@@ -1,0 +1,5 @@
+{
+  "name": "RTSWorld.World",
+  "rootNamespace": "RTSWorld.World",
+  "noEngineReferences": true
+}

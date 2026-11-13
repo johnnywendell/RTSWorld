@@ -1,0 +1,7 @@
+{
+  "name": "RTSWorld.World.Tests",
+  "rootNamespace": "RTSWorld.World.Tests",
+  "references": ["RTSWorld.World"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

@@ -1,31 +1,32 @@
 # Current Handoff
 
-**Última tarefa:** ENV-001 — DONE  
-**Arquivo:** `tasks/pending/ENV-001-agent-continuity-validation.md`  
-**Checkpoint:** 2026-11-12 (America/Bahia)  
+**Última tarefa:** WORLD-001 — DONE
+**Arquivo:** `tasks/pending/WORLD-001-deterministic-terrain.md`
+**Checkpoint:** 2026-11-12 (America/Bahia)
 **Escritor ativo:** nenhum.
 
 ## Concluído
-- Inicialização AGENTS.md, Git e documentos realizada antes de alterações.
-- unityMCP consultou realmente a cena SampleScene (Assets/Scenes/SampleScene.unity), isDirty=false, e os três objetos ativos: Main Camera, Directional Light, Global Volume.
-- Compilação de scripts solicitada; editor/state registrou início/fim e reload concluído. Console pós-compilação retornou zero erros.
-- Tarefa, CURRENT_STATE, ACTIVE e BACKLOG sincronizados; checkpoint auditado por autorrevisão, sem segundo agente.
-- Somente cinco arquivos Markdown alterados nesta sessão, listados na tarefa. Nada parcialmente implementado; nenhum gameplay, cena, pacote ou configuração alterado.
+- Contratos e gerador puro C# v1 em Assets/_Project/World; testes em Assets/_Project/Tests/EditMode. Metadados gerados pelo Unity.
+- WorldDefinition: seed int, versão 1, N=1..256 células/padrão32. ChunkCoordinate int X/Z; GlobalCoordinate long; grade imutável N+1 por eixo com passo unitário e bordas compartilhadas.
+- Elevação [0,100] por quatro oitavas de ruído de valor global com hash ulong/interpolação quintic. Biomas e recursos apenas campos Unassigned/None. Sem objetos de cena ou dependência UnityEngine.
+- Compilação PASS; testes EditMode via MCP PASS, 29/29, zero falhas/ignorados, job 3ffc75aa19434369a9d19996fc7f37cd. Console pós-testes sem erros; SampleScene continua salva/3 objetos.
+- Checkpoints de inicialização/implementação/validação na tarefa. Contrato e exemplo em ARCHITECTURE. CURRENT_STATE, ACTIVE e BACKLOG coerentes. ENV-001 preservada; WORLD-002 não iniciada.
 
-## Limitações reais
-- Console após compilação contém um Warning do MCP: `[WebSocket] Unexpected receive error: WebSocket is not initialised`, McpLog.cs:45. Não corrigido; consultas diretas posteriores tiveram sucesso.
-- editor/state após reload indicou stale_status/ready_for_tools=false em duas leituras, apesar de registrar fim da compilação. Não há confirmação de prontidão contínua por snapshot fresco.
-- Play Mode, build/player e compatibilidade ECS: NOT_RUN, fora do escopo. Evidências completas e resultados PASS/FAIL/NOT_RUN no arquivo da tarefa.
+## Limitações
+- Aviso preexistente do MCP WebSocket is not initialised (McpLog.cs:45) persiste; snapshot pós-reload stale_status, embora consultas diretas e testes funcionem. Não limpar Console para ocultá-lo.
+- Sem pendência bloqueadora no escopo. Build/player, Play Mode, desempenho e determinismo entre plataformas: NOT_RUN. Não prometer identidade em outros runtimes sem testar.
+- Não existem biomas distribuídos, recursos colocados, meshes, streaming ou gameplay. Mudança de saída do algoritmo requer nova versão.
 
-## Git e preservação
-- Branch master; HEAD `37e98bb02689cd4fcd6bef7071c3cf0f4eac45e3` (Add Unity gitignore); nenhum commit novo.
-- Preexistentes: Packages/manifest.json e Packages/packages-lock.json modificados (adição do unity-mcp); .vscode/, AGENTS.md, README.md, docs/, tasks/ não rastreados. Preservados.
-- Os cinco documentos atualizados permanecem nos diretórios não rastreados. Transferir o workspace completo ou versionar em ação futura autorizada; clonar somente HEAD perde o checkpoint.
+## Arquivos e Git
+- master/82e078832e1952834805dc8cf787d2a9b6a5ef1a; nenhum commit nesta sessão. .vscode/ já não rastreado e preservado.
+- Criados: Assets/_Project.meta, Assets/_Project/World (Chunks, Generation, asmdef), Assets/_Project/Tests/EditMode (asmdef e TerrainGeneratorTests) e todos os .meta.
+- Modificados: tarefa WORLD-001, tasks/ACTIVE.md, tasks/BACKLOG.md, docs/CURRENT_STATE.md, docs/HANDOFF.md, docs/ARCHITECTURE.md. Pacotes, cenas e ProjectSettings inalterados.
+- Código/metadados novos ainda não rastreados; preservar workspace completo até commit. Clonar somente HEAD não inclui WORLD-001.
 
-## Próximo menor passo
-Aguardar instrução; não iniciar WORLD-001 automaticamente. Na próxima sessão:
-1. Ler AGENTS.md, CURRENT_STATE, ACTIVE, este handoff e ENV-001; verificar status/diff/log reais.
-2. Se retomar diagnóstico do MCP, consultar instances, confirmar raiz por project/info, então read_console(action="get", types=["error", "warning"]) e editor/state. Não limpar Console nem instalar pacotes para esta validação.
-3. Registrar eventual persistência do aviso e staleness antes de propor correções. ENV-001 já cumpriu seus critérios; esses diagnósticos não foram tratados como resolvidos.
+## Próxima menor ação
+Aguardar instrução do usuário; não iniciar WORLD-002 automaticamente. Para retomar:
+1. Ler AGENTS, CURRENT_STATE, ACTIVE, este handoff e WORLD-001; verificar status/diff/log e raiz/instância Unity antes de editar.
+2. Se necessário reverificar código, run_tests(mode="EditMode", assembly_names=["RTSWorld.World.Tests"]) e get_test_job até terminar, seguido de read_console(action="get", types=["error", "warning"]). Suite também disponível no Unity Test Runner/EditMode.
+3. Preservar fixture v1 e .meta; respeitar contrato N células/N+1 amostras caso uma tarefa futura consuma os dados.
 
-O arquivo da ENV-001 foi mantido em pending para preservar links; seu status é DONE. Nenhum sistema de mundo foi iniciado.
+Autorrevisão de continuidade realizada; não houve segundo agente. Arquivo da tarefa mantido em pending para preservar referências, com status DONE.
