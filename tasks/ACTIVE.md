@@ -1,8 +1,8 @@
 # Active Task
 
-**Selected task:** `WORLD-001` (última tarefa, concluída)
-**File:** `tasks/pending/WORLD-001-deterministic-terrain.md`
+**Selected task:** WORLD-002 (última tarefa concluída)
+**File:** `tasks/completed/WORLD-002-low-poly-terrain-rendering.md`
 **Status:** DONE
 **Writer:** nenhum; sessão Codex (/root) encerrada.
 
-ENV-001 permanece DONE com checkpoint preservado. Sem tarefa em execução. Aguardar instrução antes de iniciar WORLD-002. Caminho pending mantido para preservar referências.
+Sem tarefa em execução. WORLD-003 não iniciada. ENV-001/WORLD-001 e seus checkpoints preservados em completed.

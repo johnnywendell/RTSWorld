@@ -1,0 +1,5 @@
+{
+  "name": "RTSWorld.Presentation.Editor",
+  "references": ["RTSWorld.Presentation"],
+  "includePlatforms": ["Editor"]
+}

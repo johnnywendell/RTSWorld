@@ -1,0 +1,6 @@
+{
+  "name": "RTSWorld.Presentation.Tests",
+  "references": ["RTSWorld.World", "RTSWorld.Presentation"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

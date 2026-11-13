@@ -1,6 +1,6 @@
 # Architecture — Working Baseline
 
-> Status: direção arquitetural; contrato de dados do terreno v1 implementado e testado em EditMode. Demais sistemas e desempenho ainda não validados.
+> Status: direção arquitetural; contrato de dados do terreno v1 implementado e testado em EditMode. Apresentação low-poly inicial validada em Editor/Play; demais sistemas e desempenho ainda não validados.
 
 ## Boundaries
 1. **World domain:** seed, generator version, logical global coordinates, chunk identifiers, terrain/biome/resource data.
@@ -47,3 +47,13 @@ var generator = new RTSWorld.World.Generation.TerrainGenerator();
 var chunk = generator.Generate(definition, new RTSWorld.World.Chunks.ChunkCoordinate(-1, 0));
 float elevation = chunk[32, 0].Elevation; // amostra global (0,0), borda leste
 ```
+
+## Apresentação do terreno — WORLD-002
+- `Assets/_Project/Presentation` contém assembly com referência ao domínio; o domínio continua sem referências ao engine. Nenhum arquivo do gerador v1 foi alterado.
+- `TerrainGeometry.Build(TerrainChunkData, horizontalScale, verticalScale)` aloca buffers finais de posições, normais e índices; não cria Mesh/GameObject nem gera ruído. Escalas finitas em [0.001,10000], X/Z horizontais e Y vertical, sem alterar dados procedurais.
+- Cada célula possui dois triângulos com diagonal e winding constantes, seis vértices independentes e normais planas geométricas. Faces duplicam vértices intencionalmente para low-poly. Não há média local de normais na borda: uma partição em chunks produz as mesmas normais por face que uma grade contínua. Diferenças entre faces vizinhas são as facetas esperadas, sem política especial na fronteira do chunk.
+- `TerrainMeshFactory.Create` adapta buffers para uma mesh, define UInt16/UInt32 conforme contagem e calcula bounds. O chamador é responsável por destruir a mesh. Uma mesh e um renderer por chunk; nenhuma entidade por célula.
+- `TerrainDemo` é apenas um demonstrador fixo 2x2 em chunks (-1,-1), (0,-1), (-1,0), (0,0). Rebuild explícito, sem Update, cache/streaming ou simulação. Usa exclusivamente TerrainGenerator para obter dados. Coordenadas de apresentação locais ao root perto da origem; não implementa floating origin para coordenadas distantes.
+- Objetos e meshes gerados são temporários DontSave e reconstruídos em OnEnable (Editor e Play) a partir da definição serializada. Em rebuild/disable, libera apenas objetos/meshes próprios; em Play desativa antes de destruir ao fim do frame. Um material compartilhado persistente, sem instanciar material por chunk. Dados CPU permanecem disponíveis para verificação; sem otimização/reuso de buffers ou desempenho prometido.
+- Cena `Assets/_Project/Scenes/TerrainDemo.unity`: seed12345, N32, escala horizontal2/vertical1.2, quatro chunks adjacentes, câmera ortográfica de demonstração e luz direcional. Material `Assets/_Project/Materials/TerrainSage.mat` usa Universal Render Pipeline/Lit. Não é câmera RTS definitiva.
+- Verificação: 44 testes EditMode (29 domínio +15 apresentação), renderização capturada e inspecionada no Editor/Play, duas seeds. Evidências em docs/validation/WORLD-002 e tarefa completed.

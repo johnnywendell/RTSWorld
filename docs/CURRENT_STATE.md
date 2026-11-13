@@ -1,20 +1,21 @@
 # Current State
 
 **Atualizado:** 2026-11-12 (America/Bahia)
-**Estado:** WORLD-001 DONE; ENV-001 DONE. Sem tarefa em execução.
+**Estado:** WORLD-002 DONE; WORLD-001 e ENV-001 DONE. Sem tarefa em execução.
 
 ## Estado verificado
-- Git: master, HEAD `82e078832e1952834805dc8cf787d2a9b6a5ef1a` (Complete ENV-001 Unity MCP validation). Nenhum commit criado nesta sessão.
-- Preexistente preservado: .vscode/ não rastreado. Novos Assets/_Project e metadados ainda não rastreados; seis documentos de continuidade/arquitetura modificados. Preservar workspace até versionamento.
-- Unity 6000.6.9f1/LinuxEditor, alvo StandaloneLinux64; MCP confirmou raiz RTSWorld e SampleScene salva (3 objetos). Cena e pacotes inalterados.
-- Gerador de dados de terreno v1 em Assets/_Project/World: C# sem referências ao engine; seed/versão explícitas, coordenadas globais long, chunks lógicos com bordas compartilhadas, elevação por ruído de valor de quatro oitavas, contratos imutáveis e slots futuros de bioma/recurso.
-- Compilação e suíte RTSWorld.World.Tests via unityMCP: PASS, 29/29 EditMode, zero falhas/ignorados; Console sem erros. Inclui repetição bit a bit, seeds distintas, bordas/cantos, negativos/extremos e fixtures v1.
-- Contrato, limites e exemplo de uso em docs/ARCHITECTURE.md. Evidência detalhada e job de testes na tarefa WORLD-001.
+- Git master/a1c205d (Complete WORLD-001 deterministic terrain generation); nenhum commit criado nesta sessão. .vscode e movimentações anteriores ENV-001/WORLD-001 para completed preservadas.
+- Unity 6000.6.9f1/LinuxEditor, URP e unityMCP confirmados. Gerador v1 e seus testes intactos.
+- Apresentação em Assets/_Project/Presentation: geometria CPU separada da criação de Mesh e GameObjects. Flat shading por triângulo, uma mesh por chunk, escalas configuráveis, UInt16/UInt32; sem dependência inversa no domínio.
+- Demo Assets/_Project/Scenes/TerrainDemo.unity: seed12345, N32, escalas2/1.2, quatro chunks adjacentes e câmera ortográfica fixa. Um material compartilhado URP Lit. Inspector permite seed/escalas e Rebuild Terrain; Editor e Play regeneram objetos temporários.
+- PASS: compilação, 44/44 EditMode (29 domínio+15 apresentação), inspeção de posições/meshes, reabertura da cena e renderização visual real no Editor/Play com seeds12345 e67890. Capturas em docs/validation/WORLD-002.
+- Cena final aberta/salva, fora de Play, seed12345 e quatro chunks. Leitura final Console: zero erros/avisos. Warning WebSocket preexistente observado antes/após compilação; não considerado corrigido.
+- Editor acrescentou m_ProjectSettingFolderPath: URPDefaultResources em ProjectSettings/URPProjectSettings.asset. Nenhum pacote instalado; SampleScene e gerador v1 inalterados.
 
 ## Limitações
-- Warning preexistente MCP WebSocket is not initialised persiste; snapshot pós-reload stale_status, apesar do sucesso das consultas/testes.
-- Determinismo validado apenas neste Editor/Linux. Build/player, IL2CPP/Burst, outros alvos e desempenho: NOT_RUN.
-- Bioma/recurso apenas reservas Unassigned/None. Sem renderização, streaming, gameplay, rede, persistência ou ECS implementados; pacotes não instalados nesta sessão.
+- Demo fixa 2x2, sem streaming, collider, biomas, recursos, água, câmera RTS definitiva ou gameplay.
+- Build/player, outros alvos, desempenho e determinismo entre plataformas: NOT_RUN. Escalas extremas podem exigir reenquadrar câmera. Sem floating origin de apresentação distante.
+- Código/artefatos novos e checkpoints ainda sem commit; preservar workspace completo. Metadados gerados pelo Unity.
 
 ## Continuidade
-Aguardar instrução; WORLD-002 não iniciada. Última tarefa em tasks/pending/WORLD-001-deterministic-terrain.md (caminho preservado, status DONE). Ler docs/HANDOFF.md antes de retomar.
+Última tarefa: tasks/completed/WORLD-002-low-poly-terrain-rendering.md. Contrato/uso em ARCHITECTURE e tarefa; próximos passos em HANDOFF. Aguardar instrução; não iniciar WORLD-003 automaticamente.
