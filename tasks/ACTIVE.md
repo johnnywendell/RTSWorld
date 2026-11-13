@@ -1,8 +1,8 @@
 # Active Task
 
-**Selected task:** WORLD-002 (última tarefa concluída)
-**File:** `tasks/completed/WORLD-002-low-poly-terrain-rendering.md`
+**Selected task:** WORLD-004 (última tarefa concluída)
+**File:** `tasks/completed/WORLD-004-biomes-water-resources.md`
 **Status:** DONE
-**Writer:** nenhum; sessão Codex (/root) encerrada.
+**Writer:** nenhum; execução encerrada.
 
-Sem tarefa em execução. WORLD-003 não iniciada. ENV-001/WORLD-001 e seus checkpoints preservados em completed.
+Aguardar autorização explícita para qualquer próxima tarefa. WORLD-005 permanece intacta no caminho preexistente tasks/in_progress/WORLD-005-rts-camera.md; não movida, executada ou marcada como iniciada por esta execução.

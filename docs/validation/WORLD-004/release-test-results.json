@@ -1,0 +1,118 @@
+{
+  "editMode": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "2b9cbe1d9ba74fee856e553964333db7",
+      "status": "succeeded",
+      "mode": "EditMode",
+      "started_unix_ms": 1794535755577,
+      "finished_unix_ms": 1794535762027,
+      "last_update_unix_ms": 1794535762027,
+      "progress": {
+        "completed": 94,
+        "total": 94,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+        "last_finished_unix_ms": 1794535761897,
+        "stuck_suspected": false,
+        "editor_is_focused": true,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 94,
+          "passed": 94,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 3.7505354,
+          "resultState": "Passed"
+        },
+        "results": []
+      }
+    },
+    "hint": null
+  },
+  "playMode": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "9440a6082e9f43e99e67a175cd84788e",
+      "status": "succeeded",
+      "mode": "PlayMode",
+      "started_unix_ms": 1794535786139,
+      "finished_unix_ms": 1794535789134,
+      "last_update_unix_ms": 1794535789134,
+      "progress": {
+        "completed": 3,
+        "total": 3,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+        "last_finished_unix_ms": 1794535789132,
+        "stuck_suspected": false,
+        "editor_is_focused": true,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 0.5731566,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests.EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost",
+            "state": "Passed",
+            "durationSeconds": 0.3224088,
+            "message": null,
+            "stackTrace": null,
+            "output": "WORLD004_ROUTE samples=48 medianMs=1,0838 p95Ms=4,1474 maxMs=7,1368 waypoints=8 cells=32 radius=1 maxPerFrame=1 budgetMs=4 sea=38 environmentVersion=1 meshes=9\n"
+          },
+          {
+            "name": "NativeResourcesAreDestroyedAfterTransitionAndDisable",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.NativeResourcesAreDestroyedAfterTransitionAndDisable",
+            "state": "Passed",
+            "durationSeconds": 0.0113848,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+            "state": "Passed",
+            "durationSeconds": 0.2056127,
+            "message": null,
+            "stackTrace": null,
+            "output": "WORLD003_ROUTE samples=70 stepMedianMs=0,4142 stepP95Ms=0,4561 stepMaxMs=3,3503 maxObservedFrameMs=11,5337 generated=70 unloaded=61 waypoints=12 cells=32 radius=1 maxPerFrame=1 budgetMs=4 nativeMeshes=9\n"
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

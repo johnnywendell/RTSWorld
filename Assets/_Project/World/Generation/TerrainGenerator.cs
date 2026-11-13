@@ -10,6 +10,13 @@ namespace RTSWorld.World.Generation
     /// </summary>
     public sealed class TerrainGenerator
     {
+        /// <summary>Additive query API; evaluates the unchanged versioned elevation algorithm.</summary>
+        public float SampleElevation(WorldDefinition definition, long x, long z)
+        {
+            if (definition == null) throw new ArgumentNullException(nameof(definition));
+            return Elevation(definition.Seed, x, z);
+        }
+
         public TerrainChunkData Generate(WorldDefinition definition, ChunkCoordinate coordinate)
         {
             if (definition == null) throw new ArgumentNullException(nameof(definition));

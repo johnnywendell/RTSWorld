@@ -1,0 +1,5 @@
+{
+  "name": "RTSWorld.Streaming.PlayMode.Tests",
+  "references": ["RTSWorld.World", "RTSWorld.Presentation"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

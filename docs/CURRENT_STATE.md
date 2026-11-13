@@ -1,21 +1,19 @@
 # Current State
 
 **Atualizado:** 2026-11-12 (America/Bahia)
-**Estado:** WORLD-002 DONE; WORLD-001 e ENV-001 DONE. Sem tarefa em execução.
+**Estado:** WORLD-004 DONE; dependências WORLD-001/002/003 DONE. Sem tarefa em execução.
 
-## Estado verificado
-- Git master/a1c205d (Complete WORLD-001 deterministic terrain generation); nenhum commit criado nesta sessão. .vscode e movimentações anteriores ENV-001/WORLD-001 para completed preservadas.
-- Unity 6000.6.9f1/LinuxEditor, URP e unityMCP confirmados. Gerador v1 e seus testes intactos.
-- Apresentação em Assets/_Project/Presentation: geometria CPU separada da criação de Mesh e GameObjects. Flat shading por triângulo, uma mesh por chunk, escalas configuráveis, UInt16/UInt32; sem dependência inversa no domínio.
-- Demo Assets/_Project/Scenes/TerrainDemo.unity: seed12345, N32, escalas2/1.2, quatro chunks adjacentes e câmera ortográfica fixa. Um material compartilhado URP Lit. Inspector permite seed/escalas e Rebuild Terrain; Editor e Play regeneram objetos temporários.
-- PASS: compilação, 44/44 EditMode (29 domínio+15 apresentação), inspeção de posições/meshes, reabertura da cena e renderização visual real no Editor/Play com seeds12345 e67890. Capturas em docs/validation/WORLD-002.
-- Cena final aberta/salva, fora de Play, seed12345 e quatro chunks. Leitura final Console: zero erros/avisos. Warning WebSocket preexistente observado antes/após compilação; não considerado corrigido.
-- Editor acrescentou m_ProjectSettingFolderPath: URPDefaultResources em ProjectSettings/URPProjectSettings.asset. Nenhum pacote instalado; SampleScene e gerador v1 inalterados.
+## Verificado
+- Git master/607e22a0add91072b406c6a3b35f12bf168de237, sem commit novo. Alterações anteriores WORLD-003 e .vscode preservadas; novos arquivos WORLD-004 ainda sem rastreamento. Preservar workspace completo.
+- Unity6000.6.9f1/LinuxEditor, URP e MCP confirmados. Camada ambiental versão1 independente do terreno v1: clima, dez biomas, mar configurável, oceanos/costas, bacias/lago/rios descendentes e recursos determinísticos com IDs globais.
+- Base v1/contratos preservados; TerrainGenerator só ganhou SampleElevation aditivo. Superfície derivada separada, decisão em ADR-0002. Ambiente e recursos são dados puros, sem gameplay.
+- Builder ambiental agrupa terreno, água recortada e árvores/pedra/ouro em uma mesh por chunk e material compartilhado. Integração opcional no ChunkManager, com revisão e cleanup anteriores reutilizados. Cenas TerrainDemo/StreamingDemo intactas.
+- Nova EnvironmentDemo.unity permite observar landmarks, mudar seed/raio/mar e movimentar observador. Visual Editor/Play inspecionado,9 chunks/9meshes, shader sem erros.
+- PASS94/94 EditMode e3/3 PlayMode, incluindo regressões e ciclo de vida ambiental. Evidências/capturas/JSON em docs/validation/WORLD-004. Console final vazio; Warning MCP pós-reload não foi tratado como corrigido.
+- Medida local N32/r1/max1/budget4ms:48 amostras ambientais,mediana1.0838ms/P954.1474ms/máximo7.1368ms,9meshes por região estabilizada e baseline após disable. Não é garantia deFPS/player.
 
-## Limitações
-- Demo fixa 2x2, sem streaming, collider, biomas, recursos, água, câmera RTS definitiva ou gameplay.
-- Build/player, outros alvos, desempenho e determinismo entre plataformas: NOT_RUN. Escalas extremas podem exigir reenquadrar câmera. Sem floating origin de apresentação distante.
-- Código/artefatos novos e checkpoints ainda sem commit; preservar workspace completo. Metadados gerados pelo Unity.
+## Limites
+Hidrologia analítica estática com topografia derivada esculpida, sem drenagem continental/hidrodinâmica. Água opaca, recursos geométricos simples sem interação. Chunk síncrono pode exceder budget; precisão float distante sem floating origin. Build/player/outros alvos/heap/VRAM/configuração máxima:NOT_RUN. Sem economia,multiplayer,persistência ou câmera RTS definitiva.
 
 ## Continuidade
-Última tarefa: tasks/completed/WORLD-002-low-poly-terrain-rendering.md. Contrato/uso em ARCHITECTURE e tarefa; próximos passos em HANDOFF. Aguardar instrução; não iniciar WORLD-003 automaticamente.
+WORLD-004 em tasks/completed/WORLD-004-biomes-water-resources.md, especificação original preservada e complementada. Ler HANDOFF para reprodução. Execução encerrada; aguardar autorização explícita para WORLD-005. Seu arquivo já estava em in_progress e foi preservado byte a byte,sem mover/iniciar/editar.
