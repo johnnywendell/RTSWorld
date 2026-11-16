@@ -1,0 +1,8 @@
+{
+  "name": "RTSWorld.Camera",
+  "references": [
+    "RTSWorld.World",
+    "RTSWorld.Presentation",
+    "Unity.InputSystem"
+  ]
+}

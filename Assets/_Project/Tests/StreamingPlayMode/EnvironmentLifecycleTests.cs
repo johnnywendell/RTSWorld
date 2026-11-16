@@ -12,6 +12,48 @@ namespace RTSWorld.Streaming.PlayMode.Tests
     public sealed class EnvironmentLifecycleTests
     {
         [UnityTest]
+        public IEnumerator SeedSevenRadiusTwoStreamsRevisitsAndReleasesTheCorrectedMeshes()
+        {
+            int baseline = Resources.FindObjectsOfTypeAll<Mesh>().Count(m => m.name.StartsWith("Stream chunk "));
+            var root = new GameObject("Seed7 regression"); var observer = new GameObject("Observer");
+            var material = new Material(Shader.Find("RTSWorld/Environment Colors"));
+            try
+            {
+                var layer = root.AddComponent<EnvironmentPresentation>(); layer.Configure(material, 38);
+                Assert.That(layer.EnvironmentVersion, Is.EqualTo(RTSWorld.World.Environment.EnvironmentDefinition.CurrentVersion));
+                var manager = root.AddComponent<ChunkManager>();
+                manager.Configure(observer.transform, material, worldSeed: 7, cells: 32, horizontal: 2, vertical: 1.2f,
+                    radius: 2, maxPerFrame: 1, milliseconds: 4);
+                manager.SetEnvironment(layer);
+                IEnumerator Drain()
+                {
+                    int guard = 0;
+                    do { yield return null; Assert.That(++guard, Is.LessThan(300)); }
+                    while (manager.ActiveCount != 25 || manager.PendingCount != 0);
+                    yield return null;
+                    Assert.That(root.transform.childCount, Is.EqualTo(25));
+                    Assert.That(Resources.FindObjectsOfTypeAll<Mesh>().Count(m => m.name.StartsWith("Stream chunk ")), Is.EqualTo(baseline + 25));
+                }
+                yield return Drain();
+                var coordinate = new RTSWorld.World.Chunks.ChunkCoordinate(2, 1);
+                Assert.That(manager.TryGetMesh(coordinate, out var original), Is.True);
+                var expected = original.vertices;
+                observer.transform.position = new Vector3(256, 0, 256);
+                yield return Drain();
+                Assert.That(original == null, Is.True);
+                observer.transform.position = Vector3.zero;
+                yield return Drain();
+                Assert.That(manager.TryGetMesh(coordinate, out var revisited), Is.True);
+                CollectionAssert.AreEqual(expected, revisited.vertices);
+                manager.enabled = false;
+                yield return null;
+                Assert.That(root.transform.childCount, Is.Zero);
+                Assert.That(Resources.FindObjectsOfTypeAll<Mesh>().Count(m => m.name.StartsWith("Stream chunk ")), Is.EqualTo(baseline));
+            }
+            finally { Object.Destroy(root); Object.Destroy(observer); Object.Destroy(material); }
+        }
+
+        [UnityTest]
         public IEnumerator EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost()
         {
             int baseline = Resources.FindObjectsOfTypeAll<Mesh>().Count(m => m.name.StartsWith("Stream chunk "));
@@ -53,7 +95,7 @@ namespace RTSWorld.Streaming.PlayMode.Tests
                 times.Sort();
                 TestContext.WriteLine($"WORLD004_ROUTE samples={times.Count} medianMs={times[times.Count / 2]:F4} " +
                     $"p95Ms={times[(int)((times.Count - 1) * 0.95)]:F4} maxMs={times.Last():F4} " +
-                    "waypoints=8 cells=32 radius=1 maxPerFrame=1 budgetMs=4 sea=38 environmentVersion=1 meshes=9");
+                    "waypoints=8 cells=32 radius=1 maxPerFrame=1 budgetMs=4 sea=38 environmentVersion=4 meshes=9");
                 manager.enabled = false;
                 yield return null;
                 Assert.That(root.transform.childCount, Is.EqualTo(0));

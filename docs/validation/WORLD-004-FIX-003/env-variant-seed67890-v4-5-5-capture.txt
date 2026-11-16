@@ -1,0 +1,7 @@
+scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False
+seed=67890 version=4 sea=55 H=2 V=1,2
+Replay camera=(291.16, 182.87, 291.16) rotation=(55.00, 45.00, 0.00) ortho=48; zoom24 is explicit replay framing, historical runtime zoom unknown
+Combined center=(5, 5) active=25 pending=0 centralVertices=6630 coordinates=(5, 5);(4, 4);(5, 4);(6, 4);(4, 5);(6, 5);(4, 6);(5, 6);(6, 6);(3, 3);(4, 3);(5, 3);(6, 3);(7, 3);(3, 4);(7, 4);(3, 5);(7, 5);(3, 6);(7, 6);(3, 7);(4, 7);(5, 7);(6, 7);(7, 7)
+OriginalTerrain center=(5, 5) active=25 pending=0 centralVertices=6144 coordinates=(5, 5);(4, 4);(5, 4);(6, 4);(4, 5);(6, 5);(4, 6);(5, 6);(6, 6);(3, 3);(4, 3);(5, 3);(6, 3);(7, 3);(3, 4);(7, 4);(3, 5);(7, 5);(3, 6);(7, 6);(3, 7);(4, 7);(5, 7);(6, 7);(7, 7)
+EnvironmentalTerrain center=(5, 5) active=25 pending=0 centralVertices=6144 coordinates=(5, 5);(4, 4);(5, 4);(6, 4);(4, 5);(6, 5);(4, 6);(5, 6);(6, 6);(3, 3);(4, 3);(5, 3);(6, 3);(7, 3);(3, 4);(7, 4);(3, 5);(7, 5);(3, 6);(7, 6);(3, 7);(4, 7);(5, 7);(6, 7);(7, 7)
+WaterOnly center=(5, 5) active=25 pending=0 centralVertices=5565 coordinates=(5, 5);(4, 4);(5, 4);(6, 4);(4, 5);(6, 5);(4, 6);(5, 6);(6, 6);(3, 3);(4, 3);(5, 3);(6, 3);(7, 3);(3, 4);(7, 4);(3, 5);(7, 5);(3, 6);(7, 6);(3, 7);(4, 7);(5, 7);(6, 7);(7, 7)

@@ -1,0 +1,61 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "09bb07c9914046aa8743d0019296611e",
+      "status": "failed",
+      "mode": "EditMode",
+      "started_unix_ms": 1794781845650,
+      "finished_unix_ms": 1794781879353,
+      "last_update_unix_ms": 1794781879353,
+      "progress": {
+        "completed": 164,
+        "total": 164,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+        "last_finished_unix_ms": 1794781879322,
+        "stuck_suspected": false,
+        "editor_is_focused": true,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "RTSWorld.World.Tests.ContainedHydrologyTests.ReportedCameraRegionAndSeedSevenEndpointKeepTheSourceButRemoveLegacyDeformations",
+            "message": "  Expected: 45.1323128f\n  But was:  44.3355446f\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 164,
+          "passed": 163,
+          "failed": 1,
+          "skipped": 0,
+          "durationSeconds": 33.2388269,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "ReportedCameraRegionAndSeedSevenEndpointKeepTheSourceButRemoveLegacyDeformations",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.ReportedCameraRegionAndSeedSevenEndpointKeepTheSourceButRemoveLegacyDeformations",
+            "state": "Failed",
+            "durationSeconds": 0.0037959,
+            "message": "  Expected: 45.1323128f\n  But was:  44.3355446f\n",
+            "stackTrace": "at RTSWorld.World.Tests.ContainedHydrologyTests.ReportedCameraRegionAndSeedSevenEndpointKeepTheSourceButRemoveLegacyDeformations () [0x00110] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/ContainedHydrologyTests.cs:100\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

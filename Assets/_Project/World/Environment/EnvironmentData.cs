@@ -11,11 +11,20 @@ namespace RTSWorld.World.Environment
     public readonly struct RiverReach
     {
         public readonly double AX, AZ, BX, BZ, ALevel, BLevel, ARadius, BRadius;
+        private readonly double[] profile;
+        internal RiverReach(double ax, double az, double bx, double bz, double a, double b, double ar, double br, double[] profile)
+        { AX=ax; AZ=az; BX=bx; BZ=bz; ALevel=a; BLevel=b; ARadius=ar; BRadius=br; this.profile=profile; }
         public RiverReach(double ax, double az, double bx, double bz, double a, double b, double ar, double br)
-        { AX = ax; AZ = az; BX = bx; BZ = bz; ALevel = a; BLevel = b; ARadius = ar; BRadius = br; }
+        { AX = ax; AZ = az; BX = bx; BZ = bz; ALevel = a; BLevel = b; ARadius = ar; BRadius = br; profile = null; }
         public double Length => Math.Sqrt((BX - AX) * (BX - AX) + (BZ - AZ) * (BZ - AZ));
-        public double LevelAt(double t) => EnvironmentNoise.Lerp(ALevel, BLevel,
-            Math.Max(0, Math.Min(1, (t * Length - ARadius) / (Length - ARadius - BRadius))));
+        public double LevelAt(double t)
+        {
+            if (profile == null) return EnvironmentNoise.Lerp(ALevel, BLevel,
+                Math.Max(0, Math.Min(1, (t * Length - ARadius) / (Length - ARadius - BRadius))));
+            double position = Math.Max(0, Math.Min(1, t)) * (profile.Length - 1);
+            int i = Math.Min(profile.Length - 2, (int)position);
+            return EnvironmentNoise.Lerp(profile[i], profile[i + 1], position - i);
+        }
         public void PointAt(double t, out double x, out double z)
         {
             double curve = Math.Sin(t * Math.PI) * 8;
@@ -26,12 +35,12 @@ namespace RTSWorld.World.Environment
 
     public sealed class EnvironmentDefinition
     {
-        public const int CurrentVersion = 1;
+        public const int CurrentVersion = 4;
         public int Version { get; }
         public float SeaLevel { get; }
         public EnvironmentDefinition(float seaLevel = 38, int version = CurrentVersion)
         {
-            if (version != CurrentVersion) throw new ArgumentOutOfRangeException(nameof(version));
+            if (version < 1 || version > CurrentVersion) throw new ArgumentOutOfRangeException(nameof(version));
             if (float.IsNaN(seaLevel) || float.IsInfinity(seaLevel) || seaLevel < 0 || seaLevel > 100)
                 throw new ArgumentOutOfRangeException(nameof(seaLevel));
             Version = version; SeaLevel = seaLevel;

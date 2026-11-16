@@ -1,0 +1,8 @@
+Editor seed7-origin: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline
+Editor seed7-lake: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline
+Editor seed7-lake-close: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline
+Editor seed7-river: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline
+Play seed7-origin: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline
+Play seed7-lake: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline
+Play seed7-lake-close: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline
+Play seed7-river: chunks=25; queue=0; seed=7; version=2; shaderError=False; renderPipeline=UniversalRenderPipeline

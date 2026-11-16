@@ -1,0 +1,31 @@
+{
+  "editmode": {
+    "passed": 145,
+    "failed": 0,
+    "skipped": 0
+  },
+  "playmode": {
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  "validatedInputs": 181,
+  "inputMismatches": [],
+  "changedExistingAssetsSinceStart": [
+    "Assets/_Project/Presentation/Streaming/ChunkManager.cs",
+    "Assets/_Project/Tests/Presentation/RTSWorld.Presentation.Tests.asmdef",
+    "Assets/_Project/Tests/StreamingPlayMode/RTSWorld.Streaming.PlayMode.Tests.asmdef"
+  ],
+  "streamingChange": "Only3read-onlygetters",
+  "protectedFilesUnchanged": 56,
+  "taskSpecificationPreserved": "Exceptstatus/checkmarks; checkpoints/reportappended",
+  "realPngs": 22,
+  "console": "Editor0errors/1knownURPwarning;Play0errors/0warnings;noClear",
+  "hotpath": "1000 warmed stationary controller+surface+observer calls, totalMs=2.3398, allocatedBytes=0; Stopwatch created before allocation baseline; no rendering, GUI or ChunkManager.Step in this measurement.",
+  "uniqueAssetGuids": 88,
+  "diffCheck": "PASS",
+  "branch": "main",
+  "head": "6a9966b0168d3ba553c97ed7f7c8a2818f5bbca4",
+  "commitsCreated": false,
+  "taskStatus": "DONE"
+}

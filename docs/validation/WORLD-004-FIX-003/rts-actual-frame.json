@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "message": "Code executed successfully.",
+  "data": {
+    "result": "Root position=(-5807.00000, 0.00000, 0.00000) rotation=(0.00, 0.00, 0.00) scale=(1.00, 1.00, 1.00) observer=(0.00000, 70.91636, 0.00000) localObserver=(5807.00, 70.92, 0.00) Center=(90, 0) cameraLocal=(5766.86, 151.98, -40.14)",
+    "compiler": "codedom"
+  }
+}

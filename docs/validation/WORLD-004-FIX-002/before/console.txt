@@ -1,0 +1,8 @@
+Editor seed7-origin: errors=0; warnings=1; logs=0
+Editor seed7-lake: errors=0; warnings=1; logs=0
+Editor seed7-lake-close: errors=0; warnings=1; logs=0
+Editor seed7-river: errors=0; warnings=1; logs=0
+Play seed7-origin: errors=0; warnings=0; logs=0
+Play seed7-lake: errors=0; warnings=0; logs=0
+Play seed7-lake-close: errors=0; warnings=0; logs=0
+Play seed7-river: errors=0; warnings=0; logs=0

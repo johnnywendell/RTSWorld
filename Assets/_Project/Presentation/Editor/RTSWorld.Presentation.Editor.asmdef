@@ -1,5 +1,12 @@
 {
   "name": "RTSWorld.Presentation.Editor",
-  "references": ["RTSWorld.Presentation", "RTSWorld.World"],
-  "includePlatforms": ["Editor"]
+  "references": [
+    "RTSWorld.Presentation",
+    "RTSWorld.World",
+    "Unity.RenderPipelines.Core.Runtime",
+    "Unity.RenderPipelines.Universal.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ]
 }

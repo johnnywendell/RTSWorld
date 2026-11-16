@@ -1,0 +1,27 @@
+using System;
+using System.IO;
+using System.Reflection;
+using UnityEditor;
+public static class WaterConsoleSnapshot
+{
+    public static void Run()
+    {
+        EditorApplication.delayCall += () => {
+            var flags=BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Static;
+            var type=typeof(Editor).Assembly.GetType("UnityEditor.LogEntries");
+            var entryType=typeof(Editor).Assembly.GetType("UnityEditor.LogEntry");
+            var counts=new object[]{0,0,0};type.GetMethod("GetCountsByType",flags).Invoke(null,counts);
+            var output=$"errors={counts[0]}; warnings={counts[1]}; logs={counts[2]}\n";
+            int count=(int)type.GetMethod("StartGettingEntries",flags).Invoke(null,null);
+            try {
+                for(int i=0;i<count;i++) {
+                    var entry=Activator.CreateInstance(entryType);
+                    type.GetMethod("GetEntryInternal",flags).Invoke(null,new object[]{i,entry});
+                    output+=entryType.GetField("message",BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance).GetValue(entry)+"\n";
+                }
+            } finally {type.GetMethod("EndGettingEntries",flags).Invoke(null,null);}
+            File.WriteAllText("/tmp/rtswater-unity-validation/console-detail.txt",output);
+            EditorApplication.Exit(0);
+        };
+    }
+}

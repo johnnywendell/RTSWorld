@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.4505238">
+  <test-suite type="TestSuite" id="1000" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="127" result="Failed" site="Child" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.450524" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1046" name="RTSWorld.Presentation.Tests.dll" fullname="/tmp/rtswater-unity-validation/Library/ScriptAssemblies/RTSWorld.Presentation.Tests.dll" runstate="Runnable" testcasecount="35" result="Failed" site="Child" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.430185" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39883" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1047" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="35" result="Failed" site="Child" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.426386" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1048" name="Presentation" fullname="RTSWorld.Presentation" runstate="Runnable" testcasecount="35" result="Failed" site="Child" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.425779" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1049" name="Tests" fullname="RTSWorld.Presentation.Tests" runstate="Runnable" testcasecount="35" result="Failed" site="Child" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.419045" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1012" name="EnvironmentStreamingTests" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" testcasecount="11" result="Failed" site="Child" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.417412" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1023" name="SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks" methodname="SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1614634161" result="Failed" start-time="2026-11-15 16:56:38Z" end-time="2026-11-15 16:56:39Z" duration="0.408663" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Near-vertical surface in (1, 1) at 5973
+  Expected: greater than 0.25f
+  But was:  0.083695434f
+]]></message>
+                  <stack-trace><![CDATA[at RTSWorld.Presentation.Tests.EnvironmentStreamingTests.SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks () [0x0021d] in /tmp/rtswater-unity-validation/Assets/_Project/Tests/Presentation/EnvironmentStreamingTests.cs:148
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1163" name="RTSWorld.World.Tests.dll" fullname="/tmp/rtswater-unity-validation/Library/ScriptAssemblies/RTSWorld.World.Tests.dll" runstate="Runnable" testcasecount="92" result="Failed" site="Child" start-time="2026-11-15 16:56:39Z" end-time="2026-11-15 16:56:39Z" duration="0.014793" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="39883" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1164" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="92" result="Failed" site="Child" start-time="2026-11-15 16:56:39Z" end-time="2026-11-15 16:56:39Z" duration="0.013265" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1165" name="World" fullname="RTSWorld.World" runstate="Runnable" testcasecount="92" result="Failed" site="Child" start-time="2026-11-15 16:56:39Z" end-time="2026-11-15 16:56:39Z" duration="0.012379" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1166" name="Tests" fullname="RTSWorld.World.Tests" runstate="Runnable" testcasecount="92" result="Failed" site="Child" start-time="2026-11-15 16:56:39Z" end-time="2026-11-15 16:56:39Z" duration="0.008391" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1098" name="HydrologyRegressionTests" fullname="RTSWorld.World.Tests.HydrologyRegressionTests" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" testcasecount="23" result="Failed" site="Child" start-time="2026-11-15 16:56:39Z" end-time="2026-11-15 16:56:39Z" duration="0.001687" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1099" name="SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips" methodname="SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1075195373" result="Failed" start-time="2026-11-15 16:56:39Z" end-time="2026-11-15 16:56:39Z" duration="0.000679" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: less than 2.25d
+  But was:  14.3304214f
+]]></message>
+                  <stack-trace><![CDATA[at RTSWorld.World.Tests.HydrologyRegressionTests.SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips () [0x00075] in /tmp/rtswater-unity-validation/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:21
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /home/johnnywendell/.config/unity3d/DefaultCompany/RTSWorld/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

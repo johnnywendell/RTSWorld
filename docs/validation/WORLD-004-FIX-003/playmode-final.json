@@ -1,0 +1,101 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "1c4cf902b65047a39975202592d2979b",
+      "status": "succeeded",
+      "mode": "PlayMode",
+      "started_unix_ms": 1794782333292,
+      "finished_unix_ms": 1794782335670,
+      "last_update_unix_ms": 1794782335670,
+      "progress": {
+        "completed": 6,
+        "total": 6,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+        "last_finished_unix_ms": 1794782335668,
+        "stuck_suspected": false,
+        "editor_is_focused": true,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "PlayMode",
+        "summary": {
+          "total": 6,
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 1.8620796,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests.EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost",
+            "state": "Passed",
+            "durationSeconds": 0.3671402,
+            "message": null,
+            "stackTrace": null,
+            "output": "WORLD004_ROUTE samples=48 medianMs=1,3669 p95Ms=3,0432 maxMs=4,5793 waypoints=8 cells=32 radius=1 maxPerFrame=1 budgetMs=4 sea=38 environmentVersion=4 meshes=9\n"
+          },
+          {
+            "name": "SeedSevenRadiusTwoStreamsRevisitsAndReleasesTheCorrectedMeshes",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests.SeedSevenRadiusTwoStreamsRevisitsAndReleasesTheCorrectedMeshes",
+            "state": "Passed",
+            "durationSeconds": 0.3202859,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VersionFourReconstructsTheNegativeCameraRegionAfterUnload",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.HydrologyStreamingTests.VersionFourReconstructsTheNegativeCameraRegionAfterUnload",
+            "state": "Passed",
+            "durationSeconds": 0.2522746,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DevicesMoveTheFocusAndStreamWithoutIdleRegenerationOrTerrainPenetration",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.RtsCameraLifecycleTests.DevicesMoveTheFocusAndStreamWithoutIdleRegenerationOrTerrainPenetration",
+            "state": "Passed",
+            "durationSeconds": 0.6661766,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "NativeResourcesAreDestroyedAfterTransitionAndDisable",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.NativeResourcesAreDestroyedAfterTransitionAndDisable",
+            "state": "Passed",
+            "durationSeconds": 0.0089887,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+            "fullName": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+            "state": "Passed",
+            "durationSeconds": 0.2082023,
+            "message": null,
+            "stackTrace": null,
+            "output": "WORLD003_ROUTE samples=70 stepMedianMs=0,4127 stepP95Ms=0,4428 stepMaxMs=3,3249 maxObservedFrameMs=2,9276 generated=70 unloaded=61 waypoints=12 cells=32 radius=1 maxPerFrame=1 budgetMs=4 nativeMeshes=9\n"
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

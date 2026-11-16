@@ -1,0 +1,37 @@
+using System.IO;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using RTSWorld.Presentation.Cameras;
+using RTSWorld.Presentation.Environment;
+using RTSWorld.Presentation.Streaming;
+
+public static class World005SceneBuilder
+{
+    public static void Build()
+    {
+        var scene=EditorSceneManager.OpenScene("Assets/_Project/Scenes/EnvironmentDemo.unity");
+        var stream=Object.FindAnyObjectByType<ChunkManager>(); stream.enabled=false;stream.Clear();
+        var camera=UnityEngine.Camera.main;
+        var focus=GameObject.Find("Test Observer").transform;focus.name="Camera Focus";
+        var oldControls=Object.FindAnyObjectByType<StreamingDemo>();
+        if(oldControls!=null)Object.DestroyImmediate(oldControls.gameObject);
+        var oldLandmarks=Object.FindAnyObjectByType<EnvironmentDemo>();
+        if(oldLandmarks!=null)Object.DestroyImmediate(oldLandmarks.gameObject);
+        var environment=stream.GetComponent<EnvironmentPresentation>();
+        stream.Configure(focus,environment.Material,worldSeed:12345,cells:32,horizontal:2,vertical:1.2f,radius:2,maxPerFrame:1,milliseconds:4);
+        stream.SetEnvironment(environment);
+        var surface=stream.gameObject.AddComponent<WorldSurfaceQuery>();surface.Configure(stream);
+        var rig=new GameObject("RTS Camera Rig");
+        var input=rig.AddComponent<RtsCameraInput>();
+        var controller=rig.AddComponent<RtsCameraController>();
+        controller.Configure(camera,input,surface);
+        var bridge=rig.AddComponent<CameraStreamingObserver>();bridge.Configure(controller,stream,focus);
+        var demo=rig.AddComponent<RtsCameraDemo>();demo.Configure(controller,input,stream);
+        stream.enabled=true;
+        EditorSceneManager.SaveScene(scene,"Assets/_Project/Scenes/RTSCameraDemo.unity");
+        AssetDatabase.SaveAssets();AssetDatabase.Refresh();
+        File.WriteAllText("/tmp/rtswater-unity-validation/world005-scene-created.txt","RTSCameraDemo created by Unity; orthographic; surface/environment3; independent of prior demo scenes.\n");
+        EditorApplication.Exit(0);
+    }
+}

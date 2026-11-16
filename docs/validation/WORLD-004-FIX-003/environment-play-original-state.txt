@@ -1,0 +1,1 @@
+Original scene version=4 seed=7 observer=(0.00, 0.00, 0.00) active=9 pending=0 center=(0, 0)

@@ -158,7 +158,9 @@ namespace RTSWorld.World.Tests
                     var sample = generator.Sample((long)Math.Round(gx), (long)Math.Round(gz));
                     Assert.That(sample.Water, Is.Not.EqualTo(WaterKind.None), $"Dry river at {gx},{gz}");
                     Assert.That(sample.Elevation, Is.LessThan(sample.WaterLevel));
-                    Assert.That(sample.WaterLevel, Is.EqualTo(river.LevelAt(t)).Within(0.3));
+                    double sampledT = ((Math.Round(gx) - river.AX) * (river.BX - river.AX) +
+                        (Math.Round(gz) - river.AZ) * (river.BZ - river.AZ)) / (river.Length * river.Length);
+                    Assert.That(sample.WaterLevel, Is.EqualTo(river.LevelAt(sampledT)).Within(0.001));
                     Assert.That(sample.WaterLevel, Is.LessThanOrEqualTo(previous + 0.001));
                     previous = sample.WaterLevel;
                 }
@@ -172,8 +174,44 @@ namespace RTSWorld.World.Tests
             var low = Chunk(0, 0, sea: 0); var high = Chunk(0, 0, sea: 100);
             Assert.That(high[0, 0].Water, Is.EqualTo(WaterKind.Ocean));
             Assert.That(low.BaseTerrain[0, 0].Elevation, Is.EqualTo(high.BaseTerrain[0, 0].Elevation));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new EnvironmentDefinition(version: 2));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new EnvironmentDefinition(version: EnvironmentDefinition.CurrentVersion + 1));
             Assert.Throws<ArgumentOutOfRangeException>(() => new EnvironmentDefinition(float.NaN));
+        }
+
+        [Test]
+        public void LegacyEnvironmentV1RetainsTheReportedRiverFixture()
+        {
+            var generator = new EnvironmentGenerator(new WorldDefinition(12345), new EnvironmentDefinition(version: 1));
+            var wet = generator.Sample(106, -146); var dry = generator.Sample(107, -146);
+            Assert.That(wet.Elevation, Is.EqualTo(54.62012f));
+            Assert.That(wet.WaterLevel, Is.EqualTo(57.37196f));
+            Assert.That(wet.Water, Is.EqualTo(WaterKind.River));
+            Assert.That(dry.Elevation, Is.EqualTo(58.016304f));
+            Assert.That(dry.WaterLevel, Is.EqualTo(38));
+            Assert.That(dry.Water, Is.EqualTo(WaterKind.None));
+        }
+
+        [TestCase(12345)]
+        [TestCase(67890)]
+        [TestCase(-1)]
+        public void WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(int seed)
+        {
+            var generator = new EnvironmentGenerator(new WorldDefinition(seed), new EnvironmentDefinition(version: 2));
+            int shores = 0;
+            // Both cardinal edges and the rendered cell diagonal, across negative chunk boundaries.
+            for (int z = -192; z < 0; z++)
+            for (int x = 64; x < 224; x++)
+            {
+                var a = generator.Sample(x, z);
+                foreach (var b in new[] { generator.Sample(x + 1, z), generator.Sample(x, z + 1), generator.Sample(x + 1, z - 1) })
+                {
+                    if ((a.Water == WaterKind.None) == (b.Water == WaterKind.None)) continue;
+                    shores++;
+                    // The maximum reach grade for these fixtures is below one unit per cell.
+                    Assert.That(Math.Abs(a.WaterLevel - b.WaterLevel), Is.LessThan(1), $"Water level cliff at {x},{z}");
+                }
+            }
+            Assert.That(shores, Is.GreaterThan(0));
         }
 
         [Test]

@@ -6,6 +6,8 @@ using UnityEngine.Rendering;
 
 namespace RTSWorld.Presentation.Environment
 {
+    public enum EnvironmentGeometryView { Combined, OriginalTerrain, EnvironmentalTerrain, WaterOnly }
+
     /// <summary>One coloured mesh per chunk: terrain, clipped water and batched low-poly resources.</summary>
     public static class EnvironmentMeshBuilder
     {
@@ -28,67 +30,103 @@ namespace RTSWorld.Presentation.Environment
 
         private readonly struct WetVertex
         {
-            public readonly Vector3 Position;
-            public readonly float Depth;
-            public WetVertex(Vector3 position, float depth) { Position = position; Depth = depth; }
+            public readonly Vector3 Ground, Water;
+            public readonly Color Color;
+            public float Depth => Water.y - Ground.y;
+            public WetVertex(Vector3 ground, Vector3 water, Color color)
+            { Ground = ground; Water = water; Color = color; }
         }
 
-        public static Mesh Build(EnvironmentChunkData data, float horizontal, float vertical)
+        public static Mesh Build(EnvironmentChunkData data, float horizontal, float vertical,
+            EnvironmentGeometryView view = EnvironmentGeometryView.Combined)
         {
-            var terrain = TerrainGeometry.Build(data.Surface, horizontal, vertical);
-            int estimate = terrain.Vertices.Length + data.Resources.Count * 60;
+            if (data == null) throw new System.ArgumentNullException(nameof(data));
+            TerrainGeometry.ValidateScale(horizontal, nameof(horizontal));
+            TerrainGeometry.ValidateScale(vertical, nameof(vertical));
+            int cells = data.BaseTerrain.Definition.CellsPerChunk;
+            int estimate = cells * cells * 6 + data.Resources.Count * 60;
             var vertices = new List<Vector3>(estimate);
             var normals = new List<Vector3>(estimate);
             var colors = new List<Color>(estimate);
-            for (int i = 0; i < terrain.Vertices.Length; i++)
-            {
-                var v = terrain.Vertices[i];
-                vertices.Add(v); normals.Add(terrain.Normals[i]);
-                colors.Add(BiomeColor(data[Mathf.RoundToInt(v.x / horizontal), Mathf.RoundToInt(v.z / horizontal)].Biome));
-            }
 
-            void Triangle(Vector3 a, Vector3 b, Vector3 c, Color color)
+            void Triangle(Vector3 a, Vector3 b, Vector3 c, Color ca, Color cb, Color cc)
             {
-                var normal = Vector3.Cross(b - a, c - a).normalized;
+                // Double intermediates avoid under/overflow for the supported scale ratios.
+                double ux = (double)b.x - a.x, uy = (double)b.y - a.y, uz = (double)b.z - a.z;
+                double vx = (double)c.x - a.x, vy = (double)c.y - a.y, vz = (double)c.z - a.z;
+                double nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+                double length = System.Math.Sqrt(nx * nx + ny * ny + nz * nz);
+                if (length == 0) return; // A shoreline through a vertex can produce an empty fan wedge.
+                var normal = new Vector3((float)(nx / length), (float)(ny / length), (float)(nz / length));
                 vertices.Add(a); vertices.Add(b); vertices.Add(c);
-                for (int i = 0; i < 3; i++) { normals.Add(normal); colors.Add(color); }
+                normals.Add(normal); normals.Add(normal); normals.Add(normal);
+                colors.Add(ca); colors.Add(cb); colors.Add(cc);
             }
+            void SolidTriangle(Vector3 a, Vector3 b, Vector3 c, Color color) => Triangle(a, b, c, color, color, color);
 
-            int cells = data.BaseTerrain.Definition.CellsPerChunk;
             var input = new WetVertex[3]; var clipped = new WetVertex[4];
-            WetVertex WaterPoint(int x, int z)
+            WetVertex Point(int x, int z)
             {
                 var sample = data[x, z];
-                return new WetVertex(new Vector3(x * horizontal, sample.WaterLevel * vertical + 0.015f, z * horizontal),
-                    sample.WaterLevel - sample.Elevation);
+                return new WetVertex(new Vector3(x * horizontal,
+                    (view == EnvironmentGeometryView.OriginalTerrain ? data.BaseTerrain[x, z].Elevation : sample.Elevation) * vertical, z * horizontal),
+                    new Vector3(x * horizontal, sample.WaterLevel * vertical, z * horizontal), BiomeColor(sample.Biome));
             }
-            void WaterTriangle(WetVertex a, WetVertex b, WetVertex c)
+            WetVertex Shore(WetVertex a, WetVertex b)
+            {
+                // Canonical edge direction makes both triangles/chunks use the same arithmetic.
+                if (a.Ground.x > b.Ground.x || (a.Ground.x == b.Ground.x && a.Ground.z > b.Ground.z))
+                { var swap = a; a = b; b = swap; }
+                double t = (double)a.Depth / ((double)a.Depth - b.Depth);
+                var ground = new Vector3((float)(a.Ground.x + ((double)b.Ground.x - a.Ground.x) * t),
+                    (float)(a.Ground.y + ((double)b.Ground.y - a.Ground.y) * t),
+                    (float)(a.Ground.z + ((double)b.Ground.z - a.Ground.z) * t));
+                return new WetVertex(ground, ground, Color.Lerp(a.Color, b.Color, (float)t));
+            }
+            void SurfaceTriangle(WetVertex a, WetVertex b, WetVertex c, bool wet)
             {
                 input[0] = a; input[1] = b; input[2] = c;
                 int count = 0;
                 var previous = input[2];
+                bool Inside(WetVertex v) => wet ? v.Depth > 0 : v.Depth <= 0;
                 for (int i = 0; i < 3; i++)
                 {
                     var current = input[i];
-                    if ((previous.Depth > 0) != (current.Depth > 0))
-                    {
-                        float t = previous.Depth / (previous.Depth - current.Depth);
-                        clipped[count++] = new WetVertex(Vector3.Lerp(previous.Position, current.Position, t), 0);
-                    }
-                    if (current.Depth > 0) clipped[count++] = current;
+                    if (Inside(previous) != Inside(current)) clipped[count++] = Shore(previous, current);
+                    if (Inside(current)) clipped[count++] = current;
                     previous = current;
                 }
-                for (int i = 1; i + 1 < count; i++) Triangle(clipped[0].Position, clipped[i].Position, clipped[i + 1].Position, new Color(0.08f, 0.43f, 0.69f));
+                var waterColor = new Color(0.08f, 0.43f, 0.69f);
+                for (int i = 1; i + 1 < count; i++)
+                {
+                    var p = clipped[0]; var q = clipped[i]; var r = clipped[i + 1];
+                    if (wet) SolidTriangle(p.Water, q.Water, r.Water, waterColor);
+                    else Triangle(p.Ground, q.Ground, r.Ground, p.Color, q.Color, r.Color);
+                }
             }
             for (int z = 0; z < cells; z++)
             for (int x = 0; x < cells; x++)
             {
-                var a = WaterPoint(x, z); var b = WaterPoint(x, z + 1);
-                var c = WaterPoint(x + 1, z); var d = WaterPoint(x + 1, z + 1);
-                WaterTriangle(a, b, c); WaterTriangle(c, b, d);
+                var a = Point(x, z); var b = Point(x, z + 1);
+                var c = Point(x + 1, z); var d = Point(x + 1, z + 1);
+                // Complementary polygons share their shoreline exactly, with no offset,
+                // gap, or nearly coplanar submerged terrain beneath the opaque water.
+                if (view == EnvironmentGeometryView.OriginalTerrain || view == EnvironmentGeometryView.EnvironmentalTerrain)
+                {
+                    Triangle(a.Ground, b.Ground, c.Ground, a.Color, b.Color, c.Color);
+                    Triangle(c.Ground, b.Ground, d.Ground, c.Color, b.Color, d.Color);
+                }
+                else
+                {
+                    if (view == EnvironmentGeometryView.Combined) SurfaceTriangle(a, b, c, false);
+                    SurfaceTriangle(a, b, c, true);
+                    if (view == EnvironmentGeometryView.Combined) SurfaceTriangle(c, b, d, false);
+                    SurfaceTriangle(c, b, d, true);
+                }
             }
 
             var origin = data.BaseTerrain.Coordinate.GetSampleCoordinate(cells, 0, 0);
+            if (view == EnvironmentGeometryView.Combined)
             foreach (var resource in data.Resources)
             {
                 var center = new Vector3((float)(resource.Key.X - origin.X + resource.OffsetX) * horizontal,
@@ -102,7 +140,7 @@ namespace RTSWorld.Presentation.Environment
                     var c = baseCenter + new Vector3(radius, 0, radius);
                     var d = baseCenter + new Vector3(radius, 0, -radius);
                     var top = baseCenter + Vector3.up * height;
-                    Triangle(a, b, top, color); Triangle(b, c, top, color); Triangle(c, d, top, color); Triangle(d, a, top, color);
+                    SolidTriangle(a, b, top, color); SolidTriangle(b, c, top, color); SolidTriangle(c, d, top, color); SolidTriangle(d, a, top, color);
                 }
                 if (resource.Kind == NaturalResource.Tree)
                 {

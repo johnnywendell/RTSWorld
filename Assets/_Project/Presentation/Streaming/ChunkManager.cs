@@ -44,6 +44,9 @@ namespace RTSWorld.Presentation.Streaming
         private EnvironmentPresentation appliedEnvironment;
         private int appliedEnvironmentRevision;
         public float HorizontalScale => horizontalScale;
+        public float VerticalScale => verticalScale;
+        public int CellsPerChunk => cellsPerChunk;
+        public EnvironmentPresentation EnvironmentLayer => environment;
         public void SetEnvironment(EnvironmentPresentation layer) => environment = layer;
 
         public int Seed { get => seed; set => seed = value; }

@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.IO;
+using System.Security.Cryptography;
+using RTSWorld.World.Chunks;
+using RTSWorld.World.Generation;
+using RTSWorld.World.Environment;
+class Program {
+ public static string Fingerprint(int version) {
+ using var stream=new MemoryStream();using var writer=new BinaryWriter(stream);
+ foreach(int seed in new[]{7,12345,-1}) foreach(var coord in new[]{new ChunkCoordinate(2,1),new ChunkCoordinate(5,5),new ChunkCoordinate(3,-5),new ChunkCoordinate(-1,-1)}) {
+ var world=new WorldDefinition(seed);var data=new EnvironmentGenerator(world,new EnvironmentDefinition(38,version)).Generate(new TerrainGenerator().Generate(world,coord));
+ for(int z=0;z<data.Width;z++)for(int x=0;x<data.Width;x++){var a=data[x,z];writer.Write(a.Elevation);writer.Write(a.WaterLevel);writer.Write(a.Temperature);writer.Write(a.Humidity);writer.Write((int)a.Biome);writer.Write((int)a.Water);}
+ writer.Write(data.Resources.Count);foreach(var r in data.Resources){writer.Write(r.Key.Seed);writer.Write(r.Key.Version);writer.Write(r.Key.X);writer.Write(r.Key.Z);writer.Write((int)r.Kind);writer.Write(r.OffsetX);writer.Write(r.OffsetZ);writer.Write(r.Elevation);}}
+ writer.Flush();using var sha=SHA256.Create();return BitConverter.ToString(sha.ComputeHash(stream.ToArray())).Replace("-","");
+ }
+ static void Main(string[] args) {
+ if(args.Length>0 && args[0]=="fingerprint"){Console.WriteLine(JsonSerializer.Serialize(new{v1=Fingerprint(1),v2=Fingerprint(2)}));return;}
+ int seed=args.Length>0?int.Parse(args[0]):7, version=args.Length>1?int.Parse(args[1]):2;
+ float sea=args.Length>2?float.Parse(args[2],System.Globalization.CultureInfo.InvariantCulture):38;
+ int min=args.Length>3?int.Parse(args[3]):-64,max=args.Length>4?int.Parse(args[4]):96;
+ var world=new WorldDefinition(seed);var terrain=new TerrainGenerator();var gen=new EnvironmentGenerator(world,new EnvironmentDefinition(sea,version));
+ double maxBase=0,maxSurface=0,maxRaise=0,maxCut=0; int steep=0,induced=0,raised=0,cut=0;var edges=new List<(double slope,string detail)>();
+ for(int z=min;z<=max;z++) for(int x=min;x<=max;x++){
+ var a=gen.Sample(x,z);float ba=terrain.SampleElevation(world,x,z);
+ double delta=a.Elevation-ba;maxRaise=Math.Max(maxRaise,delta);maxCut=Math.Max(maxCut,-delta);if(delta>0.01)raised++;if(delta<-.01)cut++;
+ foreach(var step in new[]{(1,0),(0,1),(1,-1)}){
+ int bx=x+step.Item1,bz=z+step.Item2;if(bx>max||bz>max||bz<min)continue;
+ var b=gen.Sample(bx,bz);float bb=terrain.SampleElevation(world,bx,bz);double distance=Math.Sqrt(step.Item1*step.Item1+step.Item2*step.Item2);
+ double gs=Math.Abs(a.Elevation-b.Elevation)/distance, gb=Math.Abs(ba-bb)/distance;
+ maxBase=Math.Max(maxBase,gb);maxSurface=Math.Max(maxSurface,gs);
+ if(gs>4){steep++;if(gb<=4)induced++;}
+ edges.Add((gs,$"({x},{z})->({bx},{bz}) base={ba:F5}->{bb:F5} surface={a.Elevation:F5}->{b.Elevation:F5} water={a.Water}/{a.WaterLevel:F5}->{b.Water}/{b.WaterLevel:F5}"));
+ }}
+ var result=new{seed,version,sea,min,max,maxBaseGradient=maxBase,maxSurfaceGradient=maxSurface,maxRaise,maxCut,raisedSamples=raised,cutSamples=cut,edgesAbove4=steep,environmentInducedEdgesAbove4=induced,worst=edges.OrderByDescending(e=>e.slope).Take(15).Select(e=>new{e.slope,e.detail}).ToArray()};
+ Console.WriteLine(JsonSerializer.Serialize(result,new JsonSerializerOptions{WriteIndented=true}));
+ }}

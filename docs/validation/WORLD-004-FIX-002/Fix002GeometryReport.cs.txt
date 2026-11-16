@@ -1,0 +1,53 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using UnityEditor;
+using UnityEngine;
+using RTSWorld.World.Chunks;
+using RTSWorld.World.Generation;
+using RTSWorld.World.Environment;
+using RTSWorld.Presentation.Environment;
+public static class Fix002GeometryReport {
+ public static string Fingerprint(int version) {
+ using var stream=new MemoryStream();using var writer=new BinaryWriter(stream);
+ foreach(int seed in new[]{7,12345,-1}) foreach(var coord in new[]{new ChunkCoordinate(2,1),new ChunkCoordinate(5,5),new ChunkCoordinate(3,-5),new ChunkCoordinate(-1,-1)}) {
+ var world=new WorldDefinition(seed);var data=new EnvironmentGenerator(world,new EnvironmentDefinition(38,version)).Generate(new TerrainGenerator().Generate(world,coord));
+ for(int z=0;z<data.Width;z++)for(int x=0;x<data.Width;x++){var a=data[x,z];writer.Write(a.Elevation);writer.Write(a.WaterLevel);writer.Write(a.Temperature);writer.Write(a.Humidity);writer.Write((int)a.Biome);writer.Write((int)a.Water);}
+ writer.Write(data.Resources.Count);foreach(var r in data.Resources){writer.Write(r.Key.Seed);writer.Write(r.Key.Version);writer.Write(r.Key.X);writer.Write(r.Key.Z);writer.Write((int)r.Kind);writer.Write(r.OffsetX);writer.Write(r.OffsetZ);writer.Write(r.Elevation);}}
+ writer.Flush();using var sha=SHA256.Create();return BitConverter.ToString(sha.ComputeHash(stream.ToArray())).Replace("-","");
+ }
+
+ public static void Fingerprints() {
+ File.WriteAllText("/tmp/rtswater-unity-validation/fix002-native-fingerprints.txt",$"v1={Fingerprint(1)}\nv2={Fingerprint(2)}\n");EditorApplication.Exit(0);
+ }
+ public static void Run() {
+ var output="";
+ bool Resource(Color c)=>c==new Color(0.32f,0.2f,0.1f)||c==new Color(0.12f,0.34f,0.12f)||c==new Color(1,0.67f,0.08f)||c==new Color(0.48f,0.51f,0.55f);
+ foreach(int version in new[]{2,3}) {
+  var world=new WorldDefinition(7);var gen=new EnvironmentGenerator(world,new EnvironmentDefinition(38,version));var terrain=new TerrainGenerator();
+  int triangles=0,vertical=0,degenerate=0;float minNormal=1;double projectedArea=0;
+  for(int z=-2;z<=2;z++)for(int x=-2;x<=2;x++) {
+   var mesh=EnvironmentMeshBuilder.Build(gen.Generate(terrain.Generate(world,new ChunkCoordinate(x,z))),2,1.2f);
+   var v=mesh.vertices;var c=mesh.colors;var n=mesh.normals;
+   for(int i=0;i<v.Length;i+=3){if(Resource(c[i]))continue;triangles++;
+    var cross=Vector3.Cross(v[i+1]-v[i],v[i+2]-v[i]);if(cross.sqrMagnitude==0)degenerate++;
+    if(n[i].y<0.25f)vertical++;minNormal=Math.Min(minNormal,n[i].y);
+    projectedArea+=(((double)v[i+1].z-v[i].z)*((double)v[i+2].x-v[i].x)-((double)v[i+1].x-v[i].x)*((double)v[i+2].z-v[i].z))*0.5;
+   } UnityEngine.Object.DestroyImmediate(mesh);
+  }
+  output+=$"seed7 version={version} chunks=25 triangles={triangles} nearVertical={vertical} degenerates={degenerate} minNormalY={minNormal:R} projectedArea={projectedArea:R}\n";
+ }
+ var w=new WorldDefinition(12345);var g=new EnvironmentGenerator(w,new EnvironmentDefinition());var tg=new TerrainGenerator();
+ var sample=g.Sample(160,-72);output+=$"Exact-shore sample: ground={sample.Elevation:R} water={sample.WaterLevel:R} logicalDepth={(double)sample.WaterLevel-sample.Elevation:R}\n";
+ foreach(int cx in new[]{4,5}){
+ var mesh=EnvironmentMeshBuilder.Build(g.Generate(tg.Generate(w,new ChunkCoordinate(cx,-3))),2,1.2f);
+ var v=mesh.vertices;var c=mesh.colors;float x=cx==4?64:0;
+ var edge=v.Where((a,i)=>a.x==x&&c[i]==new Color(0.08f,0.43f,0.69f)).Distinct().OrderBy(a=>a.z).ThenBy(a=>a.y);
+ foreach(var a in edge)output+=$"cx={cx} x={a.x:G9} y={a.y:G9} z={a.z:G9}\n";
+ UnityEngine.Object.DestroyImmediate(mesh);
+ }
+ File.WriteAllText("/tmp/rtswater-unity-validation/fix002-geometry-final.txt",output);
+ File.WriteAllText("/tmp/rtswater-unity-validation/fix002-native-fingerprints-current.txt",$"v1={Fingerprint(1)}\nv2={Fingerprint(2)}\n");EditorApplication.Exit(0);
+ }
+}

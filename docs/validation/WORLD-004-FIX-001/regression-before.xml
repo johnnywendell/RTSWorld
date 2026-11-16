@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Failed(Child)" total="6" passed="1" failed="5" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.15479">
+  <test-suite type="TestSuite" id="1000" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="101" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.154790" total="6" passed="1" failed="5" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1043" name="RTSWorld.Presentation.Tests.dll" fullname="/tmp/rtswater-unity-validation/Library/ScriptAssemblies/RTSWorld.Presentation.Tests.dll" runstate="Runnable" testcasecount="32" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.081817" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22976" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1044" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="32" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.081323" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1045" name="Presentation" fullname="RTSWorld.Presentation" runstate="Runnable" testcasecount="32" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.081000" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1046" name="Tests" fullname="RTSWorld.Presentation.Tests" runstate="Runnable" testcasecount="32" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.080677" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1012" name="EnvironmentStreamingTests" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" testcasecount="8" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.079734" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="ParameterizedMethod" id="1020" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.077336" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-case id="1017" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(3,-5,12345)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(3,-5,12345)" methodname="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="156566666" result="Failed" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.040287" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[  Overlapping or missing projected surface.
+  Expected: 4096 +/- 0.001d
+  But was:  5196.6458555904037d
+]]></message>
+                    <stack-trace><![CDATA[at RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce (System.Int32 cx, System.Int32 cz, System.Int32 seed) [0x001b2] in /tmp/rtswater-unity-validation/Assets/_Project/Tests/Presentation/EnvironmentStreamingTests.cs:80
+]]></stack-trace>
+                  </failure>
+                </test-case>
+                <test-case id="1018" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(5,-3,12345)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(5,-3,12345)" methodname="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="840945507" result="Failed" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.017028" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[  Overlapping or missing projected surface.
+  Expected: 4096 +/- 0.001d
+  But was:  7491.1988784543692d
+]]></message>
+                    <stack-trace><![CDATA[at RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce (System.Int32 cx, System.Int32 cz, System.Int32 seed) [0x001b2] in /tmp/rtswater-unity-validation/Assets/_Project/Tests/Presentation/EnvironmentStreamingTests.cs:80
+]]></stack-trace>
+                  </failure>
+                </test-case>
+                <test-case id="1019" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(1,1,67890)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(1,1,67890)" methodname="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1887558035" result="Failed" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.012977" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[  Overlapping or missing projected surface.
+  Expected: 4096 +/- 0.001d
+  But was:  4904.7634748093369d
+]]></message>
+                    <stack-trace><![CDATA[at RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce (System.Int32 cx, System.Int32 cz, System.Int32 seed) [0x001b2] in /tmp/rtswater-unity-validation/Assets/_Project/Tests/Presentation/EnvironmentStreamingTests.cs:80
+]]></stack-trace>
+                  </failure>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1133" name="RTSWorld.World.Tests.dll" fullname="/tmp/rtswater-unity-validation/Library/ScriptAssemblies/RTSWorld.World.Tests.dll" runstate="Runnable" testcasecount="69" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.067307" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22976" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1134" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="69" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.065488" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1135" name="World" fullname="RTSWorld.World" runstate="Runnable" testcasecount="69" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.064325" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1136" name="Tests" fullname="RTSWorld.World.Tests" runstate="Runnable" testcasecount="69" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.063264" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestFixture" id="1061" name="EnvironmentGeneratorTests" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" testcasecount="29" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.062014" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="ParameterizedMethod" id="1093" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.060523" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-case id="1090" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(12345)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(12345)" methodname="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1483849145" result="Failed" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.009668" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[  Water level cliff at 90,-165
+  Expected: less than 1
+  But was:  22.1219978f
+]]></message>
+                    <stack-trace><![CDATA[at RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel (System.Int32 seed) [0x000a8] in /tmp/rtswater-unity-validation/Assets/_Project/Tests/EditMode/EnvironmentGeneratorTests.cs:211
+]]></stack-trace>
+                  </failure>
+                </test-case>
+                <test-case id="1091" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(67890)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(67890)" methodname="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="760968170" result="Failed" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:16Z" duration="0.003661" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[  Water level cliff at 84,-176
+  Expected: less than 1
+  But was:  18.2052956f
+]]></message>
+                    <stack-trace><![CDATA[at RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel (System.Int32 seed) [0x000a8] in /tmp/rtswater-unity-validation/Assets/_Project/Tests/EditMode/EnvironmentGeneratorTests.cs:211
+]]></stack-trace>
+                  </failure>
+                </test-case>
+                <test-case id="1092" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(-1)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(-1)" methodname="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1701916692" result="Passed" start-time="2026-11-15 16:15:16Z" end-time="2026-11-15 16:15:17Z" duration="0.046452" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /home/johnnywendell/.config/unity3d/DefaultCompany/RTSWorld/TestResults.xml
+]]></output>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

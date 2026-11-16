@@ -1,0 +1,7 @@
+Leitura real anterior via WaterConsoleSnapshot (arquivo temporário depois sobrescrito pela leitura final):
+errors=0; warnings=3; logs=0
+Assets/Editor/WaterValidationCapture.cs(54,25): warning CS0618: Object.FindFirstObjectByType<T>() obsolete.
+Assets/Editor/WaterValidationCapture.cs(57,26): warning CS0618: Object.FindFirstObjectByType<T>() obsolete.
+Serialized file "Packages/com.unity.render-pipelines.core/Runtime/Lighting/SurfaceCache/PunctualLightSampling.urtshader.meta" contains a <unknown> object at version 1, below the supported minimum (2). Open and re-save the file to upgrade.
+
+Os dois avisos CS0618 pertenciam apenas ao utilitário temporário da cópia e foram corrigidos usando FindAnyObjectByType. O pacote URP não foi modificado. A leitura final em novo processo retornou0erros/0avisos/0logs (console-detail.txt); isso não significa correção do metadado do pacote. Durante as capturas, Console Editor tinha0erros/1aviso e Play0erros/0avisos (console.txt). Nenhuma chamada Clear foi usada; a configuração do Unity pode limpar ao entrar em Play.

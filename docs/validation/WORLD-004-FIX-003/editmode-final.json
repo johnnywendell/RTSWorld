@@ -1,0 +1,1595 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "442b00598f1c469cb8b6afc15cae83a3",
+      "status": "succeeded",
+      "mode": "EditMode",
+      "started_unix_ms": 1794787806524,
+      "finished_unix_ms": 1794787845012,
+      "last_update_unix_ms": 1794787845012,
+      "progress": {
+        "completed": 172,
+        "total": 172,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+        "last_finished_unix_ms": 1794787844881,
+        "stuck_suspected": false,
+        "editor_is_focused": false,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 172,
+          "passed": 172,
+          "failed": 0,
+          "skipped": 0,
+          "durationSeconds": 35.9704167,
+          "resultState": "Passed"
+        },
+        "results": [
+          {
+            "name": "CountBudgetIsRespectedAndStationaryObserverDoesNotRegenerate",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.CountBudgetIsRespectedAndStationaryObserverDoesNotRegenerate",
+            "state": "Passed",
+            "durationSeconds": 0.0008097,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DisableAndRepeatedTraversalDoNotKeepUnloadedResources",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.DisableAndRepeatedTraversalDoNotKeepUnloadedResources",
+            "state": "Passed",
+            "durationSeconds": 0.0117965,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidConfigurationDoesNotDestroyValidPresentation",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.InvalidConfigurationDoesNotDestroyValidPresentation",
+            "state": "Passed",
+            "durationSeconds": 0.000854,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LoadedNegativeChunksShareExactWorldEdges",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.LoadedNegativeChunksShareExactWorldEdges",
+            "state": "Passed",
+            "durationSeconds": 0.0010917,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ObserverConversionRespectsRootTransformAndHorizontalScale",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.ObserverConversionRespectsRootTransformAndHorizontalScale",
+            "state": "Passed",
+            "durationSeconds": 0.0023997,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RadiusAndSeedChangesReplaceOnlyWhatIsRequired",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.RadiusAndSeedChangesReplaceOnlyWhatIsRequired",
+            "state": "Passed",
+            "durationSeconds": 0.0091579,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TeleportCancelsOldQueueWithoutDuplicates",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.TeleportCancelsOldQueueWithoutDuplicates",
+            "state": "Passed",
+            "durationSeconds": 0.0006917,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TimeBudgetStopsAfterOneExpensiveChunk",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.TimeBudgetStopsAfterOneExpensiveChunk",
+            "state": "Passed",
+            "durationSeconds": 0.0247857,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TransitionPreservesOverlapAndReleasesOnlyOutgoingMeshes",
+            "fullName": "RTSWorld.Presentation.Tests.ChunkManagerTests.TransitionPreservesOverlapAndReleasesOnlyOutgoingMeshes",
+            "state": "Passed",
+            "durationSeconds": 0.0008057,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClippedWaterMeshMatchesAtChunkBoundaries(1,1,False)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(1,1,False)",
+            "state": "Passed",
+            "durationSeconds": 0.010571,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClippedWaterMeshMatchesAtChunkBoundaries(3,-4,False)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(3,-4,False)",
+            "state": "Passed",
+            "durationSeconds": 0.0103887,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClippedWaterMeshMatchesAtChunkBoundaries(4,-3,False)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(4,-3,False)",
+            "state": "Passed",
+            "durationSeconds": 0.0038378,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClippedWaterMeshMatchesAtChunkBoundaries(5,-3,True)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(5,-3,True)",
+            "state": "Passed",
+            "durationSeconds": 0.0041273,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClippedWaterMeshMatchesAtChunkBoundaries(3,-5,True)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(3,-5,True)",
+            "state": "Passed",
+            "durationSeconds": 0.0039427,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DiagnosticViewsPreserveOriginalHeightsAndExposeOnlyClippedWater",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.DiagnosticViewsPreserveOriginalHeightsAndExposeOnlyClippedWater",
+            "state": "Passed",
+            "durationSeconds": 0.0300412,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "GroupedMeshContainsColoredTerrainWaterAndResources",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.GroupedMeshContainsColoredTerrainWaterAndResources",
+            "state": "Passed",
+            "durationSeconds": 0.0034703,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks",
+            "state": "Passed",
+            "durationSeconds": 0.4807314,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "StreamingOwnsOneMeshPerChunkAndReloadsEnvironmentOnRevision",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.StreamingOwnsOneMeshPerChunkAndReloadsEnvironmentOnRevision",
+            "state": "Passed",
+            "durationSeconds": 0.0099154,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(3,-5,12345)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(3,-5,12345)",
+            "state": "Passed",
+            "durationSeconds": 0.0312703,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(5,-3,12345)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(5,-3,12345)",
+            "state": "Passed",
+            "durationSeconds": 0.0293246,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(1,1,67890)",
+            "fullName": "RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(1,1,67890)",
+            "state": "Passed",
+            "durationSeconds": 0.0192361,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,86,11,38,2,1.2f)",
+            "fullName": "RTSWorld.Presentation.Tests.HydrologyGeometryTests.RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,86,11,38,2,1.2f)",
+            "state": "Passed",
+            "durationSeconds": 0.0264571,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,-5,11,38,2,1.2f)",
+            "fullName": "RTSWorld.Presentation.Tests.HydrologyGeometryTests.RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,-5,11,38,2,1.2f)",
+            "state": "Passed",
+            "durationSeconds": 0.0259258,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,2,1,38,2,1.2f)",
+            "fullName": "RTSWorld.Presentation.Tests.HydrologyGeometryTests.RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,2,1,38,2,1.2f)",
+            "state": "Passed",
+            "durationSeconds": 0.0081853,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,5,5,0,0.5f,3)",
+            "fullName": "RTSWorld.Presentation.Tests.HydrologyGeometryTests.RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(7,5,5,0,0.5f,3)",
+            "state": "Passed",
+            "durationSeconds": 0.0233675,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(12345,3,-5,38,4,0.75f)",
+            "fullName": "RTSWorld.Presentation.Tests.HydrologyGeometryTests.RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(12345,3,-5,38,4,0.75f)",
+            "state": "Passed",
+            "durationSeconds": 0.0073251,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(67890,5,5,55,2,1.2f)",
+            "fullName": "RTSWorld.Presentation.Tests.HydrologyGeometryTests.RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(67890,5,5,55,2,1.2f)",
+            "state": "Passed",
+            "durationSeconds": 0.0220947,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(-1,-1,-1,0,2,1.2f)",
+            "fullName": "RTSWorld.Presentation.Tests.HydrologyGeometryTests.RenderedWaterHasValidUpwardTrianglesAndOnlyLongitudinalGrades(-1,-1,-1,0,2,1.2f)",
+            "state": "Passed",
+            "durationSeconds": 0.0058672,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(30)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(30)",
+            "state": "Passed",
+            "durationSeconds": 0.0001527,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(60)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(60)",
+            "state": "Passed",
+            "durationSeconds": 0.0001422,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(144)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(144)",
+            "state": "Passed",
+            "durationSeconds": 0.0001736,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DevicesDriveWasdEdgesMiddleDragScrollAndUiFocusGates",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.DevicesDriveWasdEdgesMiddleDragScrollAndUiFocusGates",
+            "state": "Passed",
+            "durationSeconds": 0.0003823,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DragUsesPixelTravelOnceRatherThanMultiplyingItByDeltaTime",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.DragUsesPixelTravelOnceRatherThanMultiplyingItByDeltaTime",
+            "state": "Passed",
+            "durationSeconds": 4.19e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "FrustumCoversTerrainBoundsAtEveryZoomAndInclination(20,12)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.FrustumCoversTerrainBoundsAtEveryZoomAndInclination(20,12)",
+            "state": "Passed",
+            "durationSeconds": 0.0002111,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "FrustumCoversTerrainBoundsAtEveryZoomAndInclination(55,24)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.FrustumCoversTerrainBoundsAtEveryZoomAndInclination(55,24)",
+            "state": "Passed",
+            "durationSeconds": 0.0001068,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "FrustumCoversTerrainBoundsAtEveryZoomAndInclination(80,48)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.FrustumCoversTerrainBoundsAtEveryZoomAndInclination(80,48)",
+            "state": "Passed",
+            "durationSeconds": 8e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LongFramesAndDiagonalInputDoNotChangeSpeed",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.LongFramesAndDiagonalInputDoNotChangeSpeed",
+            "state": "Passed",
+            "durationSeconds": 0.0002049,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MovementUsesTheLogicalGroundPlane(1,0)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(1,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0001392,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MovementUsesTheLogicalGroundPlane(-1,0)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(-1,0)",
+            "state": "Passed",
+            "durationSeconds": 7.02e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MovementUsesTheLogicalGroundPlane(0,1)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(0,1)",
+            "state": "Passed",
+            "durationSeconds": 5.87e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "MovementUsesTheLogicalGroundPlane(0,-1)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(0,-1)",
+            "state": "Passed",
+            "durationSeconds": 5.02e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(1)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(1)",
+            "state": "Passed",
+            "durationSeconds": 0.0005777,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(2)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(2)",
+            "state": "Passed",
+            "durationSeconds": 0.0003911,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(3)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(3)",
+            "state": "Passed",
+            "durationSeconds": 0.000349,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(4)",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(4)",
+            "state": "Passed",
+            "durationSeconds": 0.0063322,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TranslatedRotatedUniformFrameKeepsFocusAndNearPlaneCorrect",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.TranslatedRotatedUniformFrameKeepsFocusAndNearPlaneCorrect",
+            "state": "Passed",
+            "durationSeconds": 0.0044702,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ZoomOrientationAndPrecisionGuardRespectTheirLimits",
+            "fullName": "RTSWorld.Presentation.Tests.RtsCameraTests.ZoomOrientationAndPrecisionGuardRespectTheirLimits",
+            "state": "Passed",
+            "durationSeconds": 5.25e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DemoRebuildReplacesFourObjectsAndReleasesOwnedMeshes",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.DemoRebuildReplacesFourObjectsAndReleasesOwnedMeshes",
+            "state": "Passed",
+            "durationSeconds": 0.0005795,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidScalesAreRejected(0.0f)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(0.0f)",
+            "state": "Passed",
+            "durationSeconds": 0.0002856,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidScalesAreRejected(-1.0f)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(-1.0f)",
+            "state": "Passed",
+            "durationSeconds": 0.0001686,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidScalesAreRejected(float.NaN)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(float.NaN)",
+            "state": "Passed",
+            "durationSeconds": 0.000153,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidScalesAreRejected(float.PositiveInfinity)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(float.PositiveInfinity)",
+            "state": "Passed",
+            "durationSeconds": 0.000148,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "NativeMeshUsesCorrectIndicesAndBounds(32,UInt16)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.NativeMeshUsesCorrectIndicesAndBounds(32,UInt16)",
+            "state": "Passed",
+            "durationSeconds": 0.0017007,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "NativeMeshUsesCorrectIndicesAndBounds(256,UInt32)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.NativeMeshUsesCorrectIndicesAndBounds(256,UInt32)",
+            "state": "Passed",
+            "durationSeconds": 0.0407827,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "PartitioningDoesNotChangeFaceNormalsOrGeometry",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.PartitioningDoesNotChangeFaceNormalsOrGeometry",
+            "state": "Passed",
+            "durationSeconds": 0.0191133,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ScaleChangesGeometryWithoutChangingSourceData",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.ScaleChangesGeometryWithoutChangingSourceData",
+            "state": "Passed",
+            "durationSeconds": 0.0055036,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SharedEdgesHaveIdenticalWorldPositions(-1,-1)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.SharedEdgesHaveIdenticalWorldPositions(-1,-1)",
+            "state": "Passed",
+            "durationSeconds": 0.0006207,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SharedEdgesHaveIdenticalWorldPositions(0,0)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.SharedEdgesHaveIdenticalWorldPositions(0,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0004759,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SharedEdgesHaveIdenticalWorldPositions(-2,3)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.SharedEdgesHaveIdenticalWorldPositions(-2,3)",
+            "state": "Passed",
+            "durationSeconds": 0.0004534,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TopologyHasValidUpwardFacesAndFlatUnitNormals(1)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.TopologyHasValidUpwardFacesAndFlatUnitNormals(1)",
+            "state": "Passed",
+            "durationSeconds": 0.000156,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TopologyHasValidUpwardFacesAndFlatUnitNormals(32)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.TopologyHasValidUpwardFacesAndFlatUnitNormals(32)",
+            "state": "Passed",
+            "durationSeconds": 0.0271897,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "TopologyHasValidUpwardFacesAndFlatUnitNormals(256)",
+            "fullName": "RTSWorld.Presentation.Tests.TerrainGeometryTests.TopologyHasValidUpwardFacesAndFlatUnitNormals(256)",
+            "state": "Passed",
+            "durationSeconds": 1.9203537,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ExtremeCoordinatesClipRatherThanWrap",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.ExtremeCoordinatesClipRatherThanWrap",
+            "state": "Passed",
+            "durationSeconds": 0.0002276,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidInputsAreRejected",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.InvalidInputsAreRejected",
+            "state": "Passed",
+            "durationSeconds": 0.0004533,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "PositionUsesFloor(0,0,0,0)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(0,0,0,0)",
+            "state": "Passed",
+            "durationSeconds": 0.000148,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "PositionUsesFloor(31.999d,32,0,1)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(31.999d,32,0,1)",
+            "state": "Passed",
+            "durationSeconds": 8.38e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "PositionUsesFloor(-0.001d,-32,-1,-1)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(-0.001d,-32,-1,-1)",
+            "state": "Passed",
+            "durationSeconds": 7.13e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "PositionUsesFloor(-32.001d,64,-2,2)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(-32.001d,64,-2,2)",
+            "state": "Passed",
+            "durationSeconds": 7.47e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "PositionUsesFloor(64,-64,2,-2)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(64,-64,2,-2)",
+            "state": "Passed",
+            "durationSeconds": 6.83e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WindowIsUniqueSquareAndNearFirst(0)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(0)",
+            "state": "Passed",
+            "durationSeconds": 0.0001367,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WindowIsUniqueSquareAndNearFirst(1)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(1)",
+            "state": "Passed",
+            "durationSeconds": 7.74e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WindowIsUniqueSquareAndNearFirst(2)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(2)",
+            "state": "Passed",
+            "durationSeconds": 9.89e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WindowIsUniqueSquareAndNearFirst(8)",
+            "fullName": "RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(8)",
+            "state": "Passed",
+            "durationSeconds": 0.0004922,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(7,0)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(7,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0589375,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(7,38)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(7,38)",
+            "state": "Passed",
+            "durationSeconds": 0.0630645,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(12345,38)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(12345,38)",
+            "state": "Passed",
+            "durationSeconds": 0.0452902,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(67890,55)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(67890,55)",
+            "state": "Passed",
+            "durationSeconds": 0.0463499,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(-1,0)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.LakesAreLevelAndWaterOwnershipChangesOnlyAcrossDryCells(-1,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0530553,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ReportedCameraRegionAndSeedSevenEndpointRemoveLegacyDeformationsWithoutRaisingTerrain",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.ReportedCameraRegionAndSeedSevenEndpointRemoveLegacyDeformationsWithoutRaisingTerrain",
+            "state": "Passed",
+            "durationSeconds": 0.0024033,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,0)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0282741,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,38)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,38)",
+            "state": "Passed",
+            "durationSeconds": 0.0168003,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,55)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,55)",
+            "state": "Passed",
+            "durationSeconds": 0.0041207,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,100)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(7,100)",
+            "state": "Passed",
+            "durationSeconds": 0.0019838,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(12345,0)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(12345,0)",
+            "state": "Passed",
+            "durationSeconds": 0.033705,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(12345,38)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(12345,38)",
+            "state": "Passed",
+            "durationSeconds": 0.0256798,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(12345,55)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(12345,55)",
+            "state": "Passed",
+            "durationSeconds": 0.0062824,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(67890,0)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(67890,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0206402,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(67890,38)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(67890,38)",
+            "state": "Passed",
+            "durationSeconds": 0.0215262,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(-1,0)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(-1,0)",
+            "state": "Passed",
+            "durationSeconds": 0.020878,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(-1,38)",
+            "fullName": "RTSWorld.World.Tests.ContainedHydrologyTests.RiverProfilesAreDownhillGradeLimitedAndHaveNoTransverseTaper(-1,38)",
+            "state": "Passed",
+            "durationSeconds": 0.0082648,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AdditiveBaseSamplerMatchesV1ChunksAtNegativeAndExtremeCoordinates",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.AdditiveBaseSamplerMatchesV1ChunksAtNegativeAndExtremeCoordinates",
+            "state": "Passed",
+            "durationSeconds": 0.0021965,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BordersMatchForSurfaceClimateAndWater(0,0)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(0,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0120408,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BordersMatchForSurfaceClimateAndWater(-1,-1)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(-1,-1)",
+            "state": "Passed",
+            "durationSeconds": 0.0091276,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BordersMatchForSurfaceClimateAndWater(3,3)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(3,3)",
+            "state": "Passed",
+            "durationSeconds": 0.0012205,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BordersMatchForSurfaceClimateAndWater(10,11)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(10,11)",
+            "state": "Passed",
+            "durationSeconds": 0.0011712,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BordersMatchForSurfaceClimateAndWater(15,15)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(15,15)",
+            "state": "Passed",
+            "durationSeconds": 0.0139537,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ChunkPartitionDoesNotChangeEnvironmentOrResourceOwnership",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ChunkPartitionDoesNotChangeEnvironmentOrResourceOwnership",
+            "state": "Passed",
+            "durationSeconds": 0.0313913,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(50,0.8f,0.1f,Desert)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.8f,0.1f,Desert)",
+            "state": "Passed",
+            "durationSeconds": 0.0001764,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(50,0.5f,0.2f,Arid)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.2f,Arid)",
+            "state": "Passed",
+            "durationSeconds": 8.34e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(50,0.5f,0.4f,Plains)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.4f,Plains)",
+            "state": "Passed",
+            "durationSeconds": 7.18e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(50,0.5f,0.6f,TemperateForest)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.6f,TemperateForest)",
+            "state": "Passed",
+            "durationSeconds": 7.55e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(50,0.5f,0.9f,DenseForest)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.9f,DenseForest)",
+            "state": "Passed",
+            "durationSeconds": 6.71e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(65,0.1f,0.4f,Snow)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(65,0.1f,0.4f,Snow)",
+            "state": "Passed",
+            "durationSeconds": 6.87e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(50,0.1f,0.4f,Tundra)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.1f,0.4f,Tundra)",
+            "state": "Passed",
+            "durationSeconds": 7.06e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(80,0.4f,0.4f,Mountain)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(80,0.4f,0.4f,Mountain)",
+            "state": "Passed",
+            "durationSeconds": 7.19e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClassificationRules(39,0.4f,0.4f,Coast)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(39,0.4f,0.4f,Coast)",
+            "state": "Passed",
+            "durationSeconds": 6.66e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ClimateAndResourceOutputsChangeWithSeed",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ClimateAndResourceOutputsChangeWithSeed",
+            "state": "Passed",
+            "durationSeconds": 0.0030339,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LakeInteriorHasNoRiverBankRidges",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.LakeInteriorHasNoRiverBankRidges",
+            "state": "Passed",
+            "durationSeconds": 0.0037443,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LegacyEnvironmentV1RetainsTheReportedRiverFixture",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.LegacyEnvironmentV1RetainsTheReportedRiverFixture",
+            "state": "Passed",
+            "durationSeconds": 4.83e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(0,0)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(0,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0079045,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(-5,-5)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(-5,-5)",
+            "state": "Passed",
+            "durationSeconds": 0.0055231,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(10,11)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(10,11)",
+            "state": "Passed",
+            "durationSeconds": 0.0103576,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RepresentativeWorldContainsAllBiomesAndWaterKinds",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.RepresentativeWorldContainsAllBiomesAndWaterKinds",
+            "state": "Passed",
+            "durationSeconds": 2.5498399,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ResourcesStayDryAndUniqueAndUseBiomeDensities",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.ResourcesStayDryAndUniqueAndUseBiomeDensities",
+            "state": "Passed",
+            "durationSeconds": 0.2515314,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RiverCenterlinesAreWetAndDescendBetweenTheirBasins",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.RiverCenterlinesAreWetAndDescendBetweenTheirBasins",
+            "state": "Passed",
+            "durationSeconds": 0.0262235,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SeaLevelIsConfigurableAndUnknownVersionsAreRejected",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.SeaLevelIsConfigurableAndUnknownVersionsAreRejected",
+            "state": "Passed",
+            "durationSeconds": 0.0059119,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(12345)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(12345)",
+            "state": "Passed",
+            "durationSeconds": 0.0446266,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(67890)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(67890)",
+            "state": "Passed",
+            "durationSeconds": 0.0532706,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(-1)",
+            "fullName": "RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(-1)",
+            "state": "Passed",
+            "durationSeconds": 0.0378273,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(1,1)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(1,1)",
+            "state": "Passed",
+            "durationSeconds": 0.0030227,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-1,-1)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-1,-1)",
+            "state": "Passed",
+            "durationSeconds": 0.0060231,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(7,7)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(7,7)",
+            "state": "Passed",
+            "durationSeconds": 0.0058413,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-9,-9)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-9,-9)",
+            "state": "Passed",
+            "durationSeconds": 0.005914,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(86,11)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(86,11)",
+            "state": "Passed",
+            "durationSeconds": 0.0042397,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,0)",
+            "state": "Passed",
+            "durationSeconds": 1.6866769,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,38)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,38)",
+            "state": "Passed",
+            "durationSeconds": 1.7903102,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,55)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,55)",
+            "state": "Passed",
+            "durationSeconds": 1.724458,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,100)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,100)",
+            "state": "Passed",
+            "durationSeconds": 1.7617284,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,0)",
+            "state": "Passed",
+            "durationSeconds": 1.6547663,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,38)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,38)",
+            "state": "Passed",
+            "durationSeconds": 1.7893679,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,55)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,55)",
+            "state": "Passed",
+            "durationSeconds": 1.8195546,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,100)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,100)",
+            "state": "Passed",
+            "durationSeconds": 1.8286088,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,0)",
+            "state": "Passed",
+            "durationSeconds": 1.6760608,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,38)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,38)",
+            "state": "Passed",
+            "durationSeconds": 1.7813772,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,55)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,55)",
+            "state": "Passed",
+            "durationSeconds": 1.7574453,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,100)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,100)",
+            "state": "Passed",
+            "durationSeconds": 1.7802991,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,0)",
+            "state": "Passed",
+            "durationSeconds": 1.6321269,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,38)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,38)",
+            "state": "Passed",
+            "durationSeconds": 1.7939785,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,55)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,55)",
+            "state": "Passed",
+            "durationSeconds": 1.7503338,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,100)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,100)",
+            "state": "Passed",
+            "durationSeconds": 1.7298441,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LegacySamplesAndResourcesKeepTheirPreFixFingerprints(1,\"625E68D39AB86225980AD6C0E66E43DC8931DD65A79C81B816F49C6F14BF2412\")",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.LegacySamplesAndResourcesKeepTheirPreFixFingerprints(1,\"625E68D39AB86225980AD6C0E66E43DC8931DD65A79C81B816F49C6F14BF2412\")",
+            "state": "Passed",
+            "durationSeconds": 0.0185584,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "LegacySamplesAndResourcesKeepTheirPreFixFingerprints(2,\"EEC39C72DE01E9EFF470061869039E5229C733B62BB91895A3D8B1EF462A094D\")",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.LegacySamplesAndResourcesKeepTheirPreFixFingerprints(2,\"EEC39C72DE01E9EFF470061869039E5229C733B62BB91895A3D8B1EF462A094D\")",
+            "state": "Passed",
+            "durationSeconds": 0.0092698,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips",
+            "state": "Passed",
+            "durationSeconds": 0.0181222,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AdjacentChunksShareExactEdgesAndCorner(0,0,32)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(0,0,32)",
+            "state": "Passed",
+            "durationSeconds": 0.0010339,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AdjacentChunksShareExactEdgesAndCorner(-1,-1,32)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(-1,-1,32)",
+            "state": "Passed",
+            "durationSeconds": 0.0009917,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AdjacentChunksShareExactEdgesAndCorner(-3,2,7)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(-3,2,7)",
+            "state": "Passed",
+            "durationSeconds": 0.0001518,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AdjacentChunksShareExactEdgesAndCorner(2147483646,int.MinValue,32)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(2147483646,int.MinValue,32)",
+            "state": "Passed",
+            "durationSeconds": 0.0009821,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AdjacentChunksShareExactEdgesAndCorner(2,-4,1)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(2,-4,1)",
+            "state": "Passed",
+            "durationSeconds": 4.51e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "AdjacentChunksShareExactEdgesAndCorner(-2,3,256)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(-2,3,256)",
+            "state": "Passed",
+            "durationSeconds": 0.0488246,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ChunkPartitionDoesNotChangeGlobalHeight",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.ChunkPartitionDoesNotChangeGlobalHeight",
+            "state": "Passed",
+            "durationSeconds": 0.0012463,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DifferentSeedsProduceDifferentTerrain(0,1)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.DifferentSeedsProduceDifferentTerrain(0,1)",
+            "state": "Passed",
+            "durationSeconds": 0.0004714,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DifferentSeedsProduceDifferentTerrain(-1,int.MaxValue)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.DifferentSeedsProduceDifferentTerrain(-1,int.MaxValue)",
+            "state": "Passed",
+            "durationSeconds": 0.0004256,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "DifferentSeedsProduceDifferentTerrain(int.MinValue,12345)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.DifferentSeedsProduceDifferentTerrain(int.MinValue,12345)",
+            "state": "Passed",
+            "durationSeconds": 0.0004177,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(-71,-2,-3)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(-71,-2,-3)",
+            "state": "Passed",
+            "durationSeconds": 0.0037208,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(8,0,0)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(8,0,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0049572,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "GlobalCoordinatesUseWideIntegerArithmetic(0,0,0L,0L)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.GlobalCoordinatesUseWideIntegerArithmetic(0,0,0L,0L)",
+            "state": "Passed",
+            "durationSeconds": 0.0001787,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "GlobalCoordinatesUseWideIntegerArithmetic(-1,-2,-32L,-64L)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.GlobalCoordinatesUseWideIntegerArithmetic(-1,-2,-32L,-64L)",
+            "state": "Passed",
+            "durationSeconds": 7.15e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "GlobalCoordinatesUseWideIntegerArithmetic(int.MaxValue,int.MinValue,68719476704L,-68719476736L)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.GlobalCoordinatesUseWideIntegerArithmetic(int.MaxValue,int.MinValue,68719476704L,-68719476736L)",
+            "state": "Passed",
+            "durationSeconds": 5.73e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidChunkSizeIsRejected(0)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.InvalidChunkSizeIsRejected(0)",
+            "state": "Passed",
+            "durationSeconds": 0.0001782,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidChunkSizeIsRejected(-1)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.InvalidChunkSizeIsRejected(-1)",
+            "state": "Passed",
+            "durationSeconds": 8.58e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidChunkSizeIsRejected(257)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.InvalidChunkSizeIsRejected(257)",
+            "state": "Passed",
+            "durationSeconds": 7.47e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "InvalidCoordinatesAndNullDefinitionAreRejected",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.InvalidCoordinatesAndNullDefinitionAreRejected",
+            "state": "Passed",
+            "durationSeconds": 0.0007166,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RepeatedGenerationMatchesEverySample(0,0,0)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.RepeatedGenerationMatchesEverySample(0,0,0)",
+            "state": "Passed",
+            "durationSeconds": 0.0080149,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RepeatedGenerationMatchesEverySample(-123,-2,3)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.RepeatedGenerationMatchesEverySample(-123,-2,3)",
+            "state": "Passed",
+            "durationSeconds": 0.0080176,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "RepeatedGenerationMatchesEverySample(int.MaxValue,int.MinValue,int.MaxValue)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.RepeatedGenerationMatchesEverySample(int.MaxValue,int.MinValue,int.MaxValue)",
+            "state": "Passed",
+            "durationSeconds": 0.0111405,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "UnsupportedVersionIsRejected(0)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.UnsupportedVersionIsRejected(0)",
+            "state": "Passed",
+            "durationSeconds": 7.03e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "UnsupportedVersionIsRejected(2)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.UnsupportedVersionIsRejected(2)",
+            "state": "Passed",
+            "durationSeconds": 2.54e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "UnsupportedVersionIsRejected(-1)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.UnsupportedVersionIsRejected(-1)",
+            "state": "Passed",
+            "durationSeconds": 2.03e-05,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VersionOneMatchesFixedReferenceBits(0,0,0,0,1114399562)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(0,0,0,0,1114399562)",
+            "state": "Passed",
+            "durationSeconds": 0.0001888,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VersionOneMatchesFixedReferenceBits(-1,-1,25,21,1114640964)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(-1,-1,25,21,1114640964)",
+            "state": "Passed",
+            "durationSeconds": 0.0001676,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VersionOneMatchesFixedReferenceBits(0,0,17,23,1113887457)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(0,0,17,23,1113887457)",
+            "state": "Passed",
+            "durationSeconds": 0.0001671,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          },
+          {
+            "name": "VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+            "fullName": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+            "state": "Passed",
+            "durationSeconds": 0.0001669,
+            "message": null,
+            "stackTrace": null,
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

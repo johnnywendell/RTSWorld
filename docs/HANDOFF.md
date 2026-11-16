@@ -1,34 +1,33 @@
 # Current Handoff
 
-**Última tarefa:** WORLD-004 — DONE
-**Arquivo:** `tasks/completed/WORLD-004-biomes-water-resources.md`
+**Última tarefa:** WORLD-004-FIX-003 — DONE
+**Arquivo:** tasks/completed/WORLD-004-FIX-003-hydrology-terrain-geometry.md
 **Escritor ativo:** nenhum
-**Checkpoint:** 2026-11-12 (America/Bahia)
+**Checkpoint:** 2026-11-15 (America/Bahia)
 
-## Concluído
-- Camada World/Environment versão1: definição com mar, clima global,10 biomas, oceanos/costas,bacias/lago/rios descendentes, recursos lógicos e identidade half-open. BaseTerrain imutável separado da Surface derivada. API SampleElevation aditiva chama cálculo v1 intacto.
-- Presentation/Environment: builder de uma mesh por chunk (terreno colorido,água recortada,árvores/pedra/ouro agrupados),shader URP e EnvironmentPresentation opcional no ChunkManager. Reutiliza budget/ownership da WORLD-003. Sem objeto por recurso/célula, material compartilhado.
-- EnvironmentDemo.unity/EnvironmentPalette.mat com landmarks para seed12345/mar38;observador e controles de streaming reutilizados. Cenas anteriores e contratos intactos. Decisões/limites em ADR-0002 e ARCHITECTURE.
-- PASS compilação/shader,94/94 EditMode(job2b9cbe1d9ba74fee856e553964333db7),3/3 PlayMode(job9440a6082e9f43e99e67a175cd84788e),0falhas/ignorados. Dados brutos em docs/validation/WORLD-004/release-test-results.json.
-- PASS visual Editor/Play:final-play-forest-resources,final-play-desert,final-play-lake e final-editor-environment. Rios/água contínuos nos dados e meshes; teste de3 bordas molhadas confirmou não serem casos vazios. Berma do rio dentro do lago foi encontrada visualmente,corrigida e coberta por teste.
-- Console final0erros/avisos;Warning WebSocket preexistente pós-reload não corrigido. Agente não limpou Console.
+## Concluído e verificado
 
-## Uso
-Abra Assets/_Project/Scenes/EnvironmentDemo.unity e aguarde fila0(9chunks). Play/Game:botões à direita levam aos biomas/lago/rio da seed12345/mar38;à esquerda X/Z/Seed+/Raio e métricas. Inspector Chunk Stream permite parâmetros de streaming;EnvironmentPresentation permite mar/material. Landmarks fixos não prometem mesmos biomas após mudar seed/mar. Fora de Play o Editor atualiza também. Salvar cena persiste configuração;em Play mudanças são temporárias.
+- Causa comprovada antes da correção: ApplyField v3 reduz o nível da água com a distância transversal. A derivada é aproximadamente 1 em (-153,357), criando água lateralmente inclinada. Na v2, bermas e interrupções dos campos produzem paredes no terreno e na água. OriginalTerrain, EnvironmentalTerrain e WaterOnly foram comparados com 25 chunks residentes e fila vazia.
+- Nova versão ambiental 4: ContainedHydrology separa níveis de água e forma do leito. Lagos e seções transversais dos rios são nivelados; o perfil longitudinal é monotônico, limitado a 0,25 e pela capacidade das margens. Buffer seco de quatro intervalos separa domínios. O leito usa envelopes mínimos, sem bermas ou suavização global.
+- Terreno v1 e versões ambientais 1/2/3 preservados por fixtures e fingerprints. EnvironmentPresentation reutiliza o gerador com cache de nove metadados; ChunkManager mantém ownership/upload/unload. Nenhuma alteração no código da câmera, shader, material, pacotes ou ProjectSettings.
+- Instrumentos opcionais: EnvironmentGeometryView, EnvironmentGeometryDiagnostics e Editor/HydrologyDiagnosticSession. As duas demos selecionam explicitamente v4; regeneração e ResourceKey devem manter a versão ambiental.
+- **PASS:** 172/172 EditMode em 35,9704167 s e 6/6 PlayMode em 1,8620796 s, sem falhas/ignorados, via Unity MCP. Inclui fronteiras, coordenadas positivas/negativas, perfis/seções, meshes e reconstrução exata de (-5,11).
+- **PASS:** visual nas duas cenas, em Editor/Play; vinte replays com quatro camadas e duas capturas das câmeras originais. Console final sem erros/avisos; shader sem erro. Auditoria PASS: 38 arquivos protegidos preservados, GUIDs únicos, 14 relatórios de água v4 sem índices inválidos, degenerações ou faces invertidas. Estado final: 25 meshes/25 chunks, fila vazia, cena limpa, fora de Play e nenhum replay restante.
 
-## Medidas/limites
-Percurso8 posições,N32,escalas2/1.2,r1,max1/budget4ms,seed12345/mar38,48amostras:Step mediana1.0838ms/P954.1474ms/máximo7.1368ms;9meshes nativas estabilizadas e baseline após disable. Unity6000.6.9f1/LinuxEditor,i5-14600KF/RTX4070SUPER. Chunk síncrono pode exceder budget,sem promessa deFPS;heap/VRAM/player/configs máximas NOT_RUN.
+## Reprodução e coordenadas
 
-Rios e lagos são analíticos com canais/bermas na camada derivada,sem erosão/drenagem continental/confluências/simulação. Água opaca sem reflexos/ondas;recursos piramidais simples sem coleta/economia/persistência. Floating origin e identidade entre plataformas não implementados/garantidos.
+- `docs/validation/WORLD-004-FIX-003/README.md` contém diagnóstico, limites, migração e chamadas MCP. CSV de 27 amostras registra alturas dos três campos, distância euclidiana, direções e derivadas. JSONs localizam cada triângulo.
+- Seed 7, N=32, H=2, V=1,2, raio=2, mar=38: cenário A com centro (2,1); cenário B no frame inicial X=0 com centro (-5,11), pose mundial (-301.94,153.09,673.45), rotação 55°/45°. Ortho 48 é enquadramento explícito de replay; zoom/foco históricos não foram registrados.
+- A raiz atual da RTSCameraDemo em X=−5807 foi preservada. Hash comprova X=0 no baseline inicial. A mesma pose mundial agora aponta para o chunk (86,11), também validado. Não sobrescrever essa translação nem confundir coordenadas mundiais e lógicas. Rayhits e comparação de hashes estão registrados. Editor deixado nessa cena, fora de Play.
 
-## Git e arquivos
-- master/607e22a0add91072b406c6a3b35f12bf168de237,sem commit. Alterações e arquivos não rastreados WORLD-003/.vscode já existiam e foram preservados.
-- WORLD-004 criou World/Environment,Presentation/Environment,3arquivos de testes ambientais,EnvironmentDemo.unity,EnvironmentPalette.mat,metas,ADR-0002 e evidências docs/validation/WORLD-004.
-- Modificou TerrainGenerator(API aditiva),ChunkManager(integração opcional),ARCHITECTURE,CURRENT_STATE,HANDOFF,ACTIVE,BACKLOG e sua tarefa (somente status/checks + apêndices, movida a completed). Não recriou/substituiu especificação.
-- Alterações preexistentes WORLD-003 continuam no working tree. Código/artefatos novos ainda não rastreados;transferir workspace completo até versionamento.
-- WORLD-005 já estava em tasks/in_progress/WORLD-005-rts-camera.md,apesar do caminho pending informado. Preservada sem edição/movimentação/início;hash7dfc17b0a55d38823288e4029e1cf6d0fee83e1ce8dcd62d0b47d1e94f246432.
+## Incidentes e limites
 
-## Próxima menor ação
-Encerrar execução e aguardar autorização explícita do usuário. Não iniciar WORLD-005. Na retomada ler AGENTS/estado/ACTIVE/handoff/tarefa e conferir Git/Unity reais. Para repetir:EditMode RTSWorld.World.Tests/RTSWorld.Presentation.Tests;PlayMode RTSWorld.Streaming.PlayMode.Tests;consultar jobs/Console. Nenhum bloqueador/critério dispensado na WORLD-004;auditoria final registrada na tarefa.
+- As 83 imagens incluem uma captura inicial vazia, explicitamente inválida para reprodução. Uma rodada EditMode foi interrompida por solicitação prematura de Play do agente; foi invalidada e repetida corretamente até 172/172 PASS. Ver `validation-sequence-incident.txt`. Não contar essa rodada como sucesso. O agente não usou Console Clear.
+- Modelo estático, sem hidrodinâmica/drenagem global. Facetas e afloramentos naturais foram preservados. Um pequeno afloramento em A foi medido como terreno original acima do mar, não uma berma elevada. Validação finita nas seeds/locais registrados. Build/player e outras plataformas: NOT_RUN.
+- Medição limitada de Step em Play, oito waypoints, raio 1, máximo de um chunk/frame e orçamento de 4 ms: mediana 1,3669 ms, p95 3,0432 ms e máximo 4,5793 ms. Não é FPS; o chunk permanece atômico.
 
-Auditoria final PASS:especificação original preservada salvo status/checks,hashes anteriores preservados fora das alterações autorizadas,WORLD-005 intacta,v1 original igual exceto API aditiva,metas/GUIDs,status/caminhos,JSON94+3 e9capturas,git diff --check eConsole final sem erros/avisos. Detalhes ehash original na tarefa concluída.
+## Git e próxima ação
+
+- main/6a9966b0168d3ba553c97ed7f7c8a2818f5bbca4, sem commits. Working tree anterior da FIX-001/FIX-002/WORLD-005 preservada; baseline-git-status.txt e baseline-hashes.json registram a entrada. Relatórios concluídos anteriores intactos.
+- Não há implementação ou critério obrigatório pendente. Próxima ação: revisão do usuário. Nenhum commit ou outra tarefa autorizado.
+- MCP HTTP em localhost:8080; última sessão 22d7c9a2d2074a8786abc4191c4b6386, sujeita a expiração. Reinicializar se necessário; schemas em /tmp/rtsworld-mcp-tools.json. Não publicar logs integrais de inicialização, que podem conter autenticação.

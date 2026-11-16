@@ -1,0 +1,1 @@
+1000 warmed stationary controller+surface+observer calls, totalMs=2.3398, allocatedBytes=0; Stopwatch created before allocation baseline; no rendering, GUI or ChunkManager.Step in this measurement.

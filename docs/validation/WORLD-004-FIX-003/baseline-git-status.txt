@@ -1,0 +1,35 @@
+ M Assets/_Project/Presentation/Environment/EnvironmentMeshBuilder.cs
+ M Assets/_Project/Presentation/Environment/EnvironmentPresentation.cs
+ M Assets/_Project/Presentation/Streaming/ChunkManager.cs
+ M Assets/_Project/Scenes/EnvironmentDemo.unity
+ M Assets/_Project/Tests/EditMode/EnvironmentGeneratorTests.cs
+ M Assets/_Project/Tests/Presentation/EnvironmentStreamingTests.cs
+ M Assets/_Project/Tests/Presentation/RTSWorld.Presentation.Tests.asmdef
+ M Assets/_Project/Tests/StreamingPlayMode/EnvironmentLifecycleTests.cs
+ M Assets/_Project/Tests/StreamingPlayMode/RTSWorld.Streaming.PlayMode.Tests.asmdef
+ M Assets/_Project/World/Environment/EnvironmentData.cs
+ M Assets/_Project/World/Environment/EnvironmentGenerator.cs
+ M docs/ARCHITECTURE.md
+ M docs/CURRENT_STATE.md
+ M docs/HANDOFF.md
+ M tasks/ACTIVE.md
+ M tasks/BACKLOG.md
+ D tasks/in_progress/WORLD-005-rts-camera.md
+?? Assets/_Project/Presentation/Cameras.meta
+?? Assets/_Project/Presentation/Cameras/
+?? Assets/_Project/Scenes/RTSCameraDemo.unity
+?? Assets/_Project/Scenes/RTSCameraDemo.unity.meta
+?? Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs
+?? Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs.meta
+?? Assets/_Project/Tests/Presentation/RtsCameraTests.cs
+?? Assets/_Project/Tests/Presentation/RtsCameraTests.cs.meta
+?? Assets/_Project/Tests/StreamingPlayMode/RtsCameraLifecycleTests.cs
+?? Assets/_Project/Tests/StreamingPlayMode/RtsCameraLifecycleTests.cs.meta
+?? docs/decisions/ADR-0003-rts-camera.md
+?? docs/validation/WORLD-004-FIX-001/
+?? docs/validation/WORLD-004-FIX-002/
+?? docs/validation/WORLD-004-FIX-003/
+?? docs/validation/WORLD-005/
+?? tasks/completed/WORLD-004-FIX-001-water-geometry.md
+?? tasks/completed/WORLD-004-FIX-002-terrain-geometry.md
+?? tasks/completed/WORLD-005-rts-camera.md

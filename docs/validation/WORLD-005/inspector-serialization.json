@@ -1,0 +1,21 @@
+{
+  "sceneCreatedBy": "Unity Editor SceneManager, not hand-written YAML",
+  "controllerSettings": {
+    "MovementSpeed": "30",
+    "Acceleration": "8",
+    "Deceleration": "12",
+    "MouseSensitivity": "1",
+    "ZoomSpeed": "4",
+    "MinimumZoom": "12",
+    "MaximumZoom": "48",
+    "Smoothing": "10",
+    "Inclination": "55",
+    "EnableRotation": "1",
+    "RotationSpeed": "90",
+    "EnableEdgePan": "1",
+    "EdgePixels": "12",
+    "CoordinateLimit": "32768",
+    "TerrainClearance": "3"
+  },
+  "note": "Native-saved serialized fields displayed by the standard Unity Inspector; no Inspector screenshot claimed."
+}

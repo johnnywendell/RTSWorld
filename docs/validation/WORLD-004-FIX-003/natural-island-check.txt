@@ -1,0 +1,16 @@
+80,68 original=38,10413 environmental=37,82721 water=38 kind=Ocean
+81,68 original=37,78345 environmental=37,78345 water=38 kind=Ocean
+82,68 original=37,46575 environmental=37,46575 water=38 kind=Ocean
+83,68 original=37,19033 environmental=37,19033 water=38 kind=Ocean
+80,69 original=39,14878 environmental=36,84452 water=38 kind=Ocean
+81,69 original=38,82761 environmental=37,6373 water=38 kind=Ocean
+82,69 original=38,4634 environmental=38,43061 water=38 kind=None
+83,69 original=38,08583 environmental=38,08583 water=38 kind=None
+80,70 original=40,17583 environmental=35,86242 water=38 kind=Ocean
+81,70 original=39,86003 environmental=36,65577 water=38 kind=Ocean
+82,70 original=39,46458 environmental=37,44967 water=38 kind=Ocean
+83,70 original=39,01084 environmental=38,24413 water=38 kind=None
+80,71 original=41,08864 environmental=35,5 water=38 kind=Ocean
+81,71 original=40,78565 environmental=35,67486 water=38 kind=Ocean
+82,71 original=40,38192 environmental=36,46937 water=38 kind=Ocean
+83,71 original=39,893 environmental=37,26446 water=38 kind=Ocean

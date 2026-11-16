@@ -1,0 +1,1 @@
+scene=Assets/_Project/Scenes/RTSCameraDemo.unity version=4 seed=7 observer=(0.00, 70.92, 0.00) center=(90, 0) active=25 pending=0 camera=(-40.14, 151.98, -40.14) ortho=100

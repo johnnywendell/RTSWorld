@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="145" result="Passed" total="145" passed="145" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:39Z" duration="30.6922861">
+  <test-suite type="TestSuite" id="1000" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="145" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:39Z" duration="30.692286" total="145" passed="145" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1069" name="RTSWorld.Presentation.Tests.dll" fullname="/tmp/rtswater-unity-validation/Library/ScriptAssemblies/RTSWorld.Presentation.Tests.dll" runstate="Runnable" testcasecount="53" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:11Z" duration="2.731953" total="53" passed="53" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="53720" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1070" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="53" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:11Z" duration="2.731438" total="53" passed="53" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1071" name="Presentation" fullname="RTSWorld.Presentation" runstate="Runnable" testcasecount="53" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:11Z" duration="2.731133" total="53" passed="53" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1072" name="Tests" fullname="RTSWorld.Presentation.Tests" runstate="Runnable" testcasecount="53" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:11Z" duration="2.730803" total="53" passed="53" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1002" name="ChunkManagerTests" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.090674" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1003" name="CountBudgetIsRespectedAndStationaryObserverDoesNotRegenerate" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.CountBudgetIsRespectedAndStationaryObserverDoesNotRegenerate" methodname="CountBudgetIsRespectedAndStationaryObserverDoesNotRegenerate" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="1674153157" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.020532" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="DisableAndRepeatedTraversalDoNotKeepUnloadedResources" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.DisableAndRepeatedTraversalDoNotKeepUnloadedResources" methodname="DisableAndRepeatedTraversalDoNotKeepUnloadedResources" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="1115261697" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.008867" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="InvalidConfigurationDoesNotDestroyValidPresentation" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.InvalidConfigurationDoesNotDestroyValidPresentation" methodname="InvalidConfigurationDoesNotDestroyValidPresentation" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="1550229151" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.002034" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1009" name="LoadedNegativeChunksShareExactWorldEdges" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.LoadedNegativeChunksShareExactWorldEdges" methodname="LoadedNegativeChunksShareExactWorldEdges" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="1055185436" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.007161" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="ObserverConversionRespectsRootTransformAndHorizontalScale" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.ObserverConversionRespectsRootTransformAndHorizontalScale" methodname="ObserverConversionRespectsRootTransformAndHorizontalScale" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="115287965" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.001035" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1007" name="RadiusAndSeedChangesReplaceOnlyWhatIsRequired" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.RadiusAndSeedChangesReplaceOnlyWhatIsRequired" methodname="RadiusAndSeedChangesReplaceOnlyWhatIsRequired" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="1474156823" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.007641" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1006" name="TeleportCancelsOldQueueWithoutDuplicates" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.TeleportCancelsOldQueueWithoutDuplicates" methodname="TeleportCancelsOldQueueWithoutDuplicates" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="1391566580" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.001572" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="TimeBudgetStopsAfterOneExpensiveChunk" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.TimeBudgetStopsAfterOneExpensiveChunk" methodname="TimeBudgetStopsAfterOneExpensiveChunk" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="1310519544" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.028341" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="TransitionPreservesOverlapAndReleasesOnlyOutgoingMeshes" fullname="RTSWorld.Presentation.Tests.ChunkManagerTests.TransitionPreservesOverlapAndReleasesOnlyOutgoingMeshes" methodname="TransitionPreservesOverlapAndReleasesOnlyOutgoingMeshes" classname="RTSWorld.Presentation.Tests.ChunkManagerTests" runstate="Runnable" seed="792573273" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.001190" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1012" name="EnvironmentStreamingTests" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:09Z" duration="0.641972" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1018" name="ClippedWaterMeshMatchesAtChunkBoundaries" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.030431" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1013" name="ClippedWaterMeshMatchesAtChunkBoundaries(1,1,False)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(1,1,False)" methodname="ClippedWaterMeshMatchesAtChunkBoundaries" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1619345207" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.011297" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1014" name="ClippedWaterMeshMatchesAtChunkBoundaries(3,-4,False)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(3,-4,False)" methodname="ClippedWaterMeshMatchesAtChunkBoundaries" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1119341535" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.003032" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1015" name="ClippedWaterMeshMatchesAtChunkBoundaries(4,-3,False)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(4,-3,False)" methodname="ClippedWaterMeshMatchesAtChunkBoundaries" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="831134675" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.002605" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1016" name="ClippedWaterMeshMatchesAtChunkBoundaries(5,-3,True)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(5,-3,True)" methodname="ClippedWaterMeshMatchesAtChunkBoundaries" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="2042768550" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.002618" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1017" name="ClippedWaterMeshMatchesAtChunkBoundaries(3,-5,True)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.ClippedWaterMeshMatchesAtChunkBoundaries(3,-5,True)" methodname="ClippedWaterMeshMatchesAtChunkBoundaries" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1021405711" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.010076" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1024" name="GroupedMeshContainsColoredTerrainWaterAndResources" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.GroupedMeshContainsColoredTerrainWaterAndResources" methodname="GroupedMeshContainsColoredTerrainWaterAndResources" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="551721345" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.009786" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks" methodname="SeedSevenRadiusTwoMeshesHaveNoVerticalWallsDegeneratesOrChunkCracks" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1261774708" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.498784" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1025" name="StreamingOwnsOneMeshPerChunkAndReloadsEnvironmentOnRevision" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.StreamingOwnsOneMeshPerChunkAndReloadsEnvironmentOnRevision" methodname="StreamingOwnsOneMeshPerChunkAndReloadsEnvironmentOnRevision" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1949003386" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.018786" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1022" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:09Z" duration="0.081914" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1019" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(3,-5,12345)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(3,-5,12345)" methodname="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1114603150" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:08Z" duration="0.028111" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1020" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(5,-3,12345)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(5,-3,12345)" methodname="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="1578688864" result="Passed" start-time="2026-11-15 17:45:08Z" end-time="2026-11-15 17:45:09Z" duration="0.024927" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1021" name="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(1,1,67890)" fullname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests.VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce(1,1,67890)" methodname="VisibleSurfaceIsClosedAtShoreAndCoversEachCellOnce" classname="RTSWorld.Presentation.Tests.EnvironmentStreamingTests" runstate="Runnable" seed="983077866" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.027237" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1026" name="RtsCameraTests" fullname="RTSWorld.Presentation.Tests.RtsCameraTests" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" testcasecount="18" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.026202" total="18" passed="18" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1030" name="AcceleratingCoastingAndZoomingAgreeAcrossFrameRates" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.AcceleratingCoastingAndZoomingAgreeAcrossFrameRates" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.005780" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1027" name="AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(30)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(30)" methodname="AcceleratingCoastingAndZoomingAgreeAcrossFrameRates" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1006891539" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.001627" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1028" name="AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(60)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(60)" methodname="AcceleratingCoastingAndZoomingAgreeAcrossFrameRates" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1075908027" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000239" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1029" name="AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(144)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.AcceleratingCoastingAndZoomingAgreeAcrossFrameRates(144)" methodname="AcceleratingCoastingAndZoomingAgreeAcrossFrameRates" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="2006929019" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000197" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1043" name="DevicesDriveWasdEdgesMiddleDragScrollAndUiFocusGates" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.DevicesDriveWasdEdgesMiddleDragScrollAndUiFocusGates" methodname="DevicesDriveWasdEdgesMiddleDragScrollAndUiFocusGates" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="959063352" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.009765" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1037" name="DragUsesPixelTravelOnceRatherThanMultiplyingItByDeltaTime" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.DragUsesPixelTravelOnceRatherThanMultiplyingItByDeltaTime" methodname="DragUsesPixelTravelOnceRatherThanMultiplyingItByDeltaTime" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1914410834" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000345" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1042" name="FrustumCoversTerrainBoundsAtEveryZoomAndInclination" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.FrustumCoversTerrainBoundsAtEveryZoomAndInclination" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.002032" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1039" name="FrustumCoversTerrainBoundsAtEveryZoomAndInclination(20,12)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.FrustumCoversTerrainBoundsAtEveryZoomAndInclination(20,12)" methodname="FrustumCoversTerrainBoundsAtEveryZoomAndInclination" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="514734105" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000788" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1040" name="FrustumCoversTerrainBoundsAtEveryZoomAndInclination(55,24)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.FrustumCoversTerrainBoundsAtEveryZoomAndInclination(55,24)" methodname="FrustumCoversTerrainBoundsAtEveryZoomAndInclination" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="2092027901" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000063" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1041" name="FrustumCoversTerrainBoundsAtEveryZoomAndInclination(80,48)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.FrustumCoversTerrainBoundsAtEveryZoomAndInclination(80,48)" methodname="FrustumCoversTerrainBoundsAtEveryZoomAndInclination" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="708986977" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000031" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1036" name="LongFramesAndDiagonalInputDoNotChangeSpeed" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.LongFramesAndDiagonalInputDoNotChangeSpeed" methodname="LongFramesAndDiagonalInputDoNotChangeSpeed" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="988538644" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000247" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1035" name="MovementUsesTheLogicalGroundPlane" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000700" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1031" name="MovementUsesTheLogicalGroundPlane(1,0)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(1,0)" methodname="MovementUsesTheLogicalGroundPlane" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1019604826" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000222" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1032" name="MovementUsesTheLogicalGroundPlane(-1,0)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(-1,0)" methodname="MovementUsesTheLogicalGroundPlane" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="661785490" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000042" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1033" name="MovementUsesTheLogicalGroundPlane(0,1)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(0,1)" methodname="MovementUsesTheLogicalGroundPlane" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1543149774" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000024" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1034" name="MovementUsesTheLogicalGroundPlane(0,-1)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.MovementUsesTheLogicalGroundPlane(0,-1)" methodname="MovementUsesTheLogicalGroundPlane" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="557012955" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000020" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1048" name="SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.001767" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1045" name="SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(1)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(1)" methodname="SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="93289303" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.001014" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1046" name="SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(2)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(2)" methodname="SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1672045542" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000267" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1047" name="SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(3)" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks(3)" methodname="SurfaceQueryMatchesTheRenderedTriangleWithoutLoadingChunks" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1314822194" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000136" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1044" name="TranslatedRotatedUniformFrameKeepsFocusAndNearPlaneCorrect" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.TranslatedRotatedUniformFrameKeepsFocusAndNearPlaneCorrect" methodname="TranslatedRotatedUniformFrameKeepsFocusAndNearPlaneCorrect" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="625180393" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.003853" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1038" name="ZoomOrientationAndPrecisionGuardRespectTheirLimits" fullname="RTSWorld.Presentation.Tests.RtsCameraTests.ZoomOrientationAndPrecisionGuardRespectTheirLimits" methodname="ZoomOrientationAndPrecisionGuardRespectTheirLimits" classname="RTSWorld.Presentation.Tests.RtsCameraTests" runstate="Runnable" seed="1012817880" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000410" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1049" name="TerrainGeometryTests" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:11Z" duration="1.970817" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1068" name="DemoRebuildReplacesFourObjectsAndReleasesOwnedMeshes" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.DemoRebuildReplacesFourObjectsAndReleasesOwnedMeshes" methodname="DemoRebuildReplacesFourObjectsAndReleasesOwnedMeshes" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="2122152388" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.001634" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1067" name="InvalidScalesAreRejected" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.001266" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1063" name="InvalidScalesAreRejected(0.0f)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(0.0f)" methodname="InvalidScalesAreRejected" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="543475672" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000314" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1064" name="InvalidScalesAreRejected(-1.0f)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(-1.0f)" methodname="InvalidScalesAreRejected" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="710053941" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000079" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1065" name="InvalidScalesAreRejected(float.NaN)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(float.NaN)" methodname="InvalidScalesAreRejected" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="175406298" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000063" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1066" name="InvalidScalesAreRejected(float.PositiveInfinity)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.InvalidScalesAreRejected(float.PositiveInfinity)" methodname="InvalidScalesAreRejected" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="1620137020" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000059" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1062" name="NativeMeshUsesCorrectIndicesAndBounds" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.NativeMeshUsesCorrectIndicesAndBounds" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.032185" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1060" name="NativeMeshUsesCorrectIndicesAndBounds(32,UInt16)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.NativeMeshUsesCorrectIndicesAndBounds(32,UInt16)" methodname="NativeMeshUsesCorrectIndicesAndBounds" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="679639915" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000875" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1061" name="NativeMeshUsesCorrectIndicesAndBounds(256,UInt32)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.NativeMeshUsesCorrectIndicesAndBounds(256,UInt32)" methodname="NativeMeshUsesCorrectIndicesAndBounds" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="1962084281" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.030978" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1059" name="PartitioningDoesNotChangeFaceNormalsOrGeometry" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.PartitioningDoesNotChangeFaceNormalsOrGeometry" methodname="PartitioningDoesNotChangeFaceNormalsOrGeometry" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="626345282" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.006897" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1054" name="ScaleChangesGeometryWithoutChangingSourceData" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.ScaleChangesGeometryWithoutChangingSourceData" methodname="ScaleChangesGeometryWithoutChangingSourceData" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="1985660457" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.001123" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1058" name="SharedEdgesHaveIdenticalWorldPositions" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.SharedEdgesHaveIdenticalWorldPositions" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.018206" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1055" name="SharedEdgesHaveIdenticalWorldPositions(-1,-1)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.SharedEdgesHaveIdenticalWorldPositions(-1,-1)" methodname="SharedEdgesHaveIdenticalWorldPositions" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="1166252911" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.001054" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1056" name="SharedEdgesHaveIdenticalWorldPositions(0,0)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.SharedEdgesHaveIdenticalWorldPositions(0,0)" methodname="SharedEdgesHaveIdenticalWorldPositions" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="650009519" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000226" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1057" name="SharedEdgesHaveIdenticalWorldPositions(-2,3)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.SharedEdgesHaveIdenticalWorldPositions(-2,3)" methodname="SharedEdgesHaveIdenticalWorldPositions" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="196906057" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000164" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1053" name="TopologyHasValidUpwardFacesAndFlatUnitNormals" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.TopologyHasValidUpwardFacesAndFlatUnitNormals" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:11Z" duration="1.907997" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1050" name="TopologyHasValidUpwardFacesAndFlatUnitNormals(1)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.TopologyHasValidUpwardFacesAndFlatUnitNormals(1)" methodname="TopologyHasValidUpwardFacesAndFlatUnitNormals" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="1459106400" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.000501" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1051" name="TopologyHasValidUpwardFacesAndFlatUnitNormals(32)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.TopologyHasValidUpwardFacesAndFlatUnitNormals(32)" methodname="TopologyHasValidUpwardFacesAndFlatUnitNormals" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="54546436" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:09Z" duration="0.042575" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1052" name="TopologyHasValidUpwardFacesAndFlatUnitNormals(256)" fullname="RTSWorld.Presentation.Tests.TerrainGeometryTests.TopologyHasValidUpwardFacesAndFlatUnitNormals(256)" methodname="TopologyHasValidUpwardFacesAndFlatUnitNormals" classname="RTSWorld.Presentation.Tests.TerrainGeometryTests" runstate="Runnable" seed="2012413206" result="Passed" start-time="2026-11-15 17:45:09Z" end-time="2026-11-15 17:45:11Z" duration="1.864030" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1186" name="RTSWorld.World.Tests.dll" fullname="/tmp/rtswater-unity-validation/Library/ScriptAssemblies/RTSWorld.World.Tests.dll" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:39Z" duration="27.955033" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="53720" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1187" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:39Z" duration="27.949091" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1188" name="World" fullname="RTSWorld.World" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:39Z" duration="27.948428" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1189" name="Tests" fullname="RTSWorld.World.Tests" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:38Z" duration="27.935351" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1073" name="ChunkSelectionTests" fullname="RTSWorld.World.Tests.ChunkSelectionTests" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.004785" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1085" name="ExtremeCoordinatesClipRatherThanWrap" fullname="RTSWorld.World.Tests.ChunkSelectionTests.ExtremeCoordinatesClipRatherThanWrap" methodname="ExtremeCoordinatesClipRatherThanWrap" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="938909259" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000483" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1086" name="InvalidInputsAreRejected" fullname="RTSWorld.World.Tests.ChunkSelectionTests.InvalidInputsAreRejected" methodname="InvalidInputsAreRejected" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="1868649379" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000793" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1079" name="PositionUsesFloor" fullname="RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000941" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1074" name="PositionUsesFloor(0,0,0,0)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(0,0,0,0)" methodname="PositionUsesFloor" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="242683998" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000213" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1075" name="PositionUsesFloor(31.999d,32,0,1)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(31.999d,32,0,1)" methodname="PositionUsesFloor" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="2112953404" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000084" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1076" name="PositionUsesFloor(-0.001d,-32,-1,-1)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(-0.001d,-32,-1,-1)" methodname="PositionUsesFloor" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="944228782" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000038" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1077" name="PositionUsesFloor(-32.001d,64,-2,2)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(-32.001d,64,-2,2)" methodname="PositionUsesFloor" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="1801960838" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000031" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1078" name="PositionUsesFloor(64,-64,2,-2)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.PositionUsesFloor(64,-64,2,-2)" methodname="PositionUsesFloor" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="1138918323" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000030" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1084" name="WindowIsUniqueSquareAndNearFirst" fullname="RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.001512" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1080" name="WindowIsUniqueSquareAndNearFirst(0)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(0)" methodname="WindowIsUniqueSquareAndNearFirst" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="1233680950" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000792" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1081" name="WindowIsUniqueSquareAndNearFirst(1)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(1)" methodname="WindowIsUniqueSquareAndNearFirst" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="370383343" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000070" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1082" name="WindowIsUniqueSquareAndNearFirst(2)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(2)" methodname="WindowIsUniqueSquareAndNearFirst" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="2140529533" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000060" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1083" name="WindowIsUniqueSquareAndNearFirst(8)" fullname="RTSWorld.World.Tests.ChunkSelectionTests.WindowIsUniqueSquareAndNearFirst(8)" methodname="WindowIsUniqueSquareAndNearFirst" classname="RTSWorld.World.Tests.ChunkSelectionTests" runstate="Runnable" seed="2132090815" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000207" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1087" name="EnvironmentGeneratorTests" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.675090" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1120" name="AdditiveBaseSamplerMatchesV1ChunksAtNegativeAndExtremeCoordinates" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.AdditiveBaseSamplerMatchesV1ChunksAtNegativeAndExtremeCoordinates" methodname="AdditiveBaseSamplerMatchesV1ChunksAtNegativeAndExtremeCoordinates" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="659116074" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.005136" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1098" name="BordersMatchForSurfaceClimateAndWater" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.005833" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1093" name="BordersMatchForSurfaceClimateAndWater(0,0)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(0,0)" methodname="BordersMatchForSurfaceClimateAndWater" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="695812001" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.001927" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1094" name="BordersMatchForSurfaceClimateAndWater(-1,-1)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(-1,-1)" methodname="BordersMatchForSurfaceClimateAndWater" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="2141488609" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000844" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1095" name="BordersMatchForSurfaceClimateAndWater(3,3)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(3,3)" methodname="BordersMatchForSurfaceClimateAndWater" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1901401599" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000620" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1096" name="BordersMatchForSurfaceClimateAndWater(10,11)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(10,11)" methodname="BordersMatchForSurfaceClimateAndWater" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1032577794" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000604" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1097" name="BordersMatchForSurfaceClimateAndWater(15,15)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.BordersMatchForSurfaceClimateAndWater(15,15)" methodname="BordersMatchForSurfaceClimateAndWater" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1963450528" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000782" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1099" name="ChunkPartitionDoesNotChangeEnvironmentOrResourceOwnership" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ChunkPartitionDoesNotChangeEnvironmentOrResourceOwnership" methodname="ChunkPartitionDoesNotChangeEnvironmentOrResourceOwnership" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="270024961" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.041833" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1109" name="ClassificationRules" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.002760" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1100" name="ClassificationRules(50,0.8f,0.1f,Desert)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.8f,0.1f,Desert)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="2102024412" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000287" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1101" name="ClassificationRules(50,0.5f,0.2f,Arid)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.2f,Arid)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="857177001" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000091" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1102" name="ClassificationRules(50,0.5f,0.4f,Plains)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.4f,Plains)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="126256006" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000060" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1103" name="ClassificationRules(50,0.5f,0.6f,TemperateForest)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.6f,TemperateForest)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1089478995" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000050" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1104" name="ClassificationRules(50,0.5f,0.9f,DenseForest)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.5f,0.9f,DenseForest)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1537509608" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000047" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1105" name="ClassificationRules(65,0.1f,0.4f,Snow)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(65,0.1f,0.4f,Snow)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1618191919" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000049" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1106" name="ClassificationRules(50,0.1f,0.4f,Tundra)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(50,0.1f,0.4f,Tundra)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="107144646" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000046" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1107" name="ClassificationRules(80,0.4f,0.4f,Mountain)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(80,0.4f,0.4f,Mountain)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1264582023" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000042" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1108" name="ClassificationRules(39,0.4f,0.4f,Coast)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClassificationRules(39,0.4f,0.4f,Coast)" methodname="ClassificationRules" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="524955620" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000042" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1092" name="ClimateAndResourceOutputsChangeWithSeed" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ClimateAndResourceOutputsChangeWithSeed" methodname="ClimateAndResourceOutputsChangeWithSeed" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1838284215" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000969" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1112" name="LakeInteriorHasNoRiverBankRidges" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.LakeInteriorHasNoRiverBankRidges" methodname="LakeInteriorHasNoRiverBankRidges" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1771888174" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.004717" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1115" name="LegacyEnvironmentV1RetainsTheReportedRiverFixture" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.LegacyEnvironmentV1RetainsTheReportedRiverFixture" methodname="LegacyEnvironmentV1RetainsTheReportedRiverFixture" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="960878775" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000339" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1091" name="RepeatsAllFieldsResourcesAndLeavesBaseUnchanged" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.RepeatsAllFieldsResourcesAndLeavesBaseUnchanged" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.012945" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1088" name="RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(0,0)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(0,0)" methodname="RepeatsAllFieldsResourcesAndLeavesBaseUnchanged" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1421211540" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.006825" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1089" name="RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(-5,-5)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(-5,-5)" methodname="RepeatsAllFieldsResourcesAndLeavesBaseUnchanged" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="637030136" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.002380" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1090" name="RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(10,11)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.RepeatsAllFieldsResourcesAndLeavesBaseUnchanged(10,11)" methodname="RepeatsAllFieldsResourcesAndLeavesBaseUnchanged" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="30391370" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.002200" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1110" name="RepresentativeWorldContainsAllBiomesAndWaterKinds" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.RepresentativeWorldContainsAllBiomesAndWaterKinds" methodname="RepresentativeWorldContainsAllBiomesAndWaterKinds" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1319792469" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.382316" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1111" name="ResourcesStayDryAndUniqueAndUseBiomeDensities" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.ResourcesStayDryAndUniqueAndUseBiomeDensities" methodname="ResourcesStayDryAndUniqueAndUseBiomeDensities" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1578059234" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.068297" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1113" name="RiverCenterlinesAreWetAndDescendBetweenTheirBasins" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.RiverCenterlinesAreWetAndDescendBetweenTheirBasins" methodname="RiverCenterlinesAreWetAndDescendBetweenTheirBasins" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="367571801" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.005206" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1114" name="SeaLevelIsConfigurableAndUnknownVersionsAreRejected" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.SeaLevelIsConfigurableAndUnknownVersionsAreRejected" methodname="SeaLevelIsConfigurableAndUnknownVersionsAreRejected" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1798723480" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.000647" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1119" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.142104" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1116" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(12345)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(12345)" methodname="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="1371034506" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.049224" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1117" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(67890)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(67890)" methodname="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="658623598" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.046413" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1118" name="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(-1)" fullname="RTSWorld.World.Tests.EnvironmentGeneratorTests.WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel(-1)" methodname="WetShoreDoesNotInterpolateTowardAnUnrelatedSeaLevel" classname="RTSWorld.World.Tests.EnvironmentGeneratorTests" runstate="Runnable" seed="753909183" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.043931" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1121" name="HydrologyRegressionTests" fullname="RTSWorld.World.Tests.HydrologyRegressionTests" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" testcasecount="23" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:38Z" duration="27.155573" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1144" name="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.009284" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1140" name="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(1,1)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(1,1)" methodname="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="969908762" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.002278" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1141" name="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-1,-1)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-1,-1)" methodname="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="882996152" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.002140" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1142" name="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(7,7)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(7,7)" methodname="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="858088857" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.002114" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1143" name="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-9,-9)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.BasinInfluencesMatchAcrossChunksAndRegionalBoundaries(-9,-9)" methodname="BasinInfluencesMatchAcrossChunksAndRegionalBoundaries" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="844010711" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:11Z" duration="0.002136" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1139" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:38Z" duration="27.071978" total="16" passed="16" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1123" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,0)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,0)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="242517321" result="Passed" start-time="2026-11-15 17:45:11Z" end-time="2026-11-15 17:45:13Z" duration="1.710835" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1124" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,38)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,38)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="2144257818" result="Passed" start-time="2026-11-15 17:45:13Z" end-time="2026-11-15 17:45:15Z" duration="1.709315" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1125" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,55)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,55)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1014114106" result="Passed" start-time="2026-11-15 17:45:15Z" end-time="2026-11-15 17:45:16Z" duration="1.709394" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1126" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,100)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,100)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1849698343" result="Passed" start-time="2026-11-15 17:45:16Z" end-time="2026-11-15 17:45:18Z" duration="1.708560" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1127" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,0)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,0)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1493920404" result="Passed" start-time="2026-11-15 17:45:18Z" end-time="2026-11-15 17:45:20Z" duration="1.580817" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1128" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,38)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,38)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="2079620196" result="Passed" start-time="2026-11-15 17:45:20Z" end-time="2026-11-15 17:45:21Z" duration="1.717133" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1129" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,55)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,55)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="275860778" result="Passed" start-time="2026-11-15 17:45:21Z" end-time="2026-11-15 17:45:23Z" duration="1.727633" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1130" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,100)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,100)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="644252827" result="Passed" start-time="2026-11-15 17:45:23Z" end-time="2026-11-15 17:45:25Z" duration="1.755808" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1131" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,0)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,0)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="11948069" result="Passed" start-time="2026-11-15 17:45:25Z" end-time="2026-11-15 17:45:26Z" duration="1.559664" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1132" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,38)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,38)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1479951682" result="Passed" start-time="2026-11-15 17:45:26Z" end-time="2026-11-15 17:45:28Z" duration="1.716913" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1133" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,55)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,55)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="2049200746" result="Passed" start-time="2026-11-15 17:45:28Z" end-time="2026-11-15 17:45:30Z" duration="1.696101" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1134" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,100)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,100)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="511547866" result="Passed" start-time="2026-11-15 17:45:30Z" end-time="2026-11-15 17:45:32Z" duration="1.708468" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1135" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,0)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,0)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="551610046" result="Passed" start-time="2026-11-15 17:45:32Z" end-time="2026-11-15 17:45:33Z" duration="1.572904" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1136" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,38)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,38)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1161131227" result="Passed" start-time="2026-11-15 17:45:33Z" end-time="2026-11-15 17:45:35Z" duration="1.749384" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1137" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,55)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,55)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1379063985" result="Passed" start-time="2026-11-15 17:45:35Z" end-time="2026-11-15 17:45:37Z" duration="1.727682" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1138" name="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,100)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,100)" methodname="HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1155115272" result="Passed" start-time="2026-11-15 17:45:37Z" end-time="2026-11-15 17:45:38Z" duration="1.719048" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1147" name="LegacySamplesAndResourcesKeepTheirPreFixFingerprints" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.LegacySamplesAndResourcesKeepTheirPreFixFingerprints" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.055573" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1145" name="LegacySamplesAndResourcesKeepTheirPreFixFingerprints(1,&quot;625E68D39AB86225980AD6C0E66E43DC8931DD65A79C81B816F49C6F14BF2412&quot;)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.LegacySamplesAndResourcesKeepTheirPreFixFingerprints(1,&quot;625E68D39AB86225980AD6C0E66E43DC8931DD65A79C81B816F49C6F14BF2412&quot;)" methodname="LegacySamplesAndResourcesKeepTheirPreFixFingerprints" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="1505300367" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.037269" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1146" name="LegacySamplesAndResourcesKeepTheirPreFixFingerprints(2,&quot;EEC39C72DE01E9EFF470061869039E5229C733B62BB91895A3D8B1EF462A094D&quot;)" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.LegacySamplesAndResourcesKeepTheirPreFixFingerprints(2,&quot;EEC39C72DE01E9EFF470061869039E5229C733B62BB91895A3D8B1EF462A094D&quot;)" methodname="LegacySamplesAndResourcesKeepTheirPreFixFingerprints" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="331547535" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.015083" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1122" name="SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips" fullname="RTSWorld.World.Tests.HydrologyRegressionTests.SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips" methodname="SeedSevenRetainsMountainsButRemovesTheRiverEndpointWallAndRaisedStrips" classname="RTSWorld.World.Tests.HydrologyRegressionTests" runstate="Runnable" seed="67044387" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.016830" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1148" name="TerrainGeneratorTests" fullname="RTSWorld.World.Tests.TerrainGeneratorTests" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.098907" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="ParameterizedMethod" id="1163" name="AdjacentChunksShareExactEdgesAndCorner" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.049768" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1157" name="AdjacentChunksShareExactEdgesAndCorner(0,0,32)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(0,0,32)" methodname="AdjacentChunksShareExactEdgesAndCorner" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="237227598" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.001923" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1158" name="AdjacentChunksShareExactEdgesAndCorner(-1,-1,32)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(-1,-1,32)" methodname="AdjacentChunksShareExactEdgesAndCorner" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1105568505" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.001128" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1159" name="AdjacentChunksShareExactEdgesAndCorner(-3,2,7)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(-3,2,7)" methodname="AdjacentChunksShareExactEdgesAndCorner" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1214061208" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000199" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1160" name="AdjacentChunksShareExactEdgesAndCorner(2147483646,int.MinValue,32)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(2147483646,int.MinValue,32)" methodname="AdjacentChunksShareExactEdgesAndCorner" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1057106360" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.001036" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1161" name="AdjacentChunksShareExactEdgesAndCorner(2,-4,1)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(2,-4,1)" methodname="AdjacentChunksShareExactEdgesAndCorner" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1563140025" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000079" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1162" name="AdjacentChunksShareExactEdgesAndCorner(-2,3,256)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.AdjacentChunksShareExactEdgesAndCorner(-2,3,256)" methodname="AdjacentChunksShareExactEdgesAndCorner" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1180317546" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.040765" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1164" name="ChunkPartitionDoesNotChangeGlobalHeight" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.ChunkPartitionDoesNotChangeGlobalHeight" methodname="ChunkPartitionDoesNotChangeGlobalHeight" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1157550279" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.003497" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1156" name="DifferentSeedsProduceDifferentTerrain" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.DifferentSeedsProduceDifferentTerrain" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.007207" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1153" name="DifferentSeedsProduceDifferentTerrain(0,1)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.DifferentSeedsProduceDifferentTerrain(0,1)" methodname="DifferentSeedsProduceDifferentTerrain" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="91837921" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.004159" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1154" name="DifferentSeedsProduceDifferentTerrain(-1,int.MaxValue)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.DifferentSeedsProduceDifferentTerrain(-1,int.MaxValue)" methodname="DifferentSeedsProduceDifferentTerrain" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1526735788" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000488" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1155" name="DifferentSeedsProduceDifferentTerrain(int.MinValue,12345)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.DifferentSeedsProduceDifferentTerrain(int.MinValue,12345)" methodname="DifferentSeedsProduceDifferentTerrain" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="468392761" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000523" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1176" name="ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.008166" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1174" name="ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(-71,-2,-3)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(-71,-2,-3)" methodname="ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1238802801" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.003925" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1175" name="ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(8,0,0)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned(8,0,0)" methodname="ElevationsAreBoundedNonFlatAndFutureSlotsAreUnassigned" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1987933631" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.003536" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1168" name="GlobalCoordinatesUseWideIntegerArithmetic" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.GlobalCoordinatesUseWideIntegerArithmetic" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.001073" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1165" name="GlobalCoordinatesUseWideIntegerArithmetic(0,0,0L,0L)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.GlobalCoordinatesUseWideIntegerArithmetic(0,0,0L,0L)" methodname="GlobalCoordinatesUseWideIntegerArithmetic" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="169018398" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000311" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1166" name="GlobalCoordinatesUseWideIntegerArithmetic(-1,-2,-32L,-64L)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.GlobalCoordinatesUseWideIntegerArithmetic(-1,-2,-32L,-64L)" methodname="GlobalCoordinatesUseWideIntegerArithmetic" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1801956863" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000062" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1167" name="GlobalCoordinatesUseWideIntegerArithmetic(int.MaxValue,int.MinValue,68719476704L,-68719476736L)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.GlobalCoordinatesUseWideIntegerArithmetic(int.MaxValue,int.MinValue,68719476704L,-68719476736L)" methodname="GlobalCoordinatesUseWideIntegerArithmetic" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="751829944" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000025" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1184" name="InvalidChunkSizeIsRejected" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.InvalidChunkSizeIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000794" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1181" name="InvalidChunkSizeIsRejected(0)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.InvalidChunkSizeIsRejected(0)" methodname="InvalidChunkSizeIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="841252312" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000214" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1182" name="InvalidChunkSizeIsRejected(-1)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.InvalidChunkSizeIsRejected(-1)" methodname="InvalidChunkSizeIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="623251248" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000062" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1183" name="InvalidChunkSizeIsRejected(257)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.InvalidChunkSizeIsRejected(257)" methodname="InvalidChunkSizeIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="565293486" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000032" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-case id="1185" name="InvalidCoordinatesAndNullDefinitionAreRejected" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.InvalidCoordinatesAndNullDefinitionAreRejected" methodname="InvalidCoordinatesAndNullDefinitionAreRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1512811440" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000604" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-suite type="ParameterizedMethod" id="1152" name="RepeatedGenerationMatchesEverySample" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.RepeatedGenerationMatchesEverySample" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.021034" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1149" name="RepeatedGenerationMatchesEverySample(0,0,0)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.RepeatedGenerationMatchesEverySample(0,0,0)" methodname="RepeatedGenerationMatchesEverySample" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1117804998" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.011558" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1150" name="RepeatedGenerationMatchesEverySample(-123,-2,3)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.RepeatedGenerationMatchesEverySample(-123,-2,3)" methodname="RepeatedGenerationMatchesEverySample" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="650479783" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.004337" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1151" name="RepeatedGenerationMatchesEverySample(int.MaxValue,int.MinValue,int.MaxValue)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.RepeatedGenerationMatchesEverySample(int.MaxValue,int.MinValue,int.MaxValue)" methodname="RepeatedGenerationMatchesEverySample" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1212205076" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.004332" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1180" name="UnsupportedVersionIsRejected" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.UnsupportedVersionIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.001248" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1177" name="UnsupportedVersionIsRejected(0)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.UnsupportedVersionIsRejected(0)" methodname="UnsupportedVersionIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="51069350" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000284" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1178" name="UnsupportedVersionIsRejected(2)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.UnsupportedVersionIsRejected(2)" methodname="UnsupportedVersionIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="94678470" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000084" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1179" name="UnsupportedVersionIsRejected(-1)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.UnsupportedVersionIsRejected(-1)" methodname="UnsupportedVersionIsRejected" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="930259795" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000060" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="ParameterizedMethod" id="1173" name="VersionOneMatchesFixedReferenceBits" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.001593" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1169" name="VersionOneMatchesFixedReferenceBits(0,0,0,0,1114399562)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(0,0,0,0,1114399562)" methodname="VersionOneMatchesFixedReferenceBits" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="152326558" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000434" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1170" name="VersionOneMatchesFixedReferenceBits(-1,-1,25,21,1114640964)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(-1,-1,25,21,1114640964)" methodname="VersionOneMatchesFixedReferenceBits" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="1853758705" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000204" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1171" name="VersionOneMatchesFixedReferenceBits(0,0,17,23,1113887457)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(0,0,17,23,1113887457)" methodname="VersionOneMatchesFixedReferenceBits" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="574474890" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000180" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1172" name="VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)" fullname="RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)" methodname="VersionOneMatchesFixedReferenceBits" classname="RTSWorld.World.Tests.TerrainGeneratorTests" runstate="Runnable" seed="656731171" result="Passed" start-time="2026-11-15 17:45:38Z" end-time="2026-11-15 17:45:38Z" duration="0.000176" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /home/johnnywendell/.config/unity3d/DefaultCompany/RTSWorld/TestResults.xml
+]]></output>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

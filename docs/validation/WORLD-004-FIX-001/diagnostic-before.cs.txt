@@ -1,0 +1,16 @@
+using System;
+using RTSWorld.World.Generation;
+using RTSWorld.World.Environment;
+class Program {static void Main(){
+var gen=new EnvironmentGenerator(new WorldDefinition(12345),new EnvironmentDefinition());
+int transitions=0; double max=0; string worst="";
+for(int z=-192;z<0;z++)for(int x=64;x<224;x++) {
+var a=gen.Sample(x,z);
+foreach(var b in new[]{gen.Sample(x+1,z),gen.Sample(x,z+1)}) {
+if(a.Water!=WaterKind.None && b.Water==WaterKind.None){
+transitions++;double jump=Math.Abs(a.WaterLevel-b.WaterLevel);
+if(jump>max){max=jump;worst=$"({x},{z}) wet: elevation={a.Elevation}, level={a.WaterLevel},kind={a.Water}; dry: elevation={b.Elevation},level={b.WaterLevel}";}
+}}}
+for(int z=-148;z<=-144;z++){for(int x=104;x<=108;x++){var s=gen.Sample(x,z);Console.WriteLine($"{x},{z}: h={s.Elevation:F3} w={s.WaterLevel:F3} {s.Water}");}}
+Console.WriteLine($"wet/dry edges={transitions}; max water level discontinuity={max}; {worst}");
+}}

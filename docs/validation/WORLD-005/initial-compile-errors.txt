@@ -1,0 +1,15 @@
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(20,29): error CS1010: Newline in constant
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(20,67): error CS1003: Syntax error, ',' expected
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,14): error CS1056: Unexpected character '??'
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,16): error CS1003: Syntax error, ',' expected
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,19): error CS1003: Syntax error, ',' expected
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,21): error CS1003: Syntax error, ',' expected
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,26): error CS1003: Syntax error, ',' expected
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,26): error CS1010: Newline in constant
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,29): error CS1003: Syntax error, ',' expected
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(22,130): error CS1026: ) expected
+world005-compile.log: Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs(21,14): error CS1056: Unexpected character '·'
+world005-editmode-initial.log: Assets/_Project/Presentation/Cameras/WorldSurfaceQuery.cs(25,17): error CS0246: The type or namespace name 'EnvironmentPresentation' could not be found (are you missing a using directive or an assembly reference?)
+world005-visual-1.log: Assets/Editor/World005Validation.cs(71,78): error CS1061: 'string' does not contain a definition for 'W' and no accessible extension method 'W' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+world005-visual-1.log: Assets/Editor/World005Validation.cs(71,84): error CS1061: 'string' does not contain a definition for 'D' and no accessible extension method 'D' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)
+world005-visual-1.log: Assets/Editor/World005Validation.cs(74,77): error CS1061: 'string' does not contain a definition for 'E' and no accessible extension method 'E' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)

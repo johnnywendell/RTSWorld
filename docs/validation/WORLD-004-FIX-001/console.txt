@@ -1,0 +1,10 @@
+Editor river: errors=0; warnings=1; logs=0
+Editor river-close: errors=0; warnings=1; logs=0
+Editor lake: errors=0; warnings=1; logs=0
+Editor coast: errors=0; warnings=1; logs=0
+Editor forest: errors=0; warnings=1; logs=0
+Play river: errors=0; warnings=0; logs=0
+Play river-close: errors=0; warnings=0; logs=0
+Play lake: errors=0; warnings=0; logs=0
+Play coast: errors=0; warnings=0; logs=0
+Play forest: errors=0; warnings=0; logs=0

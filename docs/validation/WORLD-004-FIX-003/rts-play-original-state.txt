@@ -1,0 +1,1 @@
+scene=Assets/_Project/Scenes/RTSCameraDemo.unity root=(-5807.00, 0.00, 0.00) seed=7 version=4 focusLogical=(-525,216331693541,-2,91553637167395E-14) focusWorld=(-6857.43, 58.98, 0.00) observer=(-6857.43, 58.98, 0.00) center=(-17, -1) active=49 pending=0 camera=(-6903.48, 151.98, -46.05) ortho=48

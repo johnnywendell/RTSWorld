@@ -1,0 +1,87 @@
+using System;
+using System.IO;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using RTSWorld.Presentation.Streaming;
+using RTSWorld.Presentation.Environment;
+
+[InitializeOnLoad]
+public static class WaterValidationCapture
+{
+    const string Key = "WaterValidationCapture";
+    static int ticks;
+    static readonly string Output = "/tmp/rtswater-unity-validation/captures";
+    static readonly (string name, float x, float z, float size)[] Sites = {
+        ("river",120,-128,105), ("river-close",106,-146,28),
+        ("lake",168,-64,105), ("coast",56,56,105), ("forest",0,0,105)
+    };
+    static WaterValidationCapture()
+    {
+        EditorApplication.update += Update;
+        Application.logMessageReceived += (message, trace, type) => {
+            if (SessionState.GetBool(Key,false) && (type==LogType.Error || type==LogType.Exception || type==LogType.Assert))
+                File.AppendAllText(Output+"/errors.txt", type+": "+message+"\n"+trace+"\n");
+        };
+    }
+    public static void Run()
+    {
+        Directory.CreateDirectory(Output);
+        EditorSceneManager.OpenScene("Assets/_Project/Scenes/EnvironmentDemo.unity");
+        SessionState.SetInt(Key+"stage",0); SessionState.SetInt(Key+"index",0);
+        SessionState.SetBool(Key,true); ticks=0;
+    }
+    static void Update()
+    {
+        if (!SessionState.GetBool(Key,false) || EditorApplication.isCompiling || EditorApplication.isUpdating) return;
+        if (++ticks<100) return;
+        ticks=0;
+        try
+        {
+            int stage=SessionState.GetInt(Key+"stage",0);
+            if(stage==2) { if(EditorApplication.isPlaying) return; SessionState.SetBool(Key,false); EditorApplication.Exit(0); return; }
+            if (stage==1 && !EditorApplication.isPlaying) return;
+            int index=SessionState.GetInt(Key+"index",0);
+            if(index==Sites.Length)
+            {
+                if(stage==0) {SessionState.SetInt(Key+"stage",1);SessionState.SetInt(Key+"index",0);EditorApplication.EnterPlaymode();}
+                else {SessionState.SetInt(Key+"stage",2);EditorApplication.ExitPlaymode();}
+                return;
+            }
+            var site=Sites[index];
+            var manager=UnityEngine.Object.FindAnyObjectByType<ChunkManager>();
+            var observer=GameObject.Find("Test Observer").transform;
+            var camera=Camera.main;
+            var controls=UnityEngine.Object.FindAnyObjectByType<StreamingDemo>();
+            controls.enabled=false;
+            observer.position=manager.transform.TransformPoint(new Vector3(site.x*manager.HorizontalScale,0,site.z*manager.HorizontalScale));
+            for(int i=0;i<50;i++){manager.Step();if(manager.PendingCount==0)break;}
+            if(manager.PendingCount!=0 || manager.ActiveCount!=9)throw new Exception("Chunks not stabilized");
+            camera.transform.position=observer.position+new Vector3(110,145,-125);
+            camera.orthographicSize=site.size;
+            if(site.size<100) camera.transform.LookAt(observer.position+Vector3.up*67);
+            else camera.transform.rotation=Quaternion.Euler(25,-27,0);
+            var rt=new RenderTexture(1600,1000,24,RenderTextureFormat.ARGB32);
+            rt.Create();
+            // Render the actual URP scene offscreen, without modifying the scene asset.
+            var request=new UniversalRenderPipeline.SingleCameraRequest {destination=rt};
+            RenderPipeline.SubmitRenderRequest(camera,request);
+            var previous=RenderTexture.active;RenderTexture.active=rt;
+            var texture=new Texture2D(rt.width,rt.height,TextureFormat.RGB24,false);
+            texture.ReadPixels(new Rect(0,0,rt.width,rt.height),0,0);texture.Apply();
+            File.WriteAllBytes(Output+"/"+(stage==0?"editor-":"play-")+site.name+".png",texture.EncodeToPNG());
+            RenderTexture.active=previous;
+            UnityEngine.Object.DestroyImmediate(texture);rt.Release();UnityEngine.Object.DestroyImmediate(rt);
+            var layer=manager.GetComponent<EnvironmentPresentation>();
+            File.AppendAllText(Output+"/metrics.txt",$"{(stage==0?"Editor":"Play")} {site.name}: chunks={manager.ActiveCount}; queue={manager.PendingCount}; seed={manager.Seed}; version={layer.EnvironmentVersion}; shaderError={ShaderUtil.ShaderHasError(layer.Material.shader)}; renderPipeline={RenderPipelineManager.currentPipeline?.GetType().Name}\n");
+            var logEntries=typeof(Editor).Assembly.GetType("UnityEditor.LogEntries");
+            var counts=new object[]{0,0,0};
+            logEntries.GetMethod("GetCountsByType",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.NonPublic).Invoke(null,counts);
+            File.AppendAllText(Output+"/console.txt",$"{(stage==0?"Editor":"Play")} {site.name}: errors={counts[0]}; warnings={counts[1]}; logs={counts[2]}\n");
+            SessionState.SetInt(Key+"index",index+1);
+        }
+        catch(Exception e){File.AppendAllText(Output+"/errors.txt",e+"\n");SessionState.SetBool(Key,false);EditorApplication.Exit(1);}
+    }
+}

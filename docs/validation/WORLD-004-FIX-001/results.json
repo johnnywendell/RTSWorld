@@ -1,0 +1,74 @@
+{
+  "editmode": {
+    "id": "2",
+    "testcasecount": "103",
+    "result": "Passed",
+    "total": "103",
+    "passed": "103",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-15 16:16:36Z",
+    "end-time": "2026-11-15 16:16:39Z",
+    "duration": "3.1347382"
+  },
+  "playmode": {
+    "id": "2",
+    "testcasecount": "3",
+    "result": "Passed",
+    "total": "3",
+    "passed": "3",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-15 16:17:06Z",
+    "end-time": "2026-11-15 16:17:06Z",
+    "duration": "0.2203956"
+  },
+  "costOutput": [
+    "WORLD004_ROUTE samples=48 medianMs=1.2488 p95Ms=2.9830 maxMs=12.9819 waypoints=8 cells=32 radius=1 maxPerFrame=1 budgetMs=4 sea=38 environmentVersion=2 meshes=9\n"
+  ],
+  "regressionAgainstOriginal": {
+    "id": "2",
+    "testcasecount": "6",
+    "result": "Failed(Child)",
+    "total": "6",
+    "passed": "1",
+    "failed": "5",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-15 16:15:16Z",
+    "end-time": "2026-11-15 16:15:17Z",
+    "duration": "0.15479"
+  },
+  "conditions": {
+    "unity": "6000.6.9f1 LinuxEditor",
+    "execution": "isolated copy /tmp/rtswater-unity-validation",
+    "packages": "59 existing local package directories; no package download/install",
+    "tests": "batchmode -nographics",
+    "visual": "batchmode with GPU and URP SingleCameraRequest, EnvironmentDemo Editor and Play",
+    "mcp": "unavailable at 127.0.0.1:8080",
+    "originalInteractiveEditor": "NOT_RUN: not controlled or read through MCP"
+  },
+  "diagnostic": {
+    "beforeWetDryEdges": 359,
+    "afterWetDryEdges": 375,
+    "beforeMaxLevelJump": 19.371959686279297,
+    "afterMaxLevelJump": 0.2104034423828125,
+    "note": "seed12345, oriented edges +X/+Z, x64..223 z-192..-1; not a whole-world maximum"
+  },
+  "integrity": {
+    "terrainV1sha256": "f45c0e6b7f92538986fa040f227fd1f6d256514bfed3287693bf6a588afce8ae",
+    "world005sha256": "7dfc17b0a55d38823288e4029e1cf6d0fee83e1ce8dcd62d0b47d1e94f246432",
+    "sourceInputs": "source-verification.json"
+  }
+}

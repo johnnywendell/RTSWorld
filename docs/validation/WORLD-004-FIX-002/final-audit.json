@@ -1,0 +1,45 @@
+{
+  "editmode": {
+    "passed": 127,
+    "failed": 0,
+    "skipped": 0
+  },
+  "playmode": {
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  "regressionControlV2": {
+    "failedAsExpected": 2
+  },
+  "validatedInputCount": 160,
+  "inputMismatches": [],
+  "changedSourceInputsSinceFix001": [
+    "Assets/_Project/Scenes/EnvironmentDemo.unity",
+    "Assets/_Project/Tests/EditMode/EnvironmentGeneratorTests.cs",
+    "Assets/_Project/Tests/Presentation/EnvironmentStreamingTests.cs",
+    "Assets/_Project/Tests/StreamingPlayMode/EnvironmentLifecycleTests.cs",
+    "Assets/_Project/World/Environment/EnvironmentData.cs",
+    "Assets/_Project/World/Environment/EnvironmentGenerator.cs"
+  ],
+  "protectedSha256": {
+    "Assets/_Project/World/Generation/TerrainGenerator.cs": "f45c0e6b7f92538986fa040f227fd1f6d256514bfed3287693bf6a588afce8ae",
+    "Assets/_Project/Presentation/Environment/EnvironmentMeshBuilder.cs": "08df689cd3cf0cffb193935d85c6fd245373be2dced7fd08a2814281e1927560",
+    "Assets/_Project/Presentation/Environment/EnvironmentPresentation.cs": "66de34649cae5cc691319ce6b47fc274ab8ce188727d7fbe4a178ee5c51bd8b8",
+    "Assets/_Project/Presentation/Streaming/ChunkManager.cs": "ce8bb65dd13134985c1cf747ccb986ebaef8c23518a1c6fbc1b872be900f3473",
+    "tasks/in_progress/WORLD-005-rts-camera.md": "7dfc17b0a55d38823288e4029e1cf6d0fee83e1ce8dcd62d0b47d1e94f246432",
+    "tasks/completed/WORLD-004-FIX-001-water-geometry.md": "b810b2d56f1e14713ea0f4a89612e64ebd98611de4d9fe48b118364d78d02d47",
+    "Packages/manifest.json": "b40d214fd86143f43e61db41585f87c91d2a656a16150185d5872dfca1e71cf0",
+    "Packages/packages-lock.json": "6df27e6b956a5a9298e66067e0b08737ecd3ecf98028eba2aad8dbdc18d274b3"
+  },
+  "legacyFingerprintsUnchangedInUnity": true,
+  "legacyFingerprintsUnchangedInDotNet": true,
+  "beforePngs": 8,
+  "afterPngs": 18,
+  "console": "Editor 0 errors/1 URP warning; Play 0 errors/0 warnings",
+  "taskStatus": "DONE",
+  "head": "6a9966b0168d3ba553c97ed7f7c8a2818f5bbca4",
+  "branch": "main",
+  "commitsCreated": false,
+  "diffCheck": 0
+}

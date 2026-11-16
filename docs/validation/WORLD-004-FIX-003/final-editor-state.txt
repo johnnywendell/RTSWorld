@@ -1,0 +1,1 @@
+scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False dirty=False version=4 root=(-5807.00, 0.00, 0.00) active=25 pending=0 nativeMeshes=25 temporaryReplay=False shaderError=False

@@ -1,0 +1,55 @@
+{
+  "editmode": {
+    "id": "2",
+    "testcasecount": "145",
+    "result": "Passed",
+    "total": "145",
+    "passed": "145",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-15 17:45:08Z",
+    "end-time": "2026-11-15 17:45:39Z",
+    "duration": "30.6922861"
+  },
+  "playmode": {
+    "id": "2",
+    "testcasecount": "5",
+    "result": "Passed",
+    "total": "5",
+    "passed": "5",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-15 17:48:04Z",
+    "end-time": "2026-11-15 17:48:04Z",
+    "duration": "0.593707"
+  },
+  "conditions": {
+    "unity": "6000.6.9f1/LinuxEditor",
+    "MCP": "unavailable inside and outside sandbox",
+    "execution": "real Unity, isolated copy with existing local packages",
+    "validatedInputs": 181,
+    "inputMismatches": 0
+  },
+  "visualPairs": {
+    "editor-auto-update-idle.png": true,
+    "editor-hills-min-zoom.png": true,
+    "editor-water-seed7.png": true,
+    "editor-edge-disabled.png": true,
+    "editor-edge-pan.png": true,
+    "editor-rotate.png": true,
+    "editor-zoom-max.png": true,
+    "editor-zoom-min.png": true,
+    "editor-middle-drag.png": true,
+    "editor-wasd.png": true,
+    "editor-initial.png": true
+  },
+  "hotpath": "1000 warmed stationary controller+surface+observer calls, totalMs=2.3398, allocatedBytes=0; Stopwatch created before allocation baseline; no rendering, GUI or ChunkManager.Step in this measurement."
+}

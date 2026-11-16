@@ -1,0 +1,292 @@
+{
+  "status": "PASS",
+  "branch": "main",
+  "HEAD": "6a9966b0168d3ba553c97ed7f7c8a2818f5bbca4",
+  "tests": {
+    "editmode-final": {
+      "total": 172,
+      "passed": 172,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 35.9704167,
+      "resultState": "Passed"
+    },
+    "playmode-final": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 1.8620796,
+      "resultState": "Passed"
+    }
+  },
+  "protectedFiles": {
+    "Assets/_Project/Materials/TerrainSage.mat.meta": true,
+    "Assets/_Project/Materials/TerrainSage.mat": true,
+    "Assets/_Project/Materials/EnvironmentPalette.mat": true,
+    "Assets/_Project/Materials/EnvironmentPalette.mat.meta": true,
+    "Assets/_Project/Presentation/Streaming/ChunkManager.cs": true,
+    "Assets/_Project/Presentation/Environment/EnvironmentColors.shader": true,
+    "Assets/_Project/Presentation/Cameras/RTSWorld.Camera.asmdef": true,
+    "Assets/_Project/Presentation/Cameras/RTSWorld.Camera.asmdef.meta": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraMotion.cs": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraMotion.cs.meta": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraInput.cs": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraInput.cs.meta": true,
+    "Assets/_Project/Presentation/Cameras/WorldSurfaceQuery.cs": true,
+    "Assets/_Project/Presentation/Cameras/WorldSurfaceQuery.cs.meta": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraController.cs": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraController.cs.meta": true,
+    "Assets/_Project/Presentation/Cameras/CameraStreamingObserver.cs": true,
+    "Assets/_Project/Presentation/Cameras/CameraStreamingObserver.cs.meta": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs": true,
+    "Assets/_Project/Presentation/Cameras/RtsCameraDemo.cs.meta": true,
+    "Assets/_Project/World/Chunks/ChunkCoordinate.cs": true,
+    "Assets/_Project/World/Chunks/TerrainChunkData.cs": true,
+    "Assets/_Project/World/Chunks/ChunkCoordinate.cs.meta": true,
+    "Assets/_Project/World/Chunks/TerrainChunkData.cs.meta": true,
+    "Assets/_Project/World/Chunks/ChunkSelection.cs": true,
+    "Assets/_Project/World/Chunks/ChunkSelection.cs.meta": true,
+    "Assets/_Project/World/Generation/WorldDefinition.cs": true,
+    "Assets/_Project/World/Generation/TerrainGenerator.cs": true,
+    "Assets/_Project/World/Generation/WorldDefinition.cs.meta": true,
+    "Assets/_Project/World/Generation/TerrainGenerator.cs.meta": true,
+    "tasks/completed/ENV-001-agent-continuity-validation.md": true,
+    "tasks/completed/WORLD-001-deterministic-terrain.md": true,
+    "tasks/completed/WORLD-002-low-poly-terrain-rendering.md": true,
+    "tasks/completed/WORLD-003-dynamic-chunk-streaming.md": true,
+    "tasks/completed/WORLD-004-biomes-water-resources.md": true,
+    "tasks/completed/WORLD-004-FIX-001-water-geometry.md": true,
+    "tasks/completed/WORLD-004-FIX-002-terrain-geometry.md": true,
+    "tasks/completed/WORLD-005-rts-camera.md": true
+  },
+  "guidDuplicates": [],
+  "v4WaterGeometry": [
+    {
+      "file": "after-v4--5-11-WaterOnly.json",
+      "triangles": 1243,
+      "maxSlopeDegrees": 8.532901763916016,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "env-editor-v4--5-11-WaterOnly.json",
+      "triangles": 1243,
+      "maxSlopeDegrees": 8.532901763916016,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "env-editor-v4-2-1-WaterOnly.json",
+      "triangles": 890,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "env-play-v4--5-11-WaterOnly.json",
+      "triangles": 1243,
+      "maxSlopeDegrees": 8.532901763916016,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "env-play-v4-2-1-WaterOnly.json",
+      "triangles": 890,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "env-variant-seed12345-v4-3--5-WaterOnly.json",
+      "triangles": 764,
+      "maxSlopeDegrees": 2.6840901374816895,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "env-variant-seed67890-v4-5-5-WaterOnly.json",
+      "triangles": 1855,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "env-variant-seed7-lowsea-v4-2-1-WaterOnly.json",
+      "triangles": 470,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "rts-current-frame-editor-v4-86-11-WaterOnly.json",
+      "triangles": 2048,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "rts-current-frame-play-v4-86-11-WaterOnly.json",
+      "triangles": 2048,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "rts-editor-v4--5-11-WaterOnly.json",
+      "triangles": 1243,
+      "maxSlopeDegrees": 8.532901763916016,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "rts-editor-v4-2-1-WaterOnly.json",
+      "triangles": 890,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "rts-play-v4--5-11-WaterOnly.json",
+      "triangles": 1243,
+      "maxSlopeDegrees": 8.532901763916016,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    },
+    {
+      "file": "rts-play-v4-2-1-WaterOnly.json",
+      "triangles": 890,
+      "maxSlopeDegrees": 0.0,
+      "invalidIndices": 0,
+      "degenerate": 0,
+      "inverted": 0
+    }
+  ],
+  "captureSets": [
+    {
+      "file": "after-v4--5-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "before-v2--5-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "before-v3--5-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "env-before-v2-2-1-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False"
+    },
+    {
+      "file": "env-before-v3-2-1-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False"
+    },
+    {
+      "file": "env-editor-v4--5-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False"
+    },
+    {
+      "file": "env-editor-v4-2-1-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False"
+    },
+    {
+      "file": "env-play-v4--5-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=True"
+    },
+    {
+      "file": "env-play-v4-2-1-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=True"
+    },
+    {
+      "file": "env-variant-seed12345-v4-3--5-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False"
+    },
+    {
+      "file": "env-variant-seed67890-v4-5-5-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False"
+    },
+    {
+      "file": "env-variant-seed7-lowsea-v4-2-1-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/EnvironmentDemo.unity play=False"
+    },
+    {
+      "file": "rts-current-frame-before-v2-86-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "rts-current-frame-before-v3-86-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "rts-current-frame-editor-v4-86-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "rts-current-frame-play-v4-86-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=True"
+    },
+    {
+      "file": "rts-editor-v4--5-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "rts-editor-v4-2-1-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False"
+    },
+    {
+      "file": "rts-play-v4--5-11-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=True"
+    },
+    {
+      "file": "rts-play-v4-2-1-capture.txt",
+      "fourLayersResident": true,
+      "scene": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=True"
+    }
+  ],
+  "pngCount": 83,
+  "invalidEarlierCapture": "before-historical-pose-v3.png",
+  "consoleErrorWarningEntries": 0,
+  "runtimePackagesSettingsUnchanged": true,
+  "authoringRootTranslationPreserved": -5807,
+  "finalEditorState": "scene=Assets/_Project/Scenes/RTSCameraDemo.unity play=False dirty=False version=4 root=(-5807.00, 0.00, 0.00) active=25 pending=0 nativeMeshes=25 temporaryReplay=False shaderError=False",
+  "taskStatus": "DONE",
+  "taskFile": "tasks/completed/WORLD-004-FIX-003-hydrology-terrain-geometry.md",
+  "diffCheck": "PASS",
+  "backlogTableAndUniqueIDs": "PASS",
+  "sourceHashesStillMatchValidation": "PASS",
+  "commitsCreated": 0
+}

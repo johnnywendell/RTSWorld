@@ -1,0 +1,34 @@
+var culture=System.Globalization.CultureInfo.InvariantCulture;
+var rows=new System.Text.StringBuilder("version,x,z,original,environmental,water,kind,projectedStation,algorithmSignedCrossDistance,nearestStation,euclideanDistance,longX,longZ,normalX,normalZ,sectionX,sectionZ,waterLongDerivative,waterNormalDerivative,waterSectionDerivative,originalLongDerivative,originalNormalDerivative,environmentalLongDerivative,environmentalNormalDerivative\n");
+var world=new RTSWorld.World.Generation.WorldDefinition(7);
+var terrain=new RTSWorld.World.Generation.TerrainGenerator();
+foreach(int version in new[]{2,3,4}) {
+ var gen=new RTSWorld.World.Environment.EnvironmentGenerator(world,new RTSWorld.World.Environment.EnvironmentDefinition(38,version));
+ foreach(var p in new[]{new UnityEngine.Vector2Int(-154,357),new UnityEngine.Vector2Int(-153,357),new UnityEngine.Vector2Int(-150,360),new UnityEngine.Vector2Int(-148,350),new UnityEngine.Vector2Int(-136,373),new UnityEngine.Vector2Int(-135,373),new UnityEngine.Vector2Int(-136,374),new UnityEngine.Vector2Int(64,59),new UnityEngine.Vector2Int(64,60)}) {
+  RTSWorld.World.Environment.RiverReach r; gen.TryGetRiver(p.x,p.y,out r);
+  double length=r.Length,ux=(r.BX-r.AX)/length,uz=(r.BZ-r.AZ)/length,nx=-uz,nz=ux;
+  double t=((p.x-r.AX)*ux+(p.y-r.AZ)*uz)/length;
+  double across=(p.x-r.AX)*nx+(p.y-r.AZ)*nz-8*System.Math.Sin(System.Math.PI*System.Math.Max(0,System.Math.Min(1,t)));
+  System.Func<double,double> square=delegate(double station){double x,z;r.PointAt(station,out x,out z);return (x-p.x)*(x-p.x)+(z-p.y)*(z-p.y);};
+  double nearest=0,best=double.PositiveInfinity;
+  for(int i=0;i<=200;i++){double value=square(i/200.0);if(value<best){best=value;nearest=i/200.0;}}
+  double lo=System.Math.Max(0,nearest-.005),hi=System.Math.Min(1,nearest+.005);
+  for(int i=0;i<50;i++){double a=lo+(hi-lo)/3,b=hi-(hi-lo)/3;if(square(a)<square(b))hi=b;else lo=a;}
+  nearest=(lo+hi)/2;
+  double bend=8*System.Math.PI*System.Math.Cos(System.Math.PI*nearest)/length;
+  double norm=System.Math.Sqrt(1+bend*bend),lx=(ux+bend*nx)/norm,lz=(uz+bend*nz)/norm;
+  double px=-lz,pz=lx;
+  var s=gen.Sample(p.x,p.y);
+  double wx=(gen.Sample(p.x+1,p.y).WaterLevel-gen.Sample(p.x-1,p.y).WaterLevel)/2;
+  double wz=(gen.Sample(p.x,p.y+1).WaterLevel-gen.Sample(p.x,p.y-1).WaterLevel)/2;
+  double bx=(terrain.SampleElevation(world,p.x+1,p.y)-terrain.SampleElevation(world,p.x-1,p.y))/2;
+  double bz=(terrain.SampleElevation(world,p.x,p.y+1)-terrain.SampleElevation(world,p.x,p.y-1))/2;
+  double ex=(gen.Sample(p.x+1,p.y).Elevation-gen.Sample(p.x-1,p.y).Elevation)/2;
+  double ez=(gen.Sample(p.x,p.y+1).Elevation-gen.Sample(p.x,p.y-1).Elevation)/2;
+  object[] fields={version,p.x,p.y,terrain.SampleElevation(world,p.x,p.y),s.Elevation,s.WaterLevel,s.Water,t,across,nearest,System.Math.Sqrt(square(nearest)),lx,lz,px,pz,nx,nz,wx*lx+wz*lz,wx*px+wz*pz,wx*nx+wz*nz,bx*lx+bz*lz,bx*px+bz*pz,ex*lx+ez*lz,ex*px+ez*pz};
+  var strings=new string[fields.Length];for(int i=0;i<fields.Length;i++)strings[i]=System.Convert.ToString(fields[i],culture);
+  rows.AppendLine(string.Join(",",strings));
+ }
+}
+System.IO.File.WriteAllText("docs/validation/WORLD-004-FIX-003/directional-derivatives-complete.csv",rows.ToString());
+return "Saved exact source/environment/water heights, analytical and nearest-axis distance, orthonormal directions and three height-field derivatives for 27 samples.";

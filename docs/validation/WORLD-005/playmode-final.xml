@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Passed" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.593707">
+  <test-suite type="TestSuite" id="1017" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.593707" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1026" name="RTSWorld.Streaming.PlayMode.Tests.dll" fullname="/tmp/rtswater-unity-validation/Library/ScriptAssemblies/RTSWorld.Streaming.PlayMode.Tests.dll" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.587380" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="54925" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1027" name="RTSWorld" fullname="RTSWorld" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.586921" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1028" name="Streaming" fullname="RTSWorld.Streaming" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.586732" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1029" name="PlayMode" fullname="RTSWorld.Streaming.PlayMode" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.586575" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestSuite" id="1030" name="Tests" fullname="RTSWorld.Streaming.PlayMode.Tests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.586193" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="TestFixture" id="1018" name="EnvironmentLifecycleTests" fullname="RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests" classname="RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.326676" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1020" name="EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost" fullname="RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests.EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost" methodname="EnvironmentStreamingReleasesWaterAndResourcesAndReportsCost" classname="RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests" runstate="Runnable" seed="498964978" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.153066" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[WORLD004_ROUTE samples=48 medianMs=1.2747 p95Ms=2.8932 maxMs=10.9203 waypoints=8 cells=32 radius=1 maxPerFrame=1 budgetMs=4 sea=38 environmentVersion=3 meshes=9
+]]></output>
+                </test-case>
+                <test-case id="1019" name="SeedSevenRadiusTwoStreamsRevisitsAndReleasesTheCorrectedMeshes" fullname="RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests.SeedSevenRadiusTwoStreamsRevisitsAndReleasesTheCorrectedMeshes" methodname="SeedSevenRadiusTwoStreamsRevisitsAndReleasesTheCorrectedMeshes" classname="RTSWorld.Streaming.PlayMode.Tests.EnvironmentLifecycleTests" runstate="Runnable" seed="560892314" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.163124" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1021" name="RtsCameraLifecycleTests" fullname="RTSWorld.Streaming.PlayMode.Tests.RtsCameraLifecycleTests" classname="RTSWorld.Streaming.PlayMode.Tests.RtsCameraLifecycleTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.195442" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1022" name="DevicesMoveTheFocusAndStreamWithoutIdleRegenerationOrTerrainPenetration" fullname="RTSWorld.Streaming.PlayMode.Tests.RtsCameraLifecycleTests.DevicesMoveTheFocusAndStreamWithoutIdleRegenerationOrTerrainPenetration" methodname="DevicesMoveTheFocusAndStreamWithoutIdleRegenerationOrTerrainPenetration" classname="RTSWorld.Streaming.PlayMode.Tests.RtsCameraLifecycleTests" runstate="Runnable" seed="704786773" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.194528" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1023" name="StreamingLifecycleTests" fullname="RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests" classname="RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.062978" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1025" name="NativeResourcesAreDestroyedAfterTransitionAndDisable" fullname="RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.NativeResourcesAreDestroyedAfterTransitionAndDisable" methodname="NativeResourcesAreDestroyedAfterTransitionAndDisable" classname="RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests" runstate="Runnable" seed="1039593857" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.005602" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1024" name="RouteKeepsNativeMeshCountBoundedAndReportsTimings" fullname="RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.RouteKeepsNativeMeshCountBoundedAndReportsTimings" methodname="RouteKeepsNativeMeshCountBoundedAndReportsTimings" classname="RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests" runstate="Runnable" seed="865697921" result="Passed" start-time="2026-11-15 17:48:04Z" end-time="2026-11-15 17:48:04Z" duration="0.056362" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[WORLD003_ROUTE samples=70 stepMedianMs=0.3910 stepP95Ms=0.4388 stepMaxMs=2.1986 maxObservedFrameMs=2.8963 generated=70 unloaded=61 waypoints=12 cells=32 radius=1 maxPerFrame=1 budgetMs=4 nativeMeshes=9
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /home/johnnywendell/.config/unity3d/DefaultCompany/RTSWorld/TestResults.xml
+]]></output>
+                </test-case>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,8 @@
+{
+  "baselineHash": "764ad440bde34c5155c021dc4f2c2c309f5e2b2109d81f9f298ceffe17ea608b",
+  "reconstructedBaselineHash": "764ad440bde34c5155c021dc4f2c2c309f5e2b2109d81f9f298ceffe17ea608b",
+  "equal": true,
+  "baselineFrameX": 0,
+  "currentFrameX": -5807,
+  "note": "Actual scene translation preserved. Baseline frame reproduces tilted sheet in chunk(-5,11). Current frame maps historical camera ray into chunk(86,11), Ocean at sea38. Both must be inspected; runtime historical frame/zoom are not recorded."
+}

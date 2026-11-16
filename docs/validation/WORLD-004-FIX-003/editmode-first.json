@@ -1,0 +1,126 @@
+{
+  "result": {
+    "success": true,
+    "message": "Test job status retrieved.",
+    "error": null,
+    "data": {
+      "job_id": "889d5fa147be45f49546aa94a6c41fc5",
+      "status": "failed",
+      "mode": "EditMode",
+      "started_unix_ms": 1794781669985,
+      "finished_unix_ms": 1794781698374,
+      "last_update_unix_ms": 1794781698374,
+      "progress": {
+        "completed": 146,
+        "total": 146,
+        "current_test_full_name": null,
+        "current_test_started_unix_ms": null,
+        "last_finished_test_full_name": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+        "last_finished_unix_ms": 1794781698345,
+        "stuck_suspected": false,
+        "editor_is_focused": true,
+        "run_in_background": false,
+        "focus_nudge_attempts": null,
+        "focus_nudge_limit": null,
+        "focus_nudge_status": null,
+        "blocked_reason": null,
+        "failures_so_far": [
+          {
+            "full_name": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,0)",
+            "message": "  Water cliff seed=7 sea=0 index=23844->24165\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  34.7045441f\n"
+          },
+          {
+            "full_name": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,38)",
+            "message": "  Water cliff seed=7 sea=38 index=33830->34151\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  2.03965759f\n"
+          },
+          {
+            "full_name": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,0)",
+            "message": "  Water cliff seed=12345 sea=0 index=23847->24168\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  31.1396732f\n"
+          },
+          {
+            "full_name": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,0)",
+            "message": "  Water cliff seed=67890 sea=0 index=23845->24166\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  47.5365181f\n"
+          },
+          {
+            "full_name": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,38)",
+            "message": "  Water cliff seed=67890 sea=38 index=23845->24166\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  9.5365181f\n"
+          },
+          {
+            "full_name": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,0)",
+            "message": "  Water cliff seed=-1 sea=0 index=23851->24172\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  23.1989269f\n"
+          }
+        ],
+        "failures_capped": false
+      },
+      "error": null,
+      "result": {
+        "mode": "EditMode",
+        "summary": {
+          "total": 146,
+          "passed": 140,
+          "failed": 6,
+          "skipped": 0,
+          "durationSeconds": 27.7011709,
+          "resultState": "Failed(Child)"
+        },
+        "results": [
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,0)",
+            "state": "Failed",
+            "durationSeconds": 0.5742473,
+            "message": "  Water cliff seed=7 sea=0 index=23844->24165\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  34.7045441f\n",
+            "stackTrace": "at RTSWorld.World.Tests.HydrologyRegressionTests.<HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief>g__Edge|1_0 (System.Int32 a, System.Int32 b, System.Double distance, RTSWorld.World.Tests.HydrologyRegressionTests+<>c__DisplayClass1_0& ) [0x000ad] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:66\nat RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief (System.Int32 seed, System.Single sea) [0x00123] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:73\n",
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,38)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(7,38)",
+            "state": "Failed",
+            "durationSeconds": 0.748874,
+            "message": "  Water cliff seed=7 sea=38 index=33830->34151\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  2.03965759f\n",
+            "stackTrace": "at RTSWorld.World.Tests.HydrologyRegressionTests.<HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief>g__Edge|1_0 (System.Int32 a, System.Int32 b, System.Double distance, RTSWorld.World.Tests.HydrologyRegressionTests+<>c__DisplayClass1_0& ) [0x000ad] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:66\nat RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief (System.Int32 seed, System.Single sea) [0x00123] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:73\n",
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(12345,0)",
+            "state": "Failed",
+            "durationSeconds": 0.5688958,
+            "message": "  Water cliff seed=12345 sea=0 index=23847->24168\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  31.1396732f\n",
+            "stackTrace": "at RTSWorld.World.Tests.HydrologyRegressionTests.<HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief>g__Edge|1_0 (System.Int32 a, System.Int32 b, System.Double distance, RTSWorld.World.Tests.HydrologyRegressionTests+<>c__DisplayClass1_0& ) [0x000ad] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:66\nat RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief (System.Int32 seed, System.Single sea) [0x00123] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:73\n",
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,0)",
+            "state": "Failed",
+            "durationSeconds": 0.5734562,
+            "message": "  Water cliff seed=67890 sea=0 index=23845->24166\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  47.5365181f\n",
+            "stackTrace": "at RTSWorld.World.Tests.HydrologyRegressionTests.<HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief>g__Edge|1_0 (System.Int32 a, System.Int32 b, System.Double distance, RTSWorld.World.Tests.HydrologyRegressionTests+<>c__DisplayClass1_0& ) [0x000ad] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:66\nat RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief (System.Int32 seed, System.Single sea) [0x00123] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:73\n",
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,38)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(67890,38)",
+            "state": "Failed",
+            "durationSeconds": 0.5848181,
+            "message": "  Water cliff seed=67890 sea=38 index=23845->24166\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  9.5365181f\n",
+            "stackTrace": "at RTSWorld.World.Tests.HydrologyRegressionTests.<HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief>g__Edge|1_0 (System.Int32 a, System.Int32 b, System.Double distance, RTSWorld.World.Tests.HydrologyRegressionTests+<>c__DisplayClass1_0& ) [0x000ad] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:66\nat RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief (System.Int32 seed, System.Single sea) [0x00123] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:73\n",
+            "output": ""
+          },
+          {
+            "name": "HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,0)",
+            "fullName": "RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief(-1,0)",
+            "state": "Failed",
+            "durationSeconds": 0.5528983,
+            "message": "  Water cliff seed=-1 sea=0 index=23851->24172\n  Expected: less than or equal to 2.0000499999999999d\n  But was:  23.1989269f\n",
+            "stackTrace": "at RTSWorld.World.Tests.HydrologyRegressionTests.<HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief>g__Edge|1_0 (System.Int32 a, System.Int32 b, System.Double distance, RTSWorld.World.Tests.HydrologyRegressionTests+<>c__DisplayClass1_0& ) [0x000ad] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:66\nat RTSWorld.World.Tests.HydrologyRegressionTests.HydraulicFieldsBoundNewSlopesWithoutClampingTheBaseRelief (System.Int32 seed, System.Single sea) [0x00123] in /home/johnnywendell/Projetos/unity-lab/RTSWorld/Assets/_Project/Tests/EditMode/HydrologyRegressionTests.cs:73\n",
+            "output": ""
+          }
+        ]
+      }
+    },
+    "hint": null
+  }
+}

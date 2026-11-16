@@ -1,0 +1,3 @@
+Serialized file "Packages/com.unity.render-pipelines.core/Runtime/Lighting/SurfaceCache/PunctualLightSampling.urtshader.meta" contains a <unknown> object at version 1, below the supported minimum (2). Open and re-save the file to upgrade.
+
+Console counts in captures/metrics.txt; no Clear called. Package/cache not modified.
