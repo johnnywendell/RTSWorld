@@ -11,7 +11,11 @@
 | WORLD-004-FIX-002 | Diagnóstico e correção de geometria do terreno | DONE | WORLD-004/FIX-001 | `tasks/completed/WORLD-004-FIX-002-terrain-geometry.md` |
 | WORLD-005 | Sistema de Câmera RTS | DONE | WORLD-001/002/003/004 | `tasks/completed/WORLD-005-rts-camera.md` |
 | WORLD-004-FIX-003 | Hydrology and Terrain Geometry | DONE | WORLD-004/FIX-001/FIX-002/WORLD-005 | `tasks/completed/WORLD-004-FIX-003-hydrology-terrain-geometry.md` |
+| ECS-001 | Fundação DOTS/ECS | DONE | WORLD-001..005 e correções ambientais | `tasks/completed/ECS-001-dots-foundation.md` |
+| ECS-002 | Unidades e Simulação | DONE | ECS-001 | `tasks/completed/ECS-002-units-simulation.md` |
+| ECS-003 | Navegação e Movimentação | BLOCKED | ECS-001/ECS-002 | `tasks/in_progress/ECS-003-navigation-movement.md` |
 | UNITS-001 | ECS simulation spike and benchmark | PENDING | ENV-001 | To create when scoped |
-| NET-001 | Authoritative two-client proof of concept | PENDING | UNITS-001 | To create when scoped |
+| NET-001 | Authoritative two-client proof of concept | PENDING | ECS-002 | Unidades e Simulação | DONE | ECS-001 | `tasks/completed/ECS-002-units-simulation.md` |
+| UNITS-001 | To create when scoped |
 
 Backlog order is tentative. A task becomes DONE only after its acceptance criteria have evidence.

@@ -1,0 +1,1 @@
+seed=7 terrainVersion=1 step=0.05 bounds=[-64,64] warmup=16 samples=120 setupMs=9.7190000000000012 spawnMs=0.7448

@@ -1,0 +1,17 @@
+{
+  "name": "RTSWorld.Simulation.Tests",
+  "references": [
+    "RTSWorld.Simulation",
+    "RTSWorld.World",
+    "Unity.Entities",
+    "Unity.Collections",
+    "Unity.Burst"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "allowUnsafeCode": true
+}

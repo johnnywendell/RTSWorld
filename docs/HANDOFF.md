@@ -1,33 +1,34 @@
 # Current Handoff
 
-**Última tarefa:** WORLD-004-FIX-003 — DONE
-**Arquivo:** tasks/completed/WORLD-004-FIX-003-hydrology-terrain-geometry.md
-**Escritor ativo:** nenhum
+**Tarefa:** ECS-003 — BLOCKED na auditoria
+**Arquivo:** tasks/in_progress/ECS-003-navigation-movement.md
+**Escritor ativo:** nenhum — interrompido conforme instrução do usuário
 **Checkpoint:** 2026-11-15 (America/Bahia)
+
+## Sessão ECS-003
+
+- Git main/54ef57907c0e731f25adb0f8901e136ac8952326; nenhum commit. Alterações preexistentes ECS-001/ECS-002/WORLD preservadas; nenhuma implementação ECS-003. Documentos de continuidade atualizados e tarefa movida para in_progress/BLOCKED.
+- Inicialização e fontes fundamentais revisadas. Dependências ECS-001/ECS-002 DONE; World isolado, snapshot lógico e movimento fixo confirmados nas fontes. Unity conectado ao projeto correto, UnitsSimulationDemo limpa, Play desligado, sem compilação/falha.
+- PASS baseline EditMode: 195/195, zero falhas/ignorados, 33,7525616 s, job a626e4ca73e848df9c5cc0d6973d6b90. Desconexão transitória do poll recuperada. Console antes da suíte vazio de erros/avisos. Implementação/compilação nova, PlayMode ECS-003 e profiling ECS-003 NOT_RUN.
+- Bloqueio: usuário proibiu alterações fora do projeto. Após acionar o baseline, auditoria do pacote performance revelou RunFinished escrevendo incondicionalmente Application.persistentDataPath/TestResults.xml (diretório confirmado pelo Editor fora do projeto). Também existe fallback/cópia de resultados de performance ao caminho padrão. Não basta configurar outro diretório de resultados. Ver fonte/evidência exata no checkpoint da tarefa. Nenhum arquivo externo foi editado manualmente ou removido; não repetir testes nessa configuração.
+- Menor próxima ação: resolver configuração/runner de validação compatível com a restrição antes de retomar auditoria/implementação. Não houve contorno, remoção de callbacks, mudança de pacote/cache nem solicitação de permissão ampliada. Parada exigida pelo usuário ao encontrar bloqueio; não iniciar próxima tarefa.
+- Arquivos editados nesta sessão: tarefa ECS-003, ACTIVE, BACKLOG, CURRENT_STATE e este HANDOFF. A suíte inclui benchmarks preexistentes que podem regravar evidências ECS-002; preservar sem restauração às cegas. BACKLOG já continha linhas malformadas NET-001/UNITS-001, preservadas por não pertencerem ao escopo.
+
+## Referência anterior preservada — ECS-002 DONE
 
 ## Concluído e verificado
 
-- Causa comprovada antes da correção: ApplyField v3 reduz o nível da água com a distância transversal. A derivada é aproximadamente 1 em (-153,357), criando água lateralmente inclinada. Na v2, bermas e interrupções dos campos produzem paredes no terreno e na água. OriginalTerrain, EnvironmentalTerrain e WaterOnly foram comparados com 25 chunks residentes e fila vazia.
-- Nova versão ambiental 4: ContainedHydrology separa níveis de água e forma do leito. Lagos e seções transversais dos rios são nivelados; o perfil longitudinal é monotônico, limitado a 0,25 e pela capacidade das margens. Buffer seco de quatro intervalos separa domínios. O leito usa envelopes mínimos, sem bermas ou suavização global.
-- Terreno v1 e versões ambientais 1/2/3 preservados por fixtures e fingerprints. EnvironmentPresentation reutiliza o gerador com cache de nove metadados; ChunkManager mantém ownership/upload/unload. Nenhuma alteração no código da câmera, shader, material, pacotes ou ProjectSettings.
-- Instrumentos opcionais: EnvironmentGeometryView, EnvironmentGeometryDiagnostics e Editor/HydrologyDiagnosticSession. As duas demos selecionam explicitamente v4; regeneração e ResourceKey devem manter a versão ambiental.
-- **PASS:** 172/172 EditMode em 35,9704167 s e 6/6 PlayMode em 1,8620796 s, sem falhas/ignorados, via Unity MCP. Inclui fronteiras, coordenadas positivas/negativas, perfis/seções, meshes e reconstrução exata de (-5,11).
-- **PASS:** visual nas duas cenas, em Editor/Play; vinte replays com quatro camadas e duas capturas das câmeras originais. Console final sem erros/avisos; shader sem erro. Auditoria PASS: 38 arquivos protegidos preservados, GUIDs únicos, 14 relatórios de água v4 sem índices inválidos, degenerações ou faces invertidas. Estado final: 25 meshes/25 chunks, fila vazia, cena limpa, fora de Play e nenhum replay restante.
+- UnitSession reutiliza componentes/contrato ECS-001 num World RTSWorld Units; archetype e spawn/destruição em lote, IDs monotônicos por sessão, tipos aldeão/soldado, atributos configuráveis, proprietário, intenção e atividade. FoundationSession/MovementSystem anteriores não foram alterados nem registrados no World de unidades.
+- UnitMovementSystem agenda IJobEntity/Burst em fixed group, limita velocidade/área, orienta, atualiza pose/região/estado e interpola snapshot de terreno. Pausa descarta tempo recebido; retomada preserva fração anterior. Dados indisponíveis congelam pose, preservam intenção e marcam WaitingForTerrain. Snapshot é lógico e independente de chunks visuais.
+- UnitsSimulationDemo com authoring serializável, terreno v1/seed 7, caixas verdes/vermelhas instanciadas, HUD e botões 100/500/1000/5000/pausa/apresentação. Apresentação em assembly separado, sem pacote novo ou GameObject individual por unidade.
+- PASS: compilação real; 195/195 EditMode (33,8572271 s), 9/9 PlayMode (3,5675784 s); cargas até 5000, replay/pausa/terreno v1 e ambiente v4, unload real de mesh sem perda lógica, liberação de recursos. Metas presentes, GUIDs únicos, git diff --check.
+- Editor final: UnitsSimulationDemo limpa, Play desligado, sem compilação/falha, zero Worlds RTSWorld; Console sem erros/avisos, somente logs informativos do Test Runner. Console não apagado pelo agente.
 
-## Reprodução e coordenadas
+## Evidências, decisões e limites
 
-- `docs/validation/WORLD-004-FIX-003/README.md` contém diagnóstico, limites, migração e chamadas MCP. CSV de 27 amostras registra alturas dos três campos, distância euclidiana, direções e derivadas. JSONs localizam cada triângulo.
-- Seed 7, N=32, H=2, V=1,2, raio=2, mar=38: cenário A com centro (2,1); cenário B no frame inicial X=0 com centro (-5,11), pose mundial (-301.94,153.09,673.45), rotação 55°/45°. Ortho 48 é enquadramento explícito de replay; zoom/foco históricos não foram registrados.
-- A raiz atual da RTSCameraDemo em X=−5807 foi preservada. Hash comprova X=0 no baseline inicial. A mesma pose mundial agora aponta para o chunk (86,11), também validado. Não sobrescrever essa translação nem confundir coordenadas mundiais e lógicas. Rayhits e comparação de hashes estão registrados. Editor deixado nessa cena, fora de Play.
+- docs/validation/ECS-002/README.md, mcp-results.json, load-editor.json, ticks-N.csv/setup-N.txt, scene-frame-5000.csv, profiler-render.json e demo-5000-framed.png. Esta última é a captura válida; demo-5000.png vazia e demo-5000-rendered.png cortada são diagnósticos preservados e excluídos do aceite.
+- Tick completo sem renderização: 16 ticks de aquecimento + 120 amostras/população; médias para 100/500/1000/5000 = 0,01134/0,01843/0,02193/0,05286 ms. Cena real 5000: 120 frames, média 2,60764 ms, p95 3,33233 ms. Frames sem tick e interferência Editor documentados; seis submissões CPU não significam seis draw calls GPU.
+- ADR-0005 registra archetype como equivalente de prefab, authoring sem Baking/SubScene e RenderMeshInstanced sem Entities Graphics. Snapshot cobre área limitada até 256 células/eixo, dentro de ±1000000, não streaming mundial. Identidade somente por sessão; sem garantias entre plataformas. Build/player/outras plataformas/heap/VRAM/GPU timing NOT_RUN.
+- Refresh scope scripts inicialmente não importava assets; corrigido com refresh all e tipos confirmados. Inspeção World.All via LINQ substituída por foreach; aviso MCP WebSocket transitório recuperado. Sem bloqueio ou critério parcial.
 
-## Incidentes e limites
-
-- As 83 imagens incluem uma captura inicial vazia, explicitamente inválida para reprodução. Uma rodada EditMode foi interrompida por solicitação prematura de Play do agente; foi invalidada e repetida corretamente até 172/172 PASS. Ver `validation-sequence-incident.txt`. Não contar essa rodada como sucesso. O agente não usou Console Clear.
-- Modelo estático, sem hidrodinâmica/drenagem global. Facetas e afloramentos naturais foram preservados. Um pequeno afloramento em A foi medido como terreno original acima do mar, não uma berma elevada. Validação finita nas seeds/locais registrados. Build/player e outras plataformas: NOT_RUN.
-- Medição limitada de Step em Play, oito waypoints, raio 1, máximo de um chunk/frame e orçamento de 4 ms: mediana 1,3669 ms, p95 3,0432 ms e máximo 4,5793 ms. Não é FPS; o chunk permanece atômico.
-
-## Git e próxima ação
-
-- main/6a9966b0168d3ba553c97ed7f7c8a2818f5bbca4, sem commits. Working tree anterior da FIX-001/FIX-002/WORLD-005 preservada; baseline-git-status.txt e baseline-hashes.json registram a entrada. Relatórios concluídos anteriores intactos.
-- Não há implementação ou critério obrigatório pendente. Próxima ação: revisão do usuário. Nenhum commit ou outra tarefa autorizado.
-- MCP HTTP em localhost:8080; última sessão 22d7c9a2d2074a8786abc4191c4b6386, sujeita a expiração. Reinicializar se necessário; schemas em /tmp/rtsworld-mcp-tools.json. Não publicar logs integrais de inicialização, que podem conter autenticação.
+Console final: dois avisos MCP WebSocket da desconexão transitória; conexão recuperada. Nenhum erro retornado pela consulta final. `git diff --check`: PASS após correção de linha vazia final no handoff.

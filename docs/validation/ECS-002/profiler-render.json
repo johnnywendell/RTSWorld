@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "message": "Captured 4 counter(s) from 'Render'.",
+  "data": {
+    "category": "Render",
+    "counters": {
+      "Draw Calls Count": 51,
+      "Draw Calls Count_valid": true,
+      "Draw Calls Count_unit": "Count",
+      "SetPass Calls Count": 27,
+      "SetPass Calls Count_valid": true,
+      "SetPass Calls Count_unit": "Count",
+      "Triangles Count": 186176,
+      "Triangles Count_valid": true,
+      "Triangles Count_unit": "Count",
+      "Vertices Count": 114428,
+      "Vertices Count_valid": true,
+      "Vertices Count_unit": "Count"
+    }
+  }
+}

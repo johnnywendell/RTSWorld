@@ -1,0 +1,41 @@
+{
+  "baseline": {
+    "EditMode": {
+      "job": "fb10514305d449dda442daff00c00eab",
+      "passed": 181,
+      "failed": 0,
+      "seconds": 32.4879466
+    },
+    "PlayMode": {
+      "job": "0895d515f257430eb37cd99151043365",
+      "passed": 7,
+      "failed": 0,
+      "seconds": 2.1319597
+    }
+  },
+  "final": {
+    "EditMode": {
+      "job": "de11f90b72504868a8cfe1d36f8b9509",
+      "passed": 195,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 33.8572271
+    },
+    "PlayMode": {
+      "job": "831da261d18e46dfa1bc62a56b380016",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 3.5675784
+    }
+  },
+  "editorFinal": {
+    "playing": false,
+    "compiling": false,
+    "scriptCompilationFailed": false,
+    "sceneDirty": false,
+    "ownedWorlds": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "baseline-edit": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "721bfa8f14d04e2e94087f911247d154",
+        "status": "succeeded",
+        "mode": "EditMode",
+        "started_unix_ms": 1794790511212,
+        "finished_unix_ms": 1794790549086,
+        "last_update_unix_ms": 1794790549086,
+        "progress": {
+          "completed": 172,
+          "total": 172,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+          "last_finished_unix_ms": 1794790548948,
+          "stuck_suspected": false,
+          "editor_is_focused": true,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": null
+      },
+      "hint": null
+    }
+  },
+  "baseline-play": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "505dd5ea242647f18beecc7d2129a8de",
+        "status": "succeeded",
+        "mode": "PlayMode",
+        "started_unix_ms": 1794790561268,
+        "finished_unix_ms": 1794790563852,
+        "last_update_unix_ms": 1794790563852,
+        "progress": {
+          "completed": 6,
+          "total": 6,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+          "last_finished_unix_ms": 1794790563835,
+          "stuck_suspected": false,
+          "editor_is_focused": true,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": null
+      },
+      "hint": null
+    }
+  },
+  "final-edit": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "e66ef87ba8c3451eaf12c9786c4bfd80",
+        "status": "succeeded",
+        "mode": "EditMode",
+        "started_unix_ms": 1794790813223,
+        "finished_unix_ms": 1794790847539,
+        "last_update_unix_ms": 1794790847539,
+        "progress": {
+          "completed": 181,
+          "total": 181,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "RTSWorld.World.Tests.TerrainGeneratorTests.VersionOneMatchesFixedReferenceBits(int.MaxValue,int.MinValue,0,0,1100343752)",
+          "last_finished_unix_ms": 1794790847506,
+          "stuck_suspected": false,
+          "editor_is_focused": true,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "EditMode",
+          "summary": {
+            "total": 181,
+            "passed": 181,
+            "failed": 0,
+            "skipped": 0,
+            "durationSeconds": 33.7417546,
+            "resultState": "Passed"
+          },
+          "results": []
+        }
+      },
+      "hint": null
+    }
+  },
+  "final-play": {
+    "result": {
+      "success": true,
+      "message": "Test job status retrieved.",
+      "error": null,
+      "data": {
+        "job_id": "22cbecf82899436a90a5753dd5910cdf",
+        "status": "succeeded",
+        "mode": "PlayMode",
+        "started_unix_ms": 1794790870874,
+        "finished_unix_ms": 1794790873420,
+        "last_update_unix_ms": 1794790873420,
+        "progress": {
+          "completed": 7,
+          "total": 7,
+          "current_test_full_name": null,
+          "current_test_started_unix_ms": null,
+          "last_finished_test_full_name": "RTSWorld.Streaming.PlayMode.Tests.StreamingLifecycleTests.RouteKeepsNativeMeshCountBoundedAndReportsTimings",
+          "last_finished_unix_ms": 1794790873414,
+          "stuck_suspected": false,
+          "editor_is_focused": true,
+          "run_in_background": false,
+          "focus_nudge_attempts": null,
+          "focus_nudge_limit": null,
+          "focus_nudge_status": null,
+          "blocked_reason": null,
+          "failures_so_far": [],
+          "failures_capped": false
+        },
+        "error": null,
+        "result": {
+          "mode": "PlayMode",
+          "summary": {
+            "total": 7,
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "durationSeconds": 2.023978,
+            "resultState": "Passed"
+          },
+          "results": []
+        }
+      },
+      "hint": null
+    }
+  },
+  "snapshot1": {
+    "success": true,
+    "message": "Code executed successfully.",
+    "data": {
+      "result": {
+        "playing": true,
+        "scene": "Assets/_Project/Scenes/ECSFoundationDemo.unity",
+        "count": 256,
+        "tick": 196,
+        "fixedStep": 0.05,
+        "id": 1,
+        "updates": 196,
+        "x": 1.8000001460313797,
+        "y": 62.96533203125,
+        "z": -8,
+        "chunkX": 0,
+        "chunkZ": -1,
+        "burst": true
+      },
+      "compiler": "codedom"
+    }
+  },
+  "snapshot2": {
+    "success": true,
+    "message": "Code executed successfully.",
+    "data": {
+      "result": {
+        "count": 256,
+        "tick": 427,
+        "updates": 427,
+        "x": 13.350000318139791,
+        "y": 62.96533203125,
+        "z": -8
+      },
+      "compiler": "codedom"
+    }
+  }
+}

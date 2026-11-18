@@ -1,0 +1,63 @@
+{
+    "unity": "6000.6.9f1",
+    "platform": "LinuxEditor",
+    "processor": "Intel(R) Core(TM) i5-14600KF",
+    "graphics": "NVIDIA GeForce RTX 4070 SUPER/PCIe/SSE2",
+    "utc": "2026-11-16T01:16:31.6024200Z",
+    "warmupFrames": 15,
+    "measuredFrames": 60,
+    "rows": [
+        {
+            "population": 100,
+            "samples": 60,
+            "batches": 2,
+            "simulationMeanMs": 0.0027533333333333338,
+            "simulationMedianMs": 0.0018000000000000002,
+            "simulationP95Ms": 0.0024000000000000002,
+            "simulationMaxMs": 0.031900000000000005,
+            "frameMeanMs": 1.3641713924395542,
+            "frameP95Ms": 1.5984127530828118,
+            "fps": 733.0457195790444,
+            "ticks": 4
+        },
+        {
+            "population": 500,
+            "samples": 60,
+            "batches": 2,
+            "simulationMeanMs": 0.0026466666666666665,
+            "simulationMedianMs": 0.0018000000000000002,
+            "simulationP95Ms": 0.0039000000000000003,
+            "simulationMaxMs": 0.0328,
+            "frameMeanMs": 1.533163501881063,
+            "frameP95Ms": 2.8347151819616556,
+            "fps": 652.2461555946799,
+            "ticks": 3
+        },
+        {
+            "population": 1000,
+            "samples": 60,
+            "batches": 2,
+            "simulationMeanMs": 0.002406666666666667,
+            "simulationMedianMs": 0.0017000000000000001,
+            "simulationP95Ms": 0.0024000000000000002,
+            "simulationMaxMs": 0.0359,
+            "frameMeanMs": 1.3735656432497005,
+            "frameP95Ms": 1.6113165766000748,
+            "fps": 728.0321875510175,
+            "ticks": 3
+        },
+        {
+            "population": 5000,
+            "samples": 60,
+            "batches": 6,
+            "simulationMeanMs": 0.006825000000000001,
+            "simulationMedianMs": 0.0017000000000000001,
+            "simulationP95Ms": 0.0041,
+            "simulationMaxMs": 0.23820000000000002,
+            "frameMeanMs": 1.8329734875199695,
+            "frameP95Ms": 2.878692001104355,
+            "fps": 545.5616280369715,
+            "ticks": 4
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "RTSWorld.Simulation.PlayMode.Tests",
+  "references": [
+    "RTSWorld.Simulation",
+    "Unity.Entities",
+    "Unity.Collections",
+    "RTSWorld.Units.Presentation",
+    "RTSWorld.Presentation",
+    "RTSWorld.World"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}

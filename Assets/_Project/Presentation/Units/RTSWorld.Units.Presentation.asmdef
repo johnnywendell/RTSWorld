@@ -1,0 +1,4 @@
+{
+  "name": "RTSWorld.Units.Presentation",
+  "references": ["RTSWorld.Simulation", "RTSWorld.World", "Unity.Entities", "Unity.Collections"]
+}

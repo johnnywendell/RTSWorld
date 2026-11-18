@@ -1,0 +1,10 @@
+{
+  "name": "RTSWorld.Simulation",
+  "references": [
+    "RTSWorld.World",
+    "Unity.Entities",
+    "Unity.Collections",
+    "Unity.Burst"
+  ],
+  "allowUnsafeCode": true
+}

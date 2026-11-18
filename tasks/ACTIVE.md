@@ -1,8 +1,8 @@
 # Active Task
 
-**Selected task:** WORLD-004-FIX-003 (última concluída)
-**File:** `tasks/completed/WORLD-004-FIX-003-hydrology-terrain-geometry.md`
-**Status:** DONE
-**Writer:** nenhum; execução encerrada.
+**Selected task:** ECS-003 — Navegação e Movimentação
+**File:** `tasks/in_progress/ECS-003-navigation-movement.md`
+**Status:** BLOCKED
+**Writer:** nenhum; execução interrompida conforme instrução do usuário.
 
-Causa comprovada,ambiente4 implementado e validado viaMCP:172EditMode+6PlayMode,inspeção Editor/Play nas duas cenas,Console sem erros/avisos. Aguardar revisão;sem commits ou início de outra tarefa. Trabalho anterior e raizRTS−5807preservados.
+Auditoria inicial e baseline 195/195 EditMode PASS. Runner de performance grava automaticamente fora do projeto, contrariando a restrição explícita desta sessão. Nenhuma navegação implementada; demais verificações ECS-003 NOT_RUN. Ver checkpoint e docs/HANDOFF.md. Sem commits; alterações anteriores preservadas. Não iniciar outra tarefa.

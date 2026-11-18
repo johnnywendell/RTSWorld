@@ -1,7 +1,31 @@
 # Current State
 
 **Atualizado:** 2026-11-15 (America/Bahia)
-**Estado:** WORLD-004-FIX-003 DONE. Nenhuma tarefa em execução.
+**Estado:** ECS-002 DONE. ECS-003 BLOCKED na auditoria; nenhuma implementação de navegação.
+
+## ECS-003 — bloqueio de validação (2026-11-15)
+
+- Dependências e fontes ECS-001/ECS-002 verificadas; baseline atual PASS 195/195 EditMode, compilação anterior sem falha. Unity correto, UnitsSimulationDemo limpa e Play desligado.
+- Pacote de performance registra callback que escreve TestResults.xml em persistentDataPath fora do projeto. Baseline foi acionado antes da identificação desse efeito. Restrição explícita do usuário impede repetir; execução interrompida conforme solicitado, sem alterar pacotes/cache ou pedir permissões ampliadas.
+- ECS-003 BLOCKED em tasks/in_progress; implementação, PlayMode e profiling ECS-003 NOT_RUN. Git main/54ef579, sem commits, alterações anteriores preservadas. Ver tarefa/handoff para evidência e próxima ação; nenhuma tarefa posterior iniciada.
+
+## Unidades ECS verificadas — 2026-11-15
+
+- ECS-002 concluída: aldeões/soldados, definições configuráveis, ownership/IDs por sessão, spawn/destruição em lote, movimento fixo Jobs/Burst com limites/orientação, pausa/retomada e elevação triangular por snapshot do contrato ECS-001.
+- Simulação independente da apresentação/residência visual. Sem dados de terreno, congela pose; unload real testado sem perda de unidades. Snapshot limitado a área inteira de até 256 células/eixo, sem navegação, coleta, combate, rede ou persistência.
+- UnitsSimulationDemo usa malha compartilhada e RenderMeshInstanced, tipos distintos, controles de carga/pausa/apresentação e HUD; sem GameObject individual por unidade nem pacote adicional. Fundação anterior preservada.
+- PASS atual: compilação, 195/195 EditMode, 9/9 PlayMode, cargas 100/500/1000/5000, cena real em Play e teardown. Console sem erros/avisos; Play desligado, cena limpa, zero Worlds próprios.
+- Profiling local Editor: média por tick completo para 5000 = 0,05286 ms (120 amostras, 16 ticks de aquecimento); cena real 5000 = 2,60764 ms/frame médio em 120 amostras. Condições, CSVs e limites em docs/validation/ECS-002/README.md; não são metas de player. Build/player/outras plataformas/heap/VRAM/GPU timing NOT_RUN.
+- Decisão ADR-0005 e arquitetura atualizadas. Git main/54ef579, sem commits, alterações preexistentes preservadas (incluindo RTSCameraDemo seed 7→123). Nenhuma próxima tarefa iniciada.
+
+## Fundação ECS verificada — 2026-11-15
+
+- Entities 6.6.0; Burst 2.0.0 e Collections 6.6.0 existentes preservados; Mathematics/Jobs módulos do Unity 6000.6.9f1. URP 17.6.0 preservado.
+- Simulation tem World isolado, componentes unmanaged com pose global double3/quaternion, passo fixo padrão 0,05 s, movimento IJobEntity/Burst e contrato managed com terreno versionado. Nenhuma migração WORLD ou dependência da apresentação.
+- ECSFoundationDemo inicializa 256 entidades com HUD de quantidade/ticks/passo. Elevação somente no spawn; sem navegação, rede, persistência ou benchmark.
+- PASS nesta sessão: 181/181 EditMode e 7/7 PlayMode; compilação, Burst nativo, inspeção da cena em Play e liberação do World. Console final vazio; cena limpa, Play desligado. Build/player/outras plataformas/performance NOT_RUN.
+- Evidências: docs/validation/ECS-001/README.md; arquitetura/limites em ADR-0004 e docs/ARCHITECTURE.md.
+- Git real: main/54ef57907c0e731f25adb0f8901e136ac8952326, sem commits. tasks/pending preexistente preservado. RTSCameraDemo apresentou seed 7→123 durante baseline, origem não confirmada, preservada para revisão. Nenhuma próxima tarefa iniciada.
 
 ## Projeto verificado
 
@@ -24,4 +48,4 @@
 - Geração atômica de chunks e carregamento transitório permanecem. Medição local de Step em Play, oito waypoints, raio 1, máximo de um chunk/frame e orçamento de 4 ms: mediana 1,3669 ms, p95 3,0432 ms, máximo 4,5793 ms. Não é uma medição de FPS; um chunk pode exceder o orçamento.
 - Câmera sem floating origin, guarda lógica padrão ±32768 e frame vertical com escala uniforme; cobertura limitada ao raio 8. Segurança considera terreno/água, não colisores dos recursos.
 - A raiz atual da RTSCameraDemo em X=−5807 foi preservada. O baseline inicial tinha X=0, comprovado por hash. A mesma pose mundial aponta para regiões lógicas diferentes nesses frames; zoom e foco históricos não foram inventados.
-- Git main/6a9966b, sem commits. Alterações preexistentes da FIX-001, FIX-002 e WORLD-005 preservadas. Aguardar revisão do usuário; não iniciar outra tarefa automaticamente.
+- Referência histórica da FIX-003: main/6a9966b. Na entrada ECS-001, HEAD já era 54ef579 e os trabalhos WORLD estavam incorporados; consultar o estado Git atual acima.
