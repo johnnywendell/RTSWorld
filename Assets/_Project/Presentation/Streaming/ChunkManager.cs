@@ -29,6 +29,7 @@ namespace RTSWorld.Presentation.Streaming
         {
             public GameObject Object;
             public Mesh Mesh;
+            public int ResourceCount;
         }
 
         private readonly Dictionary<ChunkCoordinate, View> active = new Dictionary<ChunkCoordinate, View>();
@@ -47,6 +48,11 @@ namespace RTSWorld.Presentation.Streaming
         public float VerticalScale => verticalScale;
         public int CellsPerChunk => cellsPerChunk;
         public EnvironmentPresentation EnvironmentLayer => environment;
+        public EnvironmentPresentation ActiveEnvironment => environment != null && environment.isActiveAndEnabled ? environment : null;
+        public WorldDefinition CreateWorldDefinition() => new WorldDefinition(seed, cellsPerChunk: cellsPerChunk);
+        public int ActiveResourceCount { get; private set; }
+        public double LastTerrainGenerationMilliseconds { get; private set; }
+        public double LastMeshBuildMilliseconds { get; private set; }
         public void SetEnvironment(EnvironmentPresentation layer) => environment = layer;
 
         public int Seed { get => seed; set => seed = value; }
@@ -139,14 +145,14 @@ namespace RTSWorld.Presentation.Streaming
             Vector3 local = transform.InverseTransformPoint(observer.position);
             var center = ChunkSelection.FromPosition((double)local.x / horizontalScale,
                 (double)local.z / horizontalScale, cellsPerChunk);
-            var layer = environment != null && environment.isActiveAndEnabled ? environment : null;
+            var layer = ActiveEnvironment;
             if (layer != null) layer.Validate();
             if (definition == null || definition.Seed != seed || definition.CellsPerChunk != cellsPerChunk ||
                 appliedHorizontal != horizontalScale || appliedVertical != verticalScale || appliedMaterial != terrainMaterial ||
                 appliedEnvironment != layer || (layer != null && appliedEnvironmentRevision != layer.Revision))
             {
                 Clear();
-                definition = new WorldDefinition(seed, cellsPerChunk: cellsPerChunk);
+                definition = CreateWorldDefinition();
                 appliedHorizontal = horizontalScale; appliedVertical = verticalScale; appliedMaterial = terrainMaterial;
                 appliedEnvironment = layer; appliedEnvironmentRevision = layer != null ? layer.Revision : 0;
             }
@@ -180,6 +186,7 @@ namespace RTSWorld.Presentation.Streaming
             foreach (var pair in active) if (!desired.Contains(pair.Key)) removal.Add(pair.Key);
             foreach (var coordinate in removal)
             {
+                ActiveResourceCount -= active[coordinate].ResourceCount;
                 ReleaseView(active[coordinate]);
                 active.Remove(coordinate);
                 TotalUnloaded++;
@@ -192,9 +199,14 @@ namespace RTSWorld.Presentation.Streaming
         private void Create(ChunkCoordinate coordinate)
         {
             // Geometry and immutable source data are temporary; only native visual resources stay resident.
+            long stamp = Stopwatch.GetTimestamp();
             var data = generator.Generate(definition, coordinate);
-            var mesh = appliedEnvironment != null ? appliedEnvironment.Build(data, horizontalScale, verticalScale) :
+            LastTerrainGenerationMilliseconds = Elapsed(stamp);
+            stamp = Stopwatch.GetTimestamp();
+            int resources = 0;
+            var mesh = appliedEnvironment != null ? appliedEnvironment.Build(data, horizontalScale, verticalScale, out resources) :
                 TerrainMeshFactory.Create(TerrainGeometry.Build(data, horizontalScale, verticalScale));
+            LastMeshBuildMilliseconds = Elapsed(stamp);
             mesh.name = $"Stream chunk {coordinate}";
             mesh.hideFlags = HideFlags.DontSave;
             GameObject chunk = null;
@@ -207,7 +219,8 @@ namespace RTSWorld.Presentation.Streaming
                     (float)(origin.Z * (double)horizontalScale));
                 chunk.AddComponent<MeshFilter>().sharedMesh = mesh;
                 chunk.AddComponent<MeshRenderer>().sharedMaterial = appliedEnvironment != null ? appliedEnvironment.Material : terrainMaterial;
-                active.Add(coordinate, new View { Object = chunk, Mesh = mesh });
+                active.Add(coordinate, new View { Object = chunk, Mesh = mesh, ResourceCount = resources });
+                ActiveResourceCount += resources;
             }
             catch
             {
@@ -217,9 +230,20 @@ namespace RTSWorld.Presentation.Streaming
             }
         }
 
+        public void RefreshResourceChunk(ChunkCoordinate coordinate)
+        {
+            if (!active.TryGetValue(coordinate, out var view)) return;
+            ActiveResourceCount -= view.ResourceCount;
+            ReleaseView(view);
+            active.Remove(coordinate);
+            TotalUnloaded++;
+            if (desired.Contains(coordinate)) pending.Enqueue(coordinate);
+        }
+
         public void Clear()
         {
             foreach (var view in active.Values) { ReleaseView(view); TotalUnloaded++; }
+            ActiveResourceCount = 0;
             active.Clear(); pending.Clear(); desired.Clear(); ordered.Clear(); removal.Clear();
             definition = null; appliedMaterial = null; selectedRadius = -1;
             appliedEnvironment = null;

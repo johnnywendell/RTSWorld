@@ -1,13 +1,13 @@
 # ECS-003 — Navegação e Movimentação
 
-**Status:** BLOCKED  
+**Status:** DONE
 **Priority:** HIGH  
-**Owner:** nenhum — encerrada por bloqueio  
+**Owner:** nenhum — concluída
 **Phase:** 2 — DOTS/ECS  
 **Dependencies:** ECS-001 e ECS-002 concluídas.  
 **Branch:** main  
-**Base commit:** 54ef57907c0e731f25adb0f8901e136ac8952326  
-**Last checkpoint:** 2026-11-15 — auditoria e bloqueio de validação
+**Base commit:** b207bd7
+**Last checkpoint:** 2026-11-18 — implementação e validação concluídas
 
 ---
 
@@ -243,27 +243,27 @@ Permitir testes de movimentação entre diferentes chunks.
 
 ## 7. Acceptance criteria
 
-- [ ] Representação navegável independente da renderização.
-- [ ] Custos de deslocamento definidos.
-- [ ] Água e obstáculos tratados corretamente.
-- [ ] Continuidade de navegação entre chunks.
-- [ ] Suporte a coordenadas negativas.
-- [ ] Busca A* funcional.
-- [ ] Navegação hierárquica avaliada e decisão documentada.
-- [ ] Flow Fields funcionais para grupos.
-- [ ] Cache e invalidação básicos implementados.
-- [ ] Unidades ECS recebem destinos.
-- [ ] Unidades seguem rotas ou campos de fluxo.
-- [ ] Unidades param ao chegar.
-- [ ] Unidades não atravessam obstáculos conhecidos.
-- [ ] Desvio local inicial implementado.
-- [ ] Diagnóstico visual disponível.
-- [ ] Cena de demonstração funcional.
-- [ ] Testes automatizados aprovados.
-- [ ] Cenários com múltiplas unidades avaliados.
-- [ ] Profiling registrado.
-- [ ] Nenhuma regressão conhecida nos sistemas anteriores.
-- [ ] Documentação e handoff atualizados.
+- [x] Representação navegável independente da renderização.
+- [x] Custos de deslocamento definidos.
+- [x] Água e obstáculos tratados corretamente.
+- [x] Continuidade de navegação entre chunks.
+- [x] Suporte a coordenadas negativas.
+- [x] Busca A* funcional.
+- [x] Navegação hierárquica avaliada e decisão documentada.
+- [x] Flow Fields funcionais para grupos.
+- [x] Cache e invalidação básicos implementados.
+- [x] Unidades ECS recebem destinos.
+- [x] Unidades seguem rotas ou campos de fluxo.
+- [x] Unidades param ao chegar.
+- [x] Unidades não atravessam obstáculos conhecidos.
+- [x] Desvio local inicial implementado.
+- [x] Diagnóstico visual disponível.
+- [x] Cena de demonstração funcional.
+- [x] Testes automatizados aprovados.
+- [x] Cenários com múltiplas unidades avaliados.
+- [x] Profiling registrado.
+- [x] Nenhuma regressão conhecida nos sistemas anteriores.
+- [x] Documentação e handoff atualizados.
 
 ## 8. Tests and validation
 
@@ -339,33 +339,12 @@ Ao concluir:
 
 **Não iniciar ECS-004 ou qualquer tarefa posterior automaticamente. Aguardar autorização explícita.**
 
-## Checkpoint — BLOCKED (2026-11-15)
+## Checkpoint final — 2026-11-18
 
-### Concluído e verificado
-- Inicialização AGENTS.md: Git, CURRENT_STATE, ACTIVE, HANDOFF, tarefa, template e arquitetura consultados. ECS-001/ECS-002 constam DONE; fontes UnitSession, UnitMovementSystem, componentes e contrato procedural inspecionadas. Não há implementação ECS-003.
-- Unity MCP confirmou o projeto correto, cena UnitsSimulationDemo limpa, Play desligado, isCompiling=false e scriptCompilationFailed=false.
-- PASS: baseline EditMode 195/195, zero falhas/ignorados, 33,7525616 s; job a626e4ca73e848df9c5cc0d6973d6b90. Desconexão transitória no primeiro poll recuperada; resultado final consultado com sucesso. Console antes do teste: zero erros/avisos.
-
-### Bloqueio e ocorrência
-- A restrição explícita desta sessão proíbe alterar arquivos fora do projeto. O baseline foi acionado antes de conferir todos os efeitos de escrita do runner; o callback do pacote de performance grava automaticamente fora do projeto. Não repetir esse procedimento nesta sessão.
-- Fonte efetivamente inspecionada (somente leitura): Library/PackageCache/com.unity.test-framework.performance@6272f70ed558/Editor/PerformanceTestRunSaver.cs, RunFinished: WriteResultToFile para Application.persistentDataPath/TestResults.xml sem override. ResultsPath também tem fallback/cópia para DefaultResultsPath. TestRunnerInitializer registra esse callback automaticamente.
-- Unity confirmou persistentDataPath=/home/johnnywendell/.config/unity3d/DefaultCompany/RTSWorld. A chamada do baseline acionou esse callback; o arquivo externo não foi lido, editado manualmente nem removido. Não foi solicitada permissão ampliada, nem alterado pacote/cache para contornar a restrição.
-- Conforme instrução do usuário, parar ao encontrar bloqueio. A implementação e suas verificações obrigatórias permanecem NOT_RUN; nenhum critério de navegação foi atendido ou dispensado.
-
-### Arquivos e estado Git
-- Somente continuidade ECS-003 editada: esta tarefa (movida para tasks/in_progress), tasks/ACTIVE.md, tasks/BACKLOG.md, docs/CURRENT_STATE.md e docs/HANDOFF.md. Nenhum fonte, cena ou pacote alterado intencionalmente nesta tarefa.
-- main/54ef57907c0e731f25adb0f8901e136ac8952326; sem commits. Working tree já continha ECS-001/ECS-002, pacotes/EntitiesClientSettings, documentação, evidências, tarefas pending e RTSCameraDemo seed 7→123; tudo preservado. Testes de benchmark preexistentes podem atualizar evidências ECS-002 durante a suíte; não restaurar esses arquivos sem comparar com o baseline anterior.
-
-### Próxima menor ação
-- Resolver em sessão autorizada uma execução de testes cujo runner não escreva fora do projeto; validar a solução antes de retomar a etapa A. Não remover callbacks nem editar cache/pacotes nesta sessão. ECS-004 e demais tarefas não iniciadas.
-
-### Verificações
-| Verificação | Estado | Evidência |
-| --- | --- | --- |
-| Dependências e estado Editor | PASS | fontes e MCP; ambas tarefas anteriores DONE |
-| Baseline EditMode | PASS | 195/195; job acima |
-| Compilação anterior | PASS | scriptCompilationFailed=false |
-| Implementação/compilação ECS-003 | NOT_RUN | bloqueio na auditoria |
-| PlayMode ECS-003 e profiling | NOT_RUN | bloqueio na auditoria |
-
-Console final: dois avisos MCP WebSocket da desconexão transitória; conexão recuperada. Nenhum erro retornado pela consulta final. `git diff --check`: PASS após correção de linha vazia final no handoff.
+- **Concluído:** malha lógica global limitada, classificação de água/declividade/obstáculos, regiões indisponíveis, A* regional, campos compartilhados, cache e revisão. Destinos em lote, Burst no passo fixo, parada nas células de destino e dispersão por pontos internos. Demo com dois grupos, barreiras, destinos configuráveis, diagnóstico e tempos.
+- **Arquivos:** `Simulation/Integration` contém NavigationGrid, NavigationSearch e adaptação do contrato/UnitSession. UnitComponents e UnitMovementSystem integram estado e jobs. `Presentation/Units` contém UnitDemo e NavigationDemoOverlay. Nova NavigationDemo.unity, testes NavigationMovementTests, NavigationSearchTests e NavigationDemoTests, com respectivos metas. ADR-0006, arquitetura, estado, backlog, active, handoff e relatório de validação atualizados.
+- **PASS:** compilação no Unity 6000.6.9f1, 204/204 Edit Mode em 36,9886907 s e 10/10 Play Mode em 2,2888051 s, sem falhas ou ignorados nas rodadas finais. O teste de streaming foi corrigido para usar a mesma escala e o mesmo tamanho de chunk da navegação. A cópia isolada redirecionou também o XML do callback de performance para dentro do projeto.
+- **PASS:** Play real com 1.000 unidades e diagnóstico. Em execução adicional, 5.000/5.000 chegaram e pararam no destino em até 1.601 ticks. O Editor voltou à RTSCameraDemo com suas mudanças locais não salvas, Play desligado, zero Worlds de unidades e zero erros. Um aviso transitório de WebSocket MCP foi observado.
+- **PASS:** perfis com 8, 100, 500 e 5.000 unidades. Na rodada final, 5.000 unidades tiveram média de 0,03832 ms/tick em 120 amostras. A janela máxima de 256 × 256 apresentou 33,29370 ms para construir um campo em amostra separada. Medições e captura em [docs/validation/ECS-003](../../docs/validation/ECS-003/README.md).
+- **Limites:** ADR-0006 registra hierarquia avaliada e adiada, revisão explícita, oito campos simultâneos e dispersão com sobreposição residual. Build de player, GPU timing e outras plataformas NOT_RUN.
+- **Git:** main/b207bd7, uma revisão à frente de origin/main. Alterações ECS-003 locais, sem commit. PASS `git diff --check` e auditoria de GUIDs. Nenhum critério pendente. Aguardar autorização antes de iniciar outra tarefa.

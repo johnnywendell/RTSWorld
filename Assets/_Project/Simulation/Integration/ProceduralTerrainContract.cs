@@ -24,6 +24,25 @@ namespace RTSWorld.Simulation
         private double Height(long x, long z) => environment == null
             ? terrain.SampleElevation(Definition, x, z) : environment.Sample(x, z).Elevation;
 
+        public EnvironmentChunkData GetEnvironmentChunk(ChunkCoordinate coordinate)
+        {
+            if (environment == null) throw new InvalidOperationException("An environmental definition is required.");
+            return environment.Generate(terrain.Generate(Definition, coordinate));
+        }
+
+        internal double SampleVertex(long x, long z, out double waterLevel)
+        {
+            if (environment == null)
+            {
+                waterLevel = terrain.SampleElevation(Definition, x, z);
+                return waterLevel;
+            }
+
+            EnvironmentSample sample = environment.Sample(x, z);
+            waterLevel = sample.WaterLevel;
+            return sample.Elevation;
+        }
+
         public double Elevation(double x, double z)
         {
             // Restrict to the same int-chunk domain; floor supports negative coordinates.

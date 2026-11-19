@@ -563,7 +563,7 @@ MonoBehaviour:
   observer: {fileID: 1346539483}
   terrainMaterial: {fileID: 2100000, guid: a355911ce3b368c2d8d137ae25e8bf81, type: 2}
   environment: {fileID: 1941184775}
-  seed: 123
+  seed: 0
   cellsPerChunk: 32
   horizontalScale: 2
   verticalScale: 1.2

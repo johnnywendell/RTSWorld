@@ -1,0 +1,5 @@
+scene,requested,spawned,selected,frames,frame_mean_ms,observed_fps,frame_max_ms,ecs_ms,unit_presentation_ms,setup_ms,nav_build_ms,picking_ms,order_result,order_nav_ms,order_distribution_ms,order_application_ms,chunks,resources
+RTSInteractionDemo,100,100,100,60,2.38468,419.343,10.76009,0.00419,0.03873,5.99270,3.09420,0.83470,Accepted,8.05970,0.00750,0.08630,81,0
+RTSInteractionDemo,500,500,500,60,2.76985,361.031,13.54839,0.00500,0.14312,6.51230,3.23800,2.68940,Accepted,8.07840,0.02320,0.60920,81,0
+RTSInteractionDemo,1000,1000,1000,60,2.95568,338.332,17.54562,0.00517,0.27763,6.61040,3.07290,5.25070,Accepted,8.17600,0.03980,1.53720,81,0
+RTSInteractionDemo,5000,5000,5000,60,5.43165,184.106,53.26363,0.01135,1.20436,9.95290,3.18440,25.95160,Accepted,8.48980,0.20390,13.99870,81,0

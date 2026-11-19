@@ -4,6 +4,9 @@
     "RTSWorld.World",
     "RTSWorld.Presentation",
     "RTSWorld.Camera",
+    "RTSWorld.Units.Presentation",
+    "Unity.Entities",
+    "Unity.Collections",
     "Unity.InputSystem"
   ],
   "includePlatforms": [

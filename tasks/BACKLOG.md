@@ -13,9 +13,15 @@
 | WORLD-004-FIX-003 | Hydrology and Terrain Geometry | DONE | WORLD-004/FIX-001/FIX-002/WORLD-005 | `tasks/completed/WORLD-004-FIX-003-hydrology-terrain-geometry.md` |
 | ECS-001 | Fundação DOTS/ECS | DONE | WORLD-001..005 e correções ambientais | `tasks/completed/ECS-001-dots-foundation.md` |
 | ECS-002 | Unidades e Simulação | DONE | ECS-001 | `tasks/completed/ECS-002-units-simulation.md` |
-| ECS-003 | Navegação e Movimentação | BLOCKED | ECS-001/ECS-002 | `tasks/in_progress/ECS-003-navigation-movement.md` |
+| ECS-003 | Navegação e Movimentação | DONE | ECS-001/ECS-002 | `tasks/completed/ECS-003-navigation-movement.md` |
+| ECS-004 | RTS Unit Selection and Commands | DONE | WORLD-005/ECS-003 | `tasks/completed/ECS-004-rts-selection-commands.md` |
+| INTEGRATION-001 | Unified World and ECS Simulation | DONE | WORLD-001..005/ECS-001..004 | `tasks/completed/INTEGRATION-001-unified-world-ecs.md` |
+| INTEGRATION-002 | Environmental Obstacles and Navigation Integration | DONE | INTEGRATION-001 | `tasks/completed/INTEGRATION-002-environmental-obstacles-navigation.md` |
+| ECS-005 | Resource Gathering and Economy Foundation | DONE | INTEGRATION-002 | `tasks/completed/ECS-005-resource-gathering-economy.md` |
+| ECS-006 | Combat and Performance | DONE | ECS-005/INTEGRATION-002 | `tasks/completed/ECS-006-combat-performance.md` |
 | UNITS-001 | ECS simulation spike and benchmark | PENDING | ENV-001 | To create when scoped |
 | NET-001 | Authoritative two-client proof of concept | PENDING | ECS-002 | Unidades e Simulação | DONE | ECS-001 | `tasks/completed/ECS-002-units-simulation.md` |
 | UNITS-001 | To create when scoped |
+| ECS-LOCAL-AVOIDANCE | Evitação dinâmica local para grupos e gargalos | PROPOSTA | ECS-006 | A detalhar se autorizado |
 
 Backlog order is tentative. A task becomes DONE only after its acceptance criteria have evidence.

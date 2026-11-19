@@ -18,12 +18,20 @@ namespace RTSWorld.Presentation.Environment
             geometryView = view; Revision++;
         }
         private EnvironmentGenerator generator;
+        private System.Func<ResourceKey, bool> includeResource;
+        public void SetResourceFilter(System.Func<ResourceKey, bool> filter)
+        {
+            if (includeResource == filter) return;
+            includeResource = filter;
+            Revision++;
+        }
         private WorldDefinition cachedWorld;
         private EnvironmentDefinition cachedEnvironment;
         public int Revision { get; private set; }
         public float SeaLevel => seaLevel;
         public int EnvironmentVersion => environmentVersion;
         public Material Material => environmentMaterial;
+        public EnvironmentDefinition CreateDefinition() => new EnvironmentDefinition(seaLevel, environmentVersion);
         public void Configure(Material material, float sea = 38, int version = EnvironmentDefinition.CurrentVersion)
         {
             _ = new EnvironmentDefinition(sea, version);
@@ -36,17 +44,22 @@ namespace RTSWorld.Presentation.Environment
             _ = new EnvironmentDefinition(seaLevel, environmentVersion);
             if (environmentMaterial == null) throw new System.InvalidOperationException("Assign an environment material.");
         }
-        public Mesh Build(TerrainChunkData source, float horizontal, float vertical)
+        public Mesh Build(TerrainChunkData source, float horizontal, float vertical) => Build(source, horizontal, vertical, out _);
+
+        internal Mesh Build(TerrainChunkData source, float horizontal, float vertical, out int resourceCount)
         {
             var definition = source.Definition;
             if (generator == null || cachedWorld.Seed != definition.Seed || cachedWorld.CellsPerChunk != definition.CellsPerChunk ||
                 cachedWorld.GeneratorVersion != definition.GeneratorVersion || cachedEnvironment.SeaLevel != seaLevel || cachedEnvironment.Version != environmentVersion)
             {
-                cachedWorld = definition; cachedEnvironment = new EnvironmentDefinition(seaLevel, environmentVersion);
+                cachedWorld = definition; cachedEnvironment = CreateDefinition();
                 generator = new EnvironmentGenerator(definition, cachedEnvironment);
             }
             var layer = generator.Generate(source);
-            return EnvironmentMeshBuilder.Build(layer, horizontal, vertical, geometryView);
+            resourceCount = 0;
+            foreach (var resource in layer.Resources)
+                if (includeResource == null || includeResource(resource.Key)) resourceCount++;
+            return EnvironmentMeshBuilder.Build(layer, horizontal, vertical, geometryView, includeResource);
         }
     }
 }

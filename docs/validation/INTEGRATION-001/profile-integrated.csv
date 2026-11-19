@@ -1,0 +1,5 @@
+scene,requested,spawned,selected,frames,frame_mean_ms,observed_fps,frame_max_ms,ecs_ms,unit_presentation_ms,setup_ms,nav_build_ms,picking_ms,order_result,order_nav_ms,order_distribution_ms,order_application_ms,chunks,resources
+RTSWorldIntegratedDemo,100,100,100,60,2.57770,387.943,18.33902,0.00460,0.03941,81.28210,16.05920,0.70180,Accepted,14.93400,0.00810,0.09660,81,5159
+RTSWorldIntegratedDemo,500,500,500,60,2.73590,365.511,21.82506,0.00450,0.13049,92.05160,15.94100,3.93780,Accepted,15.00160,0.02420,0.73530,81,5159
+RTSWorldIntegratedDemo,1000,1000,1000,60,3.39732,294.349,26.34938,0.00613,0.26714,80.58970,15.66080,5.98970,Accepted,14.72420,0.04860,3.30920,81,5159
+RTSWorldIntegratedDemo,5000,5000,4965,60,6.04768,165.353,86.11679,0.01205,1.20452,84.58130,16.19000,28.29860,Accepted,15.16430,0.22620,37.20440,81,5159

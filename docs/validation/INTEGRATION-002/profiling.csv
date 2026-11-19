@@ -1,0 +1,4 @@
+population,indexed,placementBuildMs,gridMs,selected,pickingMs,command,fieldMs,applyMs
+100,3767,35.1184,16.2039,100,3.1491,Accepted,18.0379,2.4508
+1000,3767,33.1145,16.3982,1000,5.9620,Accepted,11.7342,4.9461
+5000,3767,44.3967,16.2284,4778,27.3381,Accepted,11.8104,42.4819

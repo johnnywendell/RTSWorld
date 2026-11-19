@@ -1,0 +1,4 @@
+COMBAT_WAVE total=100 in_range=100 deaths=100 commands_ms=0.5213 target_ms=0.1969 pursuit_ms=0.0854 attack_ms=0.1216 damage_ms=0.0402 death_ms=0.0285 tick_ms=0.4828
+COMBAT_WAVE total=500 in_range=500 deaths=500 commands_ms=0.7808 target_ms=0.3580 pursuit_ms=0.3951 attack_ms=0.1641 damage_ms=0.1965 death_ms=0.1212 tick_ms=1.2403
+COMBAT_WAVE total=1000 in_range=1000 deaths=1000 commands_ms=1.5475 target_ms=0.7076 pursuit_ms=0.7944 attack_ms=0.3254 damage_ms=0.3940 death_ms=0.2405 tick_ms=2.4681
+COMBAT_WAVE total=5000 in_range=5000 deaths=5000 commands_ms=7.7991 target_ms=3.5382 pursuit_ms=3.9651 attack_ms=1.6115 damage_ms=1.9729 death_ms=1.2112 tick_ms=12.3134

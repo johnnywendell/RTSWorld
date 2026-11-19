@@ -6,6 +6,7 @@
     "Unity.Collections",
     "RTSWorld.Units.Presentation",
     "RTSWorld.Presentation",
+    "RTSWorld.Camera",
     "RTSWorld.World"
   ],
   "optionalUnityReferences": [

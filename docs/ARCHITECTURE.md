@@ -140,3 +140,35 @@ Ordem: authoring → snapshot imutável do contrato procedural → spawn em lote
 Área lógica inclusiva configurada por limites inteiros, até 256 células/eixo, dentro de ±1000000. Snapshot de vértices reproduz a elevação triangular v1/ambiente versionado. Posição é limitada à área e velocidade à definição. Ausência/suspensão de dados congela pose e marca WaitingForTerrain, preservando intenção; nunca usa mesh/collider nem destrói entidade por unload visual. O snapshot não é um serviço de streaming mundial. Passo/tick inicial/catch-up seguem a fundação; consistência somente nas condições testadas do mesmo runtime.
 
 `Assets/_Project/Scenes/UnitsSimulationDemo.unity`: abrir e entrar em Play; botões 100/500/1000/5000 recriam a população, Pausar/Retomar controlam a sessão e Ocultar apresentação mantém simulação. Aldeões verdes menores, soldados vermelhos maiores; terreno v1/seed 7, área [-64,64]. Assembly de apresentação separado usa uma malha compartilhada e RenderMeshInstanced, sem GameObject por unidade. HUD mostra contagens, entidades com pelo menos uma atualização, tick, tempo de Advance+sync por frame (pode não haver tick), média de frame/FPS em janelas de 30 frames e submissões instanciadas. Benchmark por tick e evidências em `docs/validation/ECS-002/README.md`.
+
+## Navegação regional de unidades — ECS-003
+
+A decisão e seus limites estão no [ADR-0006](decisions/ADR-0006-regional-unit-navigation.md). `NavigationGrid` é uma revisão lógica independente de câmera e streaming visual. `NavigationSearch` fornece A* regional e campo de fluxo de quatro direções. `UnitSession.SetNavigationGrid` publica a revisão. `SetDestination` resolve um campo por destino para o lote e o job Burst consulta o atlas no passo fixo. `SetIntention` mantém o comando direto da ECS-002 para os consumidores existentes.
+
+`Assets/_Project/Scenes/NavigationDemo.unity` usa o renderizador instanciado de unidades, duas populações, uma barreira com passagens e uma região lógica indisponível. Os destinos são configuráveis no Inspector. O diagnóstico alterna a visualização de custo, bloqueios, áreas sem dados, conexões, A* e campo de fluxo. O HUD exibe tempo de construção da malha, envio de comandos e atualização da simulação.
+
+## Seleção e ordens locais — ECS-004
+
+[RtsInteractionDemo](../Assets/_Project/Scenes/RTSInteractionDemo.unity) conecta o Input System, câmera WORLD-005, streaming WORLD-003 e unidades ECS. A apresentação mantém IDs lógicos por jogador, resolve clique pelo primeiro volume atingido e confirma retângulos pelo centro projetado e pela oclusão. Oclusão cruza os triângulos lógicos de terreno, inclusive sem mesh residente. A demo base lê as alturas do snapshot ECS. Superfícies ambientais e amostras fora do snapshot usam a consulta da câmera.
+
+`UnitSession.ApplyOrder` valida lote, propriedade, terreno, conectividade e espaço. A rejeição preserva o comando anterior. Move usa um campo ECS-003 para o ponto coletivo e destinos individuais em uma grade navegável. Após chegar ao destino coletivo, a unidade percorre o trecho final extraído do mesmo campo em ordem reversa. Stop cancela a intenção no passo fixo e a seleção continua local à apresentação. Ver [ADR-0007](decisions/ADR-0007-local-rts-interaction.md) e [validação](validation/ECS-004/README.md).
+
+## Mundo procedural e interação unificados — INTEGRATION-001
+
+A cena RTSWorldIntegratedDemo reutiliza a apresentação combinada WORLD-004 e o adaptador ECS-004. ChunkManager e EnvironmentPresentation fornecem as definições comuns para mesh, superfície da câmera e sessão. O spawn usa células distintas alcançáveis dentro da janela regional, sem dependência da residência visual. A navegação bloqueia água pela mesma profundidade usada na mesh e aplica o gradiente lógico da ECS-003. O picking usa a superfície superior de terra e água.
+
+O catálogo de recursos é reconstruível por chunk via `ProceduralTerrainContract.GetEnvironmentChunk`. Árvores, pedra e ouro são atravessáveis nesta tarefa. A sessão mantém dados lógicos ao descarregar meshes. Consulte [ADR-0008](decisions/ADR-0008-unified-world-consumers.md) e [validação](validation/INTEGRATION-001/README.md).
+
+## Ocupação ambiental — INTEGRATION-002
+
+`EnvironmentalObstacles` indexa placements procedurais por ResourceKey e rasteriza troncos e pedras com folga lógica. Água e declividade mantêm os custos de base. A grade, A* e campos de fluxo compartilham a máscara. Alterar disponibilidade ou raio atualiza o footprint e invalida campos apenas nos componentes tocados. `FindInteractionCells` enumera células livres e alcançáveis no raio de interação. [ADR-0009](decisions/ADR-0009-environmental-obstacle-occupancy.md)
+
+## Fundação econômica — ECS-005
+
+`ResourceEconomySystem` avança trabalhadores ativos no mesmo grupo fixo do movimento. O domínio separa restante por ResourceKey, carga no GatherWorker e estoque por proprietário no depósito. Gather reutiliza aproximação ambiental e campos de fluxo. Esgotamento atualiza ocupação independente da residência. A apresentação filtra recursos esgotados na construção de mesh e reenvia somente o chunk visual afetado. EconomyDemo reutiliza seleção, Move, Stop, câmera e streaming. [ADR-0010](decisions/ADR-0010-gathering-and-storage.md)
+
+## Combate dirigido — ECS-006
+
+- `UnitCombatSystem` entra no passo fixo antes do movimento existente. `UnitCombat` guarda a ordem, a fase, as janelas visuais e a cadência. Reaproveita `UnitIdentity.Owner`, `UnitHealth` e os atributos de dano e alcance.
+- Aquisição usa handles ECS versionados e snapshots por alvo distinto. A perseguição usa célula lógica, atlas compartilhado da ECS-003 e classificação ambiental da INTEGRATION-002. O lote de golpes é agregado antes da aplicação de dano e remoção por `DestroyBatch`.
+- CombatDemo segue a cena da economia, com facções, ataque dirigido, barras de vida e feedback instanciado. O estado lógico independe de residência visual. Regras e limites em [ADR-0011](decisions/ADR-0011-directed-melee-combat.md).

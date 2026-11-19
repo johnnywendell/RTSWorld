@@ -34,13 +34,12 @@ namespace RTSWorld.Presentation.Cameras
         private void EnsureSource()
         {
             if (manager == null) throw new InvalidOperationException("Assign a ChunkManager to WorldSurfaceQuery.");
-            var layer = manager.EnvironmentLayer;
-            if (layer != null && !layer.isActiveAndEnabled) layer = null;
+            var layer = manager.ActiveEnvironment;
             if (definition != null && definition.Seed == manager.Seed && definition.CellsPerChunk == manager.CellsPerChunk &&
                 appliedLayer == layer && (layer == null || appliedRevision == layer.Revision)) return;
-            definition = new WorldDefinition(manager.Seed, cellsPerChunk: manager.CellsPerChunk);
+            definition = manager.CreateWorldDefinition();
             appliedLayer = layer; appliedRevision = layer != null ? layer.Revision : 0;
-            environment = layer != null ? new EnvironmentGenerator(definition, new EnvironmentDefinition(layer.SeaLevel, layer.EnvironmentVersion)) : null;
+            environment = layer != null ? new EnvironmentGenerator(definition, layer.CreateDefinition()) : null;
         }
         public float HeightAt(double logicalX, double logicalZ)
         {

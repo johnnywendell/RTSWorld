@@ -38,7 +38,8 @@ namespace RTSWorld.Presentation.Environment
         }
 
         public static Mesh Build(EnvironmentChunkData data, float horizontal, float vertical,
-            EnvironmentGeometryView view = EnvironmentGeometryView.Combined)
+            EnvironmentGeometryView view = EnvironmentGeometryView.Combined,
+            System.Func<ResourceKey, bool> includeResource = null)
         {
             if (data == null) throw new System.ArgumentNullException(nameof(data));
             TerrainGeometry.ValidateScale(horizontal, nameof(horizontal));
@@ -129,6 +130,7 @@ namespace RTSWorld.Presentation.Environment
             if (view == EnvironmentGeometryView.Combined)
             foreach (var resource in data.Resources)
             {
+                if (includeResource != null && !includeResource(resource.Key)) continue;
                 var center = new Vector3((float)(resource.Key.X - origin.X + resource.OffsetX) * horizontal,
                     resource.Elevation * vertical, (float)(resource.Key.Z - origin.Z + resource.OffsetZ) * horizontal);
                 float variation = (float)(0.8 + EnvironmentNoise.Hash(resource.Key.Seed, resource.Key.X, resource.Key.Z, 31) * 0.4);

@@ -1,13 +1,43 @@
 # Current State
 
-**Atualizado:** 2026-11-15 (America/Bahia)
-**Estado:** ECS-002 DONE. ECS-003 BLOCKED na auditoria; nenhuma implementação de navegação.
+**Atualizado:** 2026-11-18 (America/Bahia)
+**Estado:** ECS-006 DONE. Nenhuma tarefa ativa.
 
-## ECS-003 — bloqueio de validação (2026-11-15)
+## ECS-006 — combate e desempenho
 
-- Dependências e fontes ECS-001/ECS-002 verificadas; baseline atual PASS 195/195 EditMode, compilação anterior sem falha. Unity correto, UnitsSimulationDemo limpa e Play desligado.
-- Pacote de performance registra callback que escreve TestResults.xml em persistentDataPath fora do projeto. Baseline foi acionado antes da identificação desse efeito. Restrição explícita do usuário impede repetir; execução interrompida conforme solicitado, sem alterar pacotes/cache ou pedir permissões ampliadas.
-- ECS-003 BLOCKED em tasks/in_progress; implementação, PlayMode e profiling ECS-003 NOT_RUN. Git main/54ef579, sem commits, alterações anteriores preservadas. Ver tarefa/handoff para evidência e próxima ação; nenhuma tarefa posterior iniciada.
+- CombatDemo integra facções, Attack corpo a corpo, seleção, indicadores, remoção e economia ao mundo procedural. A navegação reutiliza a grade ambiental e os Flow Fields.
+- PASS 246/246 Edit Mode, 15/15 Play Mode, input virtual e inspeção visual via Unity MCP. Em 5.000 unidades, o cenário integrado teve 4.500 ordens e pico de oito unidades no alcance. O ensaio sintético confirmou 5.000 golpes e mortes no mesmo tick. Dados e limitações em [validação ECS-006](validation/ECS-006/README.md). Mouse físico, player e GPU NOT_RUN.
+
+## ECS-005 — coleta e economia
+
+- EconomyDemo permite coletar madeira e pedra com aldeões, transportar, entregar ao depósito e retomar o trabalho. Estoque só aumenta na entrega. Move e Stop mantêm a carga.
+- Esgotamento libera ocupação e atualiza mesh. Coleta e estoque sobrevivem ao streaming visual. Economia em memória por sessão, sem persistência externa.
+- PASS 233/233 Edit Mode, 13/13 Play Mode, input virtual e 60 madeira + 80 pedra entregues. Profiling para 1 a 100 trabalhadores e capturas em docs/validation/ECS-005. Player e GPU NOT_RUN.
+
+## INTEGRATION-002 — obstáculos ambientais
+
+- Troncos e rochas bloqueiam a grade com folga configurável. Ouro atravessável. Cache seletivo e aproximação lógica verificados, independentes da residência visual.
+- PASS 226/226 Edit Mode, 12/12 Play Mode e inspeção MCP com 100/1.000/5.000 unidades. Evidências em docs/validation/INTEGRATION-002.
+
+## INTEGRATION-001 — cena unificada (2026-11-18)
+
+- RTSWorldIntegratedDemo junta biomas, água, recursos, streaming, câmera e controles ECS. A configuração comum mantém altura, água e navegação coerentes. Spawn usa células alcançáveis. Tree, Stone e Gold são atravessáveis e têm catálogo lógico por chunk.
+- PASS 223/223 Edit Mode e 12/12 Play Mode. Inspeção MCP, 100 posições distintas, Stop, rejeição de água, troca de seed e streaming com reconstrução determinística verificados. Profiling e capturas em `docs/validation/INTEGRATION-001`. Build de player, mouse físico e GPU timing NOT_RUN.
+- Git main/b207bd7, alterações locais sem commit.
+
+## ECS-004 — seleção e ordens RTS (2026-11-18)
+
+- RTSInteractionDemo conecta a câmera WORLD-005, terreno procedural e streaming com clique, retângulo, Shift, Ctrl, feedback e ordens Move/Stop em entidades ECS.
+- Grupo compartilha campo de navegação com posições finais distintas e espaçadas. Stop usa Espaço e preserva a seleção. A validação de comandos é independente da câmera.
+- PASS Unity 6000.6.9f1, 221/221 Edit Mode, 11/11 Play Mode, inspeção MCP com input virtual e chegada de 100 unidades a 100 posições. Profiling de 100 a 5.000 e captura em `docs/validation/ECS-004`. Player e mouse físico NOT_RUN.
+- Git main/b207bd7, alterações locais sem commit.
+
+## ECS-003 — navegação regional (2026-11-18)
+
+- A* e campos de fluxo em janela lógica global de até 256 células por eixo. Custos por declividade e bloqueio por água, obstáculos e indisponibilidade do chunk lógico. Comando em lote no passo fixo ECS, campos em atlas nativo, dispersão por pontos internos e chegada sem ultrapassar obstáculos.
+- NavigationDemo com grupos, barreiras, destinos configuráveis, diagnóstico e HUD de tempos. ADR-0006 registra a decisão de adiar hierarquia e os limites do sistema.
+- PASS Unity 6000.6.9f1, 204/204 Edit Mode, 10/10 Play Mode, auditoria de metas e inspeção visual. 5.000/5.000 unidades chegaram na cena. Profiling em `docs/validation/ECS-003/README.md`. Build/player e outras plataformas NOT_RUN.
+- Git main/b207bd7, alterações locais sem commit.
 
 ## Unidades ECS verificadas — 2026-11-15
 

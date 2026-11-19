@@ -1,4 +1,4 @@
 {
   "name": "RTSWorld.Units.Presentation",
-  "references": ["RTSWorld.Simulation", "RTSWorld.World", "Unity.Entities", "Unity.Collections"]
+  "references": ["RTSWorld.Camera", "RTSWorld.Presentation", "Unity.InputSystem", "RTSWorld.Simulation", "RTSWorld.World", "Unity.Entities", "Unity.Collections"]
 }
