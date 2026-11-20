@@ -10,12 +10,48 @@ namespace RTSWorld.Tests
     public sealed class UnitOrdersTests
     {
         [Test]
-        public void GroupCrossesChunksAndStopsAtDistinctSpacedCells()
+        public void FormationJoinsItsReturnLegBeforeTheSharedAnchor()
+        {
+            var terrain = new ProceduralTerrainContract(new WorldDefinition(7));
+            var min = new int2(-16);
+            var max = new int2(16);
+            var grid = new NavigationGrid(terrain, min, max, 100);
+            using var session = new UnitSession(terrain, min, max);
+            session.SetNavigationGrid(grid);
+            using var members = session.SpawnBatch(UnitDefinition.Soldier, 0, 9, new double3(-7.5, 0, -.5), default, 1);
+            var anchor = new int2(5, 0);
+            Assert.That(session.ApplyOrder(UnitOrder.Move(anchor, 2), 0, members), Is.EqualTo(UnitOrderResult.Accepted));
+
+            var manager = session.World.EntityManager;
+            var entity = members[1];
+            var goal = manager.GetBuffer<FormationWaypoint>(entity)[0].Cell;
+            Assert.That(goal, Is.EqualTo(new int2(3, -2)));
+            var previous = manager.GetComponentData<LogicalPose>(entity).Position.xz;
+            var reference = new List<int2>();
+            Assert.That(NavigationSearch.TryFindPath(grid, (int2)math.floor(previous), goal, reference), Is.True);
+
+            double distance = 0;
+            for (int i = 0; i < 300; i++)
+            {
+                Tick(session);
+                var position = manager.GetComponentData<LogicalPose>(entity).Position.xz;
+                Assert.That((int2)math.floor(position), Is.Not.EqualTo(anchor));
+                distance += math.distance(previous, position);
+                previous = position;
+            }
+            Assert.That(previous, Is.EqualTo((double2)goal + .5));
+            Assert.That(distance, Is.LessThanOrEqualTo(reference.Count - 1 + 1e-8));
+            Assert.That(manager.GetComponentData<MovementVelocity>(entity).Value, Is.EqualTo(double3.zero));
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void GroupCrossesChunksAndStopsAtDistinctSpacedCells(bool crowd)
         {
             var terrain = new ProceduralTerrainContract(new WorldDefinition(7, cellsPerChunk: 4));
             var grid = new NavigationGrid(terrain, new int2(-12), new int2(12), 100,
                 cell => cell.x == 0 && cell.y != 2);
-            using var session = new UnitSession(terrain, grid.Min, grid.Min + grid.Size);
+            using var session = new UnitSession(terrain, grid.Min, grid.Min + grid.Size, crowdEnabled: crowd);
             session.SetNavigationGrid(grid);
             using var members = session.SpawnBatch(UnitDefinition.Soldier, 0, 9, new double3(-5.5, 0, .5), default);
             Assert.That(session.ApplyOrder(UnitOrder.Move(new int2(5, 2), 2), 0, members), Is.EqualTo(UnitOrderResult.Accepted));
@@ -114,11 +150,12 @@ namespace RTSWorld.Tests
             Assert.That(session.TryGetTerrainElevation(2.01, 0, out _), Is.False);
         }
 
-        [Test]
-        public void WaterRejectsMove()
+        [TestCase(false)]
+        [TestCase(true)]
+        public void WaterRejectsMove(bool crowd)
         {
             var terrain = new ProceduralTerrainContract(new WorldDefinition(7), new EnvironmentDefinition(100));
-            using var session = new UnitSession(terrain, new int2(-2), new int2(2));
+            using var session = new UnitSession(terrain, new int2(-2), new int2(2), crowdEnabled: crowd);
             session.SetNavigationGrid(new NavigationGrid(terrain, new int2(-2), new int2(2), 100));
             using var member = session.SpawnBatch(UnitDefinition.Villager, 0, 1, new double3(-1.5, 0, .5), default);
             Assert.That(session.ApplyOrder(UnitOrder.Move(int2.zero), 0, member), Is.EqualTo(UnitOrderResult.InvalidDestination));

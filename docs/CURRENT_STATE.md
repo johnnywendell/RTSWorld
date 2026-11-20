@@ -1,7 +1,59 @@
 # Current State
 
-**Atualizado:** 2026-11-18 (America/Bahia)
-**Estado:** ECS-006 DONE. Nenhuma tarefa ativa.
+## VISUAL-002 — biblioteca ambiental e biomas
+
+- VisualStyleDemo com 30 variantes ambientais, três LODs, paletas de terreno por clima, água por profundidade e vegetação de margem. Placements lógicos, terreno, navegação e persistência preservados.
+- PASS Edit Mode 302/302 e Play Mode 28/28. EnvironmentBenchmarkDemo reutiliza a cena e controla densidade, sombras, rasteira, pan e zoom. Player Linux Development e Editor executaram 17 configurações cada.
+- Em 5.000 unidades, densidade média e sombras, CPU de apresentação foi de 1,909 ms no Editor e 1,437 ms no Player. GPU Frame Time e batches totais NOT_RUN. [Capturas e benchmarks](validation/VISUAL-002/README.md)
+
+
+## VISUAL-001A — apoio e continuidade de streaming
+
+- Fundação nivelada na maior altura do footprint, com base adaptativa até a menor amostra. Árvores e rochas instanciadas a partir dos placements dos chunks residentes. Três LODs com histerese e cobertura de câmera protegida durante carregamento.
+- PASS 300/300 Edit Mode, 27/27 Play Mode e Console sem erros/avisos. Fundação perto da água, criação dinâmica, destruição, Save/Load, mudança rápida de direção e retorno verificados. No zoom máximo da cena, 25 amostras do viewport cobertas.
+- Em 5.000 unidades, instancing padrão a 2560 × 1440 mediu 1,928 ms de apresentação, frente a 1,960 ms na referência. Triângulos de frame aumentaram cerca de 22%. GPU Frame Time, total de batches e Player NOT_RUN. [Relatório e CSV](validation/VISUAL-001A/README.md)
+
+
+## VISUAL-001 — direção artística e renderização
+
+- VisualStyleDemo verificada com cinco aldeões, cinco soldados, dois prédios, três árvores de referência e rocha procedural, sob iluminação diurna. A apresentação lê o ECS e compartilha material URP Lit. Idle, Walk, culling e LOD operam na apresentação.
+- PASS 296/296 Edit Mode, 26/26 Play Mode e Console sem erros/avisos. MCP verificou zoom, seleção, Gather/Stop e descarregamento/recarregamento visual sem perder unidades.
+- Em 5.000 unidades a 2560 × 1440 no Editor, o caminho instanciado apresentou 2,659 ms e 111 draw calls, frente a 4,177 ms e cerca de 3.008 no MeshRenderer. GPU Frame Time e Entities Graphics ficaram NOT_RUN. [Validação VISUAL-001](validation/VISUAL-001/README.md)
+
+
+**Atualizado:** 2026-11-20 (America/Bahia)
+**Estado:** VISUAL-002 DONE. Nenhuma tarefa ativa.
+
+## NAV-002 — progresso de navegação em grupos
+
+- A unidade entra no trecho final de formação quando já está numa célula do percurso. No ensaio de nove soldados, o trajeto de referência caiu de 15,628 para 11,000 unidades.
+- Recuperação lateral e arbitragem de passagem restrita verificadas. A CrowdRecoveryDemo executou os 12 roteiros. PASS 296/296 Edit Mode, 24/24 Play Mode e profiling pareado em 100 a 5.000 unidades. [Relatório NAV-002](validation/NAV-002/README.md)
+
+## NAV-001 — diagnóstico de navegação
+
+- NavigationDiagnosticsDemo expõe grade, ocupação, campo e rota selecionada no Editor. A rasterização inclui tangências simétricas. Os raios padrão permanecem 0,22 para aldeão e 0,30 para soldado e a folga ambiental da cena é 0,22.
+- Na PersistenceDemo, o posicionamento inicial preserva a conexão em torno do retângulo candidato. Seed 7 com 100 unidades e três prédios. A ordem reproduzida alcança as 50 origens do jogador, ante 43 com a ocupação antiga. Regressão passou com avoidance ligado e desligado.
+- Matriz com 14 PASS. Faixas centrais compartilham a transitabilidade entre A*, Flow Fields e movimento. Edit Mode 290/290 e Play Mode 22/22, com Console sem erros ou avisos. [Validação NAV-001](validation/NAV-001/README.md)
+
+## ECS-010 — persistência local da simulação
+
+- PersistenceDemo salva e restaura mundo procedural, recursos modificados, unidades, ordens, combate, IA, estoques e obras. O arquivo v1 usa IDs estáveis e verificação de integridade. A apresentação passa a usar a sessão reconstruída e seus recursos após o carregamento.
+- PASS compilação, 280/280 Edit Mode e 21/21 Play Mode. Console final sem erros ou avisos. A reconstrução ainda ocupa o thread principal. [Validação e profiling ECS-010](validation/ECS-010/README.md)
+
+## ECS-009 — autonomia de unidades
+
+- UnitAIDemo integra trabalho de aldeões, depósitos, obra planejada e soldados em guarda. A decisão por entidade roda no passo fixo e dá prioridade às ordens explícitas. Stop suspende a autonomia até nova ordem válida ou reativação.
+- PASS compilação, 273/273 Edit Mode, 19/19 Play Mode, streaming, inspeção MCP e profiling de 100 a 5.000 unidades. Com 2.500 aldeões autônomos e 5.000 unidades presentes, o ensaio sintético registrou tick médio de 1,571 ms e 33 entregas em 12 s simulados. [Validação ECS-009](validation/ECS-009/README.md)
+
+## ECS-008 — construções e depósitos físicos
+
+- ConstructionDemo oferece posicionamento lógico com prévia, custos em madeira e pedra, ordem Build com múltiplos aldeões, progresso, cancelamento e vida. Construções reservam a área desde o planejamento. Destruição libera a navegação. EconomyDemo entrega em depósito físico e preserva a carga quando perde acesso.
+- PASS compilação, 262/262 Edit Mode, 17/17 Play Mode e inspeção da ConstructionDemo via Unity MCP com mouse virtual. Console final sem erros ou avisos. [Validação e profiling](validation/ECS-008/README.md)
+
+## ECS-007 — evitação local e multidões
+
+- CrowdMovementDemo habilita índice espacial nativo e steering Burst no passo fixo. Inclui fluxos opostos e convergentes, coleta, combate, streaming e diagnóstico. Move mantém posições individuais. O atlas mantém oito campos.
+- PASS compilação, 258/258 Edit Mode, 16/16 Play Mode e inspeção Unity MCP. O ensaio pareado de 5.000 unidades reduziu a média de unidades sobrepostas de 4.994,1 para 4.628,3, com tick médio de 0,3059 ms usando crowd. Destinos compartilhados pequenos continuam sujeitos a congestionamento. [Validação ECS-007](validation/ECS-007/README.md)
 
 ## ECS-006 — combate e desempenho
 

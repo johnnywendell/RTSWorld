@@ -14,9 +14,10 @@ namespace RTSWorld.Simulation
     {
         public GatherPhase Phase;
         public ResourceKey Resource;
-        public int2 WorkCell;
+        public int2 WorkCell, DeliveryCell;
         public NaturalResource CargoKind;
         public double Cargo;
+        public uint BlockedDepotRevision;
     }
 
     public readonly struct ResourceAmount
@@ -48,18 +49,28 @@ namespace RTSWorld.Simulation
         public double EconomyMilliseconds { get; private set; }
         public event Action<ResourceKey> ResourceDepleted;
 
-        public void ConfigureEconomy(int2 depot, double productivity = 4, double wood = 60, double stone = 80)
+        public void ConfigureEconomy(int2 depot, double productivity = 4, double wood = 60, double stone = 80,
+            double startingWood = 0, double startingStone = 0)
         {
             if (EconomyEnabled) throw new InvalidOperationException("Economy already configured.");
             if (navigationGrid?.Obstacles == null || !navigationGrid.TryGetCost(depot, out int cost) || cost == 0)
                 throw new ArgumentException("Depot needs a traversable cell.", nameof(depot));
             if (!math.isfinite(productivity) || productivity <= 0 || !math.isfinite(wood) || wood <= 0 ||
-                !math.isfinite(stone) || stone <= 0)
+                !math.isfinite(stone) || stone <= 0 ||
+                !math.isfinite(startingWood) || startingWood < 0 ||
+                !math.isfinite(startingStone) || startingStone < 0)
                 throw new ArgumentOutOfRangeException(nameof(productivity));
             DepotCell = depot;
             gatherPerSecond = productivity;
             initialWood = wood;
             initialStone = stone;
+            if (startingWood > 0) stock[(0, NaturalResource.Tree)] = startingWood;
+            if (startingStone > 0) stock[(0, NaturalResource.Stone)] = startingStone;
+            EnableEconomyUpdates();
+        }
+
+        private void EnableEconomyUpdates()
+        {
             EconomyEnabled = true;
             var economy = World.GetOrCreateSystemManaged<ResourceEconomySystem>();
             economy.Session = this;
@@ -100,10 +111,10 @@ namespace RTSWorld.Simulation
             if (gatherBatch.Count == 0) return UnitOrderResult.Empty;
 
             // One component lookup per order, reused for all candidate positions.
-            if (!navigationGrid.TryGetCost(DepotCell, out int depotCost) || depotCost == 0)
+            var source = (int2)math.floor(manager.GetComponentData<LogicalPose>(gatherBatch[0]).Position.xz);
+            if (!TryDeliveryCell(owner, source, out var depot))
                 return UnitOrderResult.Unreachable;
-            if (!navigationSlots.TryGetValue(DepotCell, out int depotSlot) &&
-                !AcquireField(DepotCell, null, out depotSlot)) return UnitOrderResult.CacheBusy;
+            if (!AcquireField(depot, null, out int depotSlot)) return UnitOrderResult.CacheBusy;
             var depotField = sharedFields[depotSlot];
             navigationGrid.Obstacles.FindInteractionCells(navigationGrid, key, 3.5, approaches, depotField);
             if (approaches.Count == 0) return UnitOrderResult.Unreachable;
@@ -114,16 +125,22 @@ namespace RTSWorld.Simulation
             }
 
             int assigned = 0;
+            int previousAssignments = issuingAutomaticOrder && resourceAssignments.TryGetValue(key, out int count)
+                ? count : 0;
             foreach (var entity in gatherBatch)
             {
                 var worker = manager.GetComponentData<GatherWorker>(entity);
-                int2 approach = approaches[assigned % math.min(3, approaches.Count)];
+                int2 approach = approaches[(previousAssignments + assigned) % math.min(3, approaches.Count)];
                 bool deliverFirst = worker.Cargo > 0 && worker.CargoKind != amount.Kind;
-                if (!SetGatherLeg(manager, entity, deliverFirst ? DepotCell : approach)) continue;
+                if (!SetGatherLeg(manager, entity, deliverFirst ? depot : approach)) continue;
+                CancelBuild(entity);
+                CancelAttack(manager, entity);
+                worker.DeliveryCell = depot;
                 worker.Resource = key;
                 worker.WorkCell = approach;
                 worker.Phase = deliverFirst ? GatherPhase.Delivering : GatherPhase.Approaching;
                 manager.SetComponentData(entity, worker);
+                MarkManual(manager, entity);
                 if (scheduledWorkers.Add(entity)) workers.Add(entity);
                 assigned++;
             }
@@ -134,7 +151,7 @@ namespace RTSWorld.Simulation
         {
             if (!navigationGrid.TryGetCost(destination, out int cost) || cost == 0 ||
                 !AcquireField(destination, null, out int slot)) return false;
-            SetMovementField(manager, entity, slot, false);
+            SetMovementField(manager, entity, slot, false, interactionCell: crowdEnabled ? destination : null);
             manager.GetBuffer<FormationWaypoint>(entity).Clear();
             return true;
         }
@@ -168,7 +185,8 @@ namespace RTSWorld.Simulation
                 var worker = manager.GetComponentData<GatherWorker>(entity);
                 UpdateWorker(manager, entity, ref worker, seconds);
                 manager.SetComponentData(entity, worker);
-                if (worker.Phase is GatherPhase.Idle or GatherPhase.Blocked)
+                if (worker.Phase == GatherPhase.Idle ||
+                    (worker.Phase == GatherPhase.Blocked && (!physicalDepots || worker.Cargo <= 0)))
                 {
                     scheduledWorkers.Remove(entity);
                     continue;
@@ -186,10 +204,18 @@ namespace RTSWorld.Simulation
 
         private void UpdateWorker(EntityManager manager, Entity entity, ref GatherWorker worker, float seconds)
         {
-            if (worker.Phase is GatherPhase.Idle or GatherPhase.Blocked) return;
+            if (worker.Phase == GatherPhase.Idle) return;
+            if (worker.Phase == GatherPhase.Blocked)
+            {
+                if (physicalDepots && worker.Cargo > 0 && worker.BlockedDepotRevision != depotRevision &&
+                    movement.TerrainAvailable)
+                    SendToDepot(manager, entity, ref worker);
+                return;
+            }
             var motion = manager.GetComponentData<UnitMotion>(entity);
             if (motion.Activity == UnitActivity.WaitingForTerrain) return;
-            var position = (int2)math.floor(manager.GetComponentData<LogicalPose>(entity).Position.xz);
+            double2 point = manager.GetComponentData<LogicalPose>(entity).Position.xz;
+            var position = (int2)math.floor(point);
             if (worker.Phase == GatherPhase.Gathering &&
                 (!navigationGrid.TryGetCost(position, out int workCost) || workCost == 0))
             {
@@ -206,24 +232,39 @@ namespace RTSWorld.Simulation
 
             if (worker.Phase == GatherPhase.Delivering || worker.Phase == GatherPhase.Approaching)
             {
-                int2 destination = worker.Phase == GatherPhase.Delivering ? DepotCell : worker.WorkCell;
+                if (worker.Phase == GatherPhase.Delivering &&
+                    !IsDeliveryCell(manager.GetComponentData<UnitIdentity>(entity).Owner, worker.DeliveryCell))
+                {
+                    SendToDepot(manager, entity, ref worker);
+                    return;
+                }
+                int2 destination = worker.Phase == GatherPhase.Delivering ? worker.DeliveryCell : worker.WorkCell;
                 if (motion.Activity == UnitActivity.WaitingForNavigation)
                 {
-                    if (!SetGatherLeg(manager, entity, destination)) FinishWorker(manager, entity, ref worker, GatherPhase.Blocked);
+                    if (physicalDepots && worker.Phase == GatherPhase.Delivering)
+                        SendToDepot(manager, entity, ref worker);
+                    else if (!SetGatherLeg(manager, entity, destination))
+                        FinishWorker(manager, entity, ref worker, GatherPhase.Blocked);
                     return;
                 }
                 if (motion.Activity == UnitActivity.Unreachable)
                 {
-                    FinishWorker(manager, entity, ref worker, GatherPhase.Blocked);
+                    if (physicalDepots && worker.Phase == GatherPhase.Delivering)
+                        SendToDepot(manager, entity, ref worker);
+                    else FinishWorker(manager, entity, ref worker, GatherPhase.Blocked);
                     return;
                 }
-                if (motion.Field != 0 || !position.Equals(destination)) return;
+                bool inInteractionArea = position.Equals(destination) || (crowdEnabled &&
+                    math.distancesq(point, destination + new double2(.5)) <= UnitMovementSystem.InteractionRadiusSquared &&
+                    ClearNavigationSegment(point, destination + new double2(.5)));
+                if (motion.Field != 0 || !inInteractionArea) return;
 
                 if (worker.Phase == GatherPhase.Delivering)
                 {
                     int owner = manager.GetComponentData<UnitIdentity>(entity).Owner;
                     stock[(owner, worker.CargoKind)] = GetStock(owner, worker.CargoKind) + worker.Cargo;
                     DeliveredTotal += worker.Cargo;
+                    if (IsAutomatic(manager, entity)) AutonomousDeliveries++;
                     worker.Cargo = 0;
                     if (!resourceAvailable) FinishWorker(manager, entity, ref worker, GatherPhase.Idle);
                     else if (SetGatherLeg(manager, entity, worker.WorkCell)) worker.Phase = GatherPhase.Approaching;
@@ -252,15 +293,23 @@ namespace RTSWorld.Simulation
         {
             if (worker.Cargo <= 0)
                 FinishWorker(manager, entity, ref worker, GatherPhase.Idle);
-            else if (SetGatherLeg(manager, entity, DepotCell))
-                worker.Phase = GatherPhase.Delivering;
             else
-                FinishWorker(manager, entity, ref worker, GatherPhase.Blocked);
+            {
+                int owner = manager.GetComponentData<UnitIdentity>(entity).Owner;
+                int2 source = (int2)math.floor(manager.GetComponentData<LogicalPose>(entity).Position.xz);
+                if (TryDeliveryCell(owner, source, out var destination) && SetGatherLeg(manager, entity, destination))
+                {
+                    worker.DeliveryCell = destination;
+                    worker.Phase = GatherPhase.Delivering;
+                }
+                else FinishWorker(manager, entity, ref worker, GatherPhase.Blocked);
+            }
         }
 
-        private static void FinishWorker(EntityManager manager, Entity entity, ref GatherWorker worker, GatherPhase phase)
+        private void FinishWorker(EntityManager manager, Entity entity, ref GatherWorker worker, GatherPhase phase)
         {
             worker.Phase = phase;
+            if (phase == GatherPhase.Blocked) worker.BlockedDepotRevision = depotRevision;
             var motion = manager.GetComponentData<UnitMotion>(entity);
             motion.Field = 0;
             motion.HasFormation = false;

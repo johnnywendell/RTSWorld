@@ -24,18 +24,43 @@ namespace RTSWorld.Simulation
         private EntityQuery units;
         private NativeArray<double> heights;
         private ulong nextId = 1;
+        private readonly ProceduralTerrainContract proceduralTerrain;
         private double elapsed;
         private bool terrainAvailable;
         private readonly int width;
         private const int NavigationCapacity = 8;
         private readonly Dictionary<int2, int> navigationSlots = new();
+        private readonly int2[] fieldDestinations = new int2[NavigationCapacity];
         private readonly NavigationFlowField[] sharedFields = new NavigationFlowField[NavigationCapacity];
         private NavigationGrid navigationGrid;
         private uint navigationRevision;
         private NativeArray<int> navigationNext;
+        private NativeArray<byte> crowdWalkable;
+        private readonly bool crowdEnabled;
+
+        public bool CrowdEnabled => crowdEnabled;
+        public bool RecoveryEnabled
+        {
+            get => movement.RecoveryEnabled;
+            set => movement.RecoveryEnabled = value;
+        }
+        public bool MeasureCrowdJobs { get => movement.MeasureCrowdJobs; set => movement.MeasureCrowdJobs = value; }
+        public double SpatialMilliseconds => movement.SpatialMilliseconds;
+        public double MovementMilliseconds => movement.MovementMilliseconds;
+
+        public long FieldHits { get; private set; }
+        public long FieldMisses { get; private set; }
+        public long FieldReplacements { get; private set; }
+        public long FieldCapacityDenials { get; private set; }
+        public long FieldBuilds { get; private set; }
+        public double FieldBuildMilliseconds { get; private set; }
         private int NavigationArea => (width - 1) * ((int)(Bounds.Max.y - Bounds.Min.y));
 
-        public UnitSession(ProceduralTerrainContract terrain, int2 min, int2 max, float fixedDeltaTime = 0.05f)
+        public UnitSession(ProceduralTerrainContract terrain, int2 min, int2 max, float fixedDeltaTime = 0.05f, bool crowdEnabled = false)
+            : this(terrain, min, max, fixedDeltaTime, crowdEnabled, false) { }
+
+        private UnitSession(ProceduralTerrainContract terrain, int2 min, int2 max, float fixedDeltaTime,
+            bool crowdEnabled, bool hasAlreadyTicked)
         {
             if (math.any(max <= min) || math.any(max - (double2)min > 256) ||
                 math.any(math.abs((double2)min) > 1000000) || math.any(math.abs((double2)max) > 1000000))
@@ -43,6 +68,8 @@ namespace RTSWorld.Simulation
             if (!math.isfinite(fixedDeltaTime) || fixedDeltaTime < 0.001f || fixedDeltaTime > 1)
                 throw new ArgumentOutOfRangeException(nameof(fixedDeltaTime));
             FixedDeltaTime = fixedDeltaTime;
+            proceduralTerrain = terrain;
+            this.crowdEnabled = crowdEnabled;
             Bounds = new UnitBounds { Min = min, Max = max };
             width = max.x - min.x + 1;
             heights = new NativeArray<double>(width * (max.y - min.y + 1), Allocator.Persistent);
@@ -65,21 +92,34 @@ namespace RTSWorld.Simulation
                 units = em.CreateEntityQuery(typeof(UnitIdentity), typeof(LogicalPose), typeof(UnitMotion));
                 group = World.GetOrCreateSystemManaged<FixedStepSimulationSystemGroup>();
                 group.Timestep = fixedDeltaTime;
+                // Initialize the rate manager at t=0 before installing simulation systems.
+                if (hasAlreadyTicked) group.Update();
                 movement = World.GetOrCreateSystemManaged<UnitMovementSystem>();
                 movement.Heights = heights; movement.GridMin = min; movement.GridWidth = width;
                 movement.TerrainAvailable = terrainAvailable;
                 navigationNext = new NativeArray<int>(1, Allocator.Persistent);
                 movement.NavigationNext = navigationNext;
+                movement.CrowdEnabled = crowdEnabled;
+                crowdWalkable = new NativeArray<byte>(NavigationArea, Allocator.Persistent);
+                movement.CrowdWalkable = crowdWalkable;
                 group.AddSystemToUpdateList(movement);
                 var combat = World.GetOrCreateSystemManaged<UnitCombatSystem>();
                 combat.Session = this;
                 group.AddSystemToUpdateList(combat);
+                var construction = World.GetOrCreateSystemManaged<ConstructionSystem>();
+                construction.Session = this;
+                group.AddSystemToUpdateList(construction);
+                autonomousUnits = em.CreateEntityQuery(typeof(UnitAutonomy));
+                var autonomy = World.GetOrCreateSystemManaged<UnitAutonomySystem>();
+                autonomy.Session = this;
+                group.AddSystemToUpdateList(autonomy);
                 group.SortSystems();
             }
             catch
             {
                 if (World != null && World.IsCreated) World.Dispose();
                 if (navigationNext.IsCreated) navigationNext.Dispose();
+                if (crowdWalkable.IsCreated) crowdWalkable.Dispose();
                 heights.Dispose();
                 throw;
             }
@@ -148,7 +188,7 @@ namespace RTSWorld.Simulation
             em.SetComponentData(e, new UnitCombat { Interval = definition.AttackInterval > 0 ? definition.AttackInterval : 1 });
             em.SetComponentData(e, new UnitHealth { Current = definition.Health, Maximum = definition.Health });
             em.SetComponentData(e, new UnitAttributes { MaxSpeed = definition.Speed, CarryCapacity = definition.CarryCapacity,
-                Attack = definition.Attack, Defense = definition.Defense, Range = definition.Range });
+                Attack = definition.Attack, Defense = definition.Defense, Range = definition.Range, OccupancyRadius = definition.OccupancyRadius });
             em.SetComponentData(e, new UnitMotion { DesiredVelocity = desiredVelocity, Activity = movement.TerrainAvailable
                 ? UnitActivity.Idle : UnitActivity.WaitingForTerrain });
         }
@@ -192,6 +232,7 @@ namespace RTSWorld.Simulation
                 movement.NavigationNext = navigationNext;
             }
             navigationGrid = grid;
+            PublishCrowdWalkability();
             navigationSlots.Clear();
             Array.Clear(sharedFields, 0, sharedFields.Length);
             movement.NavigationRevision = navigationRevision = checked(navigationRevision + 1);
@@ -214,6 +255,8 @@ namespace RTSWorld.Simulation
             foreach (var entity in entities)
             {
                 SetMovementField(manager, entity, slot, false);
+                MarkManual(manager, entity);
+                CancelBuild(entity);
                 CancelGather(manager, entity);
                 CancelAttack(manager, entity);
             }
@@ -223,44 +266,86 @@ namespace RTSWorld.Simulation
         private bool AcquireField(int2 destination, NavigationFlowField prepared, out int slot,
             HashSet<Entity> replacing = null)
         {
-            if (!navigationSlots.TryGetValue(destination, out slot))
+            if (navigationSlots.TryGetValue(destination, out slot))
             {
-                if (navigationSlots.Count == NavigationCapacity)
-                {
-                    // Fields referenced only by the incoming batch can be replaced atomically.
-                    int used = 0;
-                    using var motions = units.ToComponentDataArray<UnitMotion>(Allocator.Temp);
-                    using var liveUnits = units.ToEntityArray(Allocator.Temp);
-                    for (int i = 0; i < motions.Length; i++)
-                    {
-                        var motion = motions[i];
-                        if (motion.Field != 0 && motion.NavigationRevision == navigationRevision &&
-                            (replacing == null || !replacing.Contains(liveUnits[i])))
-                            used |= 1 << (motion.Field - 1);
-                    }
-                    if (used == (1 << NavigationCapacity) - 1) return false;
-
-                    int2 evicted = default;
-                    foreach (var entry in navigationSlots)
-                    {
-                        if ((used & (1 << entry.Value)) != 0) continue;
-                        evicted = entry.Key;
-                        slot = entry.Value;
-                        break;
-                    }
-                    navigationSlots.Remove(evicted);
-                }
-                else
-                {
-                    slot = Array.FindIndex(sharedFields, field => field == null);
-                }
-
-                sharedFields[slot] = prepared ?? NavigationSearch.BuildFlowField(navigationGrid, destination);
-                sharedFields[slot].CopyTo(navigationNext, slot * NavigationArea);
-                navigationSlots.Add(destination, slot);
+                FieldHits++;
+                return true;
             }
 
+            FieldMisses++;
+            if (navigationSlots.Count == NavigationCapacity)
+            {
+                // Fields referenced only by the incoming batch can be replaced atomically.
+                int used = 0;
+                using var motions = units.ToComponentDataArray<UnitMotion>(Allocator.Temp);
+                using var liveUnits = units.ToEntityArray(Allocator.Temp);
+                for (int i = 0; i < motions.Length; i++)
+                {
+                    var motion = motions[i];
+                    if (motion.Field != 0 && motion.NavigationRevision == navigationRevision &&
+                        (replacing == null || !replacing.Contains(liveUnits[i])))
+                        used |= 1 << (motion.Field - 1);
+                }
+                if (used == (1 << NavigationCapacity) - 1)
+                {
+                    FieldCapacityDenials++;
+                    return false;
+                }
+
+                int2 evicted = default;
+                foreach (var entry in navigationSlots)
+                {
+                    if ((used & (1 << entry.Value)) != 0) continue;
+                    evicted = entry.Key;
+                    slot = entry.Value;
+                    break;
+                }
+                navigationSlots.Remove(evicted);
+                FieldReplacements++;
+            }
+            else
+            {
+                slot = Array.FindIndex(sharedFields, field => field == null);
+            }
+
+            sharedFields[slot] = prepared ?? BuildMeasuredField(destination);
+            sharedFields[slot].CopyTo(navigationNext, slot * NavigationArea);
+            navigationSlots.Add(destination, slot);
+            fieldDestinations[slot] = destination;
+
             return true;
+        }
+
+        public bool TryGetActiveField(UnitMotion motion, out NavigationFlowField field, out int2 destination)
+        {
+            field = null;
+            destination = default;
+            if (motion.Field <= 0 || motion.Field > sharedFields.Length ||
+                motion.NavigationRevision != navigationRevision) return false;
+
+            int slot = motion.Field - 1;
+            field = sharedFields[slot];
+            destination = fieldDestinations[slot];
+            return field != null && field.IsCurrent;
+        }
+
+        private NavigationFlowField BuildMeasuredField(int2 destination)
+        {
+            long start = System.Diagnostics.Stopwatch.GetTimestamp();
+            var field = NavigationSearch.BuildFlowField(navigationGrid, destination);
+            FieldBuilds++;
+            FieldBuildMilliseconds += (System.Diagnostics.Stopwatch.GetTimestamp() - start) *
+                (1000.0 / System.Diagnostics.Stopwatch.Frequency);
+            return field;
+        }
+
+        private void PublishCrowdWalkability()
+        {
+            if (!crowdEnabled && Buildings.Count == 0 && navigationGrid?.Obstacles == null && !movement.HasCrowdGrid) return;
+            movement.HasCrowdGrid = navigationGrid != null;
+            if (navigationGrid == null) return;
+            for (int i = 0; i < crowdWalkable.Length; i++)
+                crowdWalkable[i] = navigationGrid.Passage(i);
         }
 
         public int LastInvalidatedFields { get; private set; }
@@ -273,6 +358,7 @@ namespace RTSWorld.Simulation
             CompleteJobs();
             if (!navigationGrid.ChangeResourceAvailability(key, available)) return false;
 
+            PublishCrowdWalkability();
             InvalidateEnvironmentalFields();
             return true;
         }
@@ -283,6 +369,7 @@ namespace RTSWorld.Simulation
             if (navigationGrid?.Obstacles == null) return false;
             CompleteJobs();
             if (!navigationGrid.ChangeResourceRadius(key, radius)) return false;
+            PublishCrowdWalkability();
             InvalidateEnvironmentalFields();
             return true;
         }
@@ -319,14 +406,25 @@ namespace RTSWorld.Simulation
 
         }
 
-        private void SetMovementField(EntityManager manager, Entity entity, int slot, bool formation)
+        private void SetMovementField(EntityManager manager, Entity entity, int slot, bool formation, int2? interactionCell = null)
         {
             var motion = manager.GetComponentData<UnitMotion>(entity);
             motion.Field = slot + 1;
+            motion.RouteDestination = fieldDestinations[slot];
             motion.NavigationRevision = navigationRevision;
             motion.DesiredVelocity = default;
             motion.HasFormation = formation;
+            motion.InteractionArrival = interactionCell.HasValue;
+            motion.InteractionCell = interactionCell.GetValueOrDefault();
+            motion.CongestionTicks = 0;
+            motion.RecoveryTicks = motion.RecoveryCooldown = 0;
+            motion.RecoveryAttempts = 0;
+            motion.RouteDistanceTravelled = motion.NoProgressSeconds = motion.PassageWaitSeconds = 0;
+            motion.RecoverySide = 0;
+            motion.YieldTo = 0;
+            motion.Progress = NavigationProgress.Advancing;
             motion.FormationStep = -1;
+            motion.FormationProbeIndex = 0;
             manager.SetComponentData(entity, motion);
         }
 
@@ -339,7 +437,12 @@ namespace RTSWorld.Simulation
             motion.HasFormation = false;
             World.EntityManager.GetBuffer<FormationWaypoint>(unit).Clear();
             motion.DesiredVelocity = velocity;
+            motion.YieldTo = 0;
+            motion.CongestionTicks = motion.RecoveryTicks = motion.RecoveryCooldown = 0;
+            motion.Progress = math.any(velocity != 0) ? NavigationProgress.Advancing : NavigationProgress.Idle;
             World.EntityManager.SetComponentData(unit, motion);
+            MarkManual(World.EntityManager, unit);
+            CancelBuild(unit);
             CancelGather(World.EntityManager, unit);
             CancelAttack(World.EntityManager, unit);
         }
@@ -378,6 +481,7 @@ namespace RTSWorld.Simulation
             if (World != null && World.IsCreated) { CompleteJobs(); World.Dispose(); }
             if (heights.IsCreated) heights.Dispose();
             if (navigationNext.IsCreated) navigationNext.Dispose();
+            if (crowdWalkable.IsCreated) crowdWalkable.Dispose();
         }
     }
 }

@@ -39,12 +39,14 @@ namespace RTSWorld.Presentation.Environment
 
         public static Mesh Build(EnvironmentChunkData data, float horizontal, float vertical,
             EnvironmentGeometryView view = EnvironmentGeometryView.Combined,
-            System.Func<ResourceKey, bool> includeResource = null)
+            System.Func<ResourceKey, bool> includeResource = null, bool instanceTreesAndRocks = false,
+            bool artProfile = false)
         {
             if (data == null) throw new System.ArgumentNullException(nameof(data));
             TerrainGeometry.ValidateScale(horizontal, nameof(horizontal));
             TerrainGeometry.ValidateScale(vertical, nameof(vertical));
             int cells = data.BaseTerrain.Definition.CellsPerChunk;
+            var origin = data.BaseTerrain.Coordinate.GetSampleCoordinate(cells, 0, 0);
             int estimate = cells * cells * 6 + data.Resources.Count * 60;
             var vertices = new List<Vector3>(estimate);
             var normals = new List<Vector3>(estimate);
@@ -66,12 +68,45 @@ namespace RTSWorld.Presentation.Environment
             void SolidTriangle(Vector3 a, Vector3 b, Vector3 c, Color color) => Triangle(a, b, c, color, color, color);
 
             var input = new WetVertex[3]; var clipped = new WetVertex[4];
+            var artColors = artProfile ? new Color[data.Width * data.Width] : null;
+            if (artColors != null)
+                for (int z = 0; z <= cells; z++)
+                for (int x = 0; x <= cells; x++)
+                    artColors[z * data.Width + x] = GroundColor(x, z);
+
+            Color GroundColor(int x, int z)
+            {
+                var sample = data[x, z];
+                int seed = data.BaseTerrain.Definition.Seed;
+                float patch = (float)EnvironmentNoise.Field(seed, origin.X + x, origin.Z + z, 13, 97);
+                float mottling = (float)EnvironmentNoise.Field(seed, origin.X + x, origin.Z + z, 4, 102);
+                float damp = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.37f, .71f, sample.Humidity));
+                var grass = Color.Lerp(new Color(.54f, .54f, .31f), new Color(.32f, .50f, .24f), damp);
+                var moss = new Color(.42f, .53f, .27f);
+                var soil = new Color(.47f, .36f, .25f);
+                var beach = new Color(.69f, .59f, .41f);
+                var crust = new Color(.47f, .49f, .46f);
+                grass = Color.Lerp(grass, moss, Mathf.SmoothStep(0, .83f, patch));
+                grass = Color.Lerp(grass, soil, Mathf.SmoothStep(0, .42f, Mathf.InverseLerp(.57f, .93f, mottling)));
+                float chill = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.28f, .17f, sample.Temperature));
+                float dry = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.40f, .16f, sample.Humidity));
+                grass = Color.Lerp(grass, beach, dry * .83f);
+                grass = Color.Lerp(grass, crust, Mathf.InverseLerp(65, 81, sample.Elevation) * .87f);
+                grass = Color.Lerp(grass, Color.Lerp(crust, new Color(.77f, .81f, .78f), patch), chill * .95f);
+                float shore = 1 - Mathf.SmoothStep(0, 1,
+                    Mathf.InverseLerp(.02f, 1.15f + patch * .7f, sample.Elevation - sample.WaterLevel));
+                var color = Color.Lerp(grass, beach, shore * .71f) * Mathf.Lerp(.83f, 1.12f, mottling);
+                color.a = .9f;
+                return color;
+            }
+
             WetVertex Point(int x, int z)
             {
                 var sample = data[x, z];
                 return new WetVertex(new Vector3(x * horizontal,
                     (view == EnvironmentGeometryView.OriginalTerrain ? data.BaseTerrain[x, z].Elevation : sample.Elevation) * vertical, z * horizontal),
-                    new Vector3(x * horizontal, sample.WaterLevel * vertical, z * horizontal), BiomeColor(sample.Biome));
+                    new Vector3(x * horizontal, sample.WaterLevel * vertical, z * horizontal),
+                    artProfile ? artColors[z * data.Width + x] : BiomeColor(sample.Biome));
             }
             WetVertex Shore(WetVertex a, WetVertex b)
             {
@@ -101,9 +136,18 @@ namespace RTSWorld.Presentation.Environment
                 for (int i = 1; i + 1 < count; i++)
                 {
                     var p = clipped[0]; var q = clipped[i]; var r = clipped[i + 1];
-                    if (wet) SolidTriangle(p.Water, q.Water, r.Water, waterColor);
+                    if (wet && artProfile) Triangle(p.Water, q.Water, r.Water, WaterPaint(p), WaterPaint(q), WaterPaint(r));
+                    else if (wet) SolidTriangle(p.Water, q.Water, r.Water, waterColor);
                     else Triangle(p.Ground, q.Ground, r.Ground, p.Color, q.Color, r.Color);
                 }
+            }
+            Color WaterPaint(WetVertex v)
+            {
+                float depth = Mathf.Max(0, v.Depth / vertical);
+                var color = Color.Lerp(new Color(.35f, .58f, .49f), new Color(.075f, .28f, .36f),
+                    Mathf.SmoothStep(0, 1, Mathf.InverseLerp(0, 6, depth)));
+                color.a = Mathf.Min(.49f, depth / 15);
+                return color;
             }
             for (int z = 0; z < cells; z++)
             for (int x = 0; x < cells; x++)
@@ -126,10 +170,10 @@ namespace RTSWorld.Presentation.Environment
                 }
             }
 
-            var origin = data.BaseTerrain.Coordinate.GetSampleCoordinate(cells, 0, 0);
             if (view == EnvironmentGeometryView.Combined)
             foreach (var resource in data.Resources)
             {
+                if (instanceTreesAndRocks && (artProfile || resource.Kind != NaturalResource.Gold)) continue;
                 if (includeResource != null && !includeResource(resource.Key)) continue;
                 var center = new Vector3((float)(resource.Key.X - origin.X + resource.OffsetX) * horizontal,
                     resource.Elevation * vertical, (float)(resource.Key.Z - origin.Z + resource.OffsetZ) * horizontal);

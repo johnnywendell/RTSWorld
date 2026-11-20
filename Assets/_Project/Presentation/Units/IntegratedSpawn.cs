@@ -7,7 +7,7 @@ namespace RTSWorld.Units.Presentation
 {
     internal static class IntegratedSpawn
     {
-        public static int Place(UnitSession session, NavigationGrid grid, int2 center, int count, bool combat = false)
+        public static int Place(UnitSession session, NavigationGrid grid, int2 center, int count, bool combat = false, int groupOffset = 12)
         {
             var anchor = center;
             var nearest = double.PositiveInfinity;
@@ -37,8 +37,8 @@ namespace RTSWorld.Units.Presentation
             int total = math.min(count, candidates.Count);
             int enemies = combat ? total / 2 : 0;
             int villagers = combat ? (total - enemies) / 5 : (total + 1) / 2;
-            PlaceGroup(UnitDefinition.Villager, anchor - new int2(12, 0), villagers);
-            PlaceGroup(UnitDefinition.Soldier, anchor + new int2(12, 0), total - villagers - enemies);
+            PlaceGroup(UnitDefinition.Villager, anchor - new int2(groupOffset, 0), villagers);
+            PlaceGroup(UnitDefinition.Soldier, anchor + new int2(groupOffset, 0), total - villagers - enemies);
             if (combat) PlaceGroup(UnitDefinition.Soldier, anchor + new int2(20, 8), enemies, 1);
             return total;
 

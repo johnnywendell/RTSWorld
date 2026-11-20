@@ -6,7 +6,7 @@ using Unity.Mathematics;
 
 namespace RTSWorld.Simulation
 {
-    public enum UnitOrderKind : byte { Stop, Move, Attack }
+    public enum UnitOrderKind : byte { Stop, Move, Attack, Build }
     public enum UnitOrderResult : byte { Accepted, Empty, InvalidUnit, InvalidDestination, Unreachable, InsufficientSpace, CacheBusy, InvalidTarget }
     public readonly struct UnitOrder
     {
@@ -23,6 +23,7 @@ namespace RTSWorld.Simulation
         public int Spacing { get; }
         public Entity Target { get; }
         public static UnitOrder Attack(Entity target) => new UnitOrder(UnitOrderKind.Attack, default, 0, target);
+        public static UnitOrder Build(Entity target) => new UnitOrder(UnitOrderKind.Build, default, 0, target);
         public static UnitOrder Stop() => default;
         public static UnitOrder Move(int2 destination, int spacing = 1) =>
             new UnitOrder(UnitOrderKind.Move, destination, math.clamp(spacing, 1, 256));
@@ -52,6 +53,8 @@ namespace RTSWorld.Simulation
 
             if (order.Kind == UnitOrderKind.Attack) return OrderAttack(manager, order.Target, owner, entities);
 
+            if (order.Kind == UnitOrderKind.Build) return OrderBuild(manager, order.Target, owner, entities);
+
             long started = Stopwatch.GetTimestamp();
             if (order.Kind == UnitOrderKind.Stop)
             {
@@ -61,8 +64,13 @@ namespace RTSWorld.Simulation
                     motion.Field = 0;
                     motion.DesiredVelocity = default;
                     motion.HasFormation = false;
+                    motion.Progress = NavigationProgress.Idle;
+                    motion.YieldTo = 0;
+                    motion.CongestionTicks = motion.RecoveryTicks = motion.RecoveryCooldown = 0;
                     manager.SetComponentData(entity, motion);
                     manager.GetBuffer<FormationWaypoint>(entity).Clear();
+                    MarkManual(manager, entity, true);
+                    CancelBuild(entity);
                     CancelGather(manager, entity);
                     CancelAttack(manager, entity);
                 }
@@ -75,7 +83,7 @@ namespace RTSWorld.Simulation
                 return UnitOrderResult.InvalidDestination;
 
             var field = navigationSlots.TryGetValue(order.Destination, out int cached)
-                ? sharedFields[cached] : NavigationSearch.BuildFlowField(navigationGrid, order.Destination);
+                ? sharedFields[cached] : BuildMeasuredField(order.Destination);
             foreach (Entity entity in entities)
             {
                 int2 cell = (int2)math.floor(manager.GetComponentData<LogicalPose>(entity).Position.xz);
@@ -104,6 +112,8 @@ namespace RTSWorld.Simulation
                 }
 
                 SetMovementField(manager, entity, slot, true);
+                MarkManual(manager, entity);
+                CancelBuild(entity);
                 CancelGather(manager, entity);
                 CancelAttack(manager, entity);
             }
@@ -114,7 +124,7 @@ namespace RTSWorld.Simulation
         private void CollectFormationCells(NavigationFlowField field, int2 anchor, int spacing, int count)
         {
             formationCells.Clear();
-            formationCells.Add(anchor);
+            if (count == 1 || navigationGrid.IsFullPassage(anchor)) formationCells.Add(anchor);
             int limit = math.cmax(navigationGrid.Size);
             for (int ring = spacing; ring < limit && formationCells.Count < count; ring += spacing)
             {
@@ -132,7 +142,7 @@ namespace RTSWorld.Simulation
 
             void Add(int2 cell)
             {
-                if (formationCells.Count < count && field.TryGetDirection(cell, out _))
+                if (formationCells.Count < count && navigationGrid.IsFullPassage(cell) && field.TryGetDirection(cell, out _))
                     formationCells.Add(cell);
             }
         }

@@ -151,7 +151,7 @@ A decisão e seus limites estão no [ADR-0006](decisions/ADR-0006-regional-unit-
 
 [RtsInteractionDemo](../Assets/_Project/Scenes/RTSInteractionDemo.unity) conecta o Input System, câmera WORLD-005, streaming WORLD-003 e unidades ECS. A apresentação mantém IDs lógicos por jogador, resolve clique pelo primeiro volume atingido e confirma retângulos pelo centro projetado e pela oclusão. Oclusão cruza os triângulos lógicos de terreno, inclusive sem mesh residente. A demo base lê as alturas do snapshot ECS. Superfícies ambientais e amostras fora do snapshot usam a consulta da câmera.
 
-`UnitSession.ApplyOrder` valida lote, propriedade, terreno, conectividade e espaço. A rejeição preserva o comando anterior. Move usa um campo ECS-003 para o ponto coletivo e destinos individuais em uma grade navegável. Após chegar ao destino coletivo, a unidade percorre o trecho final extraído do mesmo campo em ordem reversa. Stop cancela a intenção no passo fixo e a seleção continua local à apresentação. Ver [ADR-0007](decisions/ADR-0007-local-rts-interaction.md) e [validação](validation/ECS-004/README.md).
+`UnitSession.ApplyOrder` valida lote, propriedade, terreno, conectividade e espaço. A rejeição preserva o comando anterior. Move usa um campo ECS-003 para o ponto coletivo e destinos individuais em uma grade navegável. A unidade percorre o trecho final extraído do mesmo campo em ordem reversa a partir da primeira célula em comum com sua rota compartilhada. A âncora serve como ponto de entrada quando as rotas só se encontram ali. Stop cancela a intenção no passo fixo e a seleção continua local à apresentação. Ver [ADR-0007](decisions/ADR-0007-local-rts-interaction.md) e [validação](validation/ECS-004/README.md).
 
 ## Mundo procedural e interação unificados — INTEGRATION-001
 
@@ -159,9 +159,21 @@ A cena RTSWorldIntegratedDemo reutiliza a apresentação combinada WORLD-004 e o
 
 O catálogo de recursos é reconstruível por chunk via `ProceduralTerrainContract.GetEnvironmentChunk`. Árvores, pedra e ouro são atravessáveis nesta tarefa. A sessão mantém dados lógicos ao descarregar meshes. Consulte [ADR-0008](decisions/ADR-0008-unified-world-consumers.md) e [validação](validation/INTEGRATION-001/README.md).
 
+A recuperação lateral da NAV-002 usa o débito de avanço e a presença de vizinhos já amostrados pela evitação. Uma tentativa tem duração e cooldown limitados. O destino e o campo permanecem ativos. A candidata é submetida à validação de segmentos, e faixas restritas e pernas de interação conservam sua política de movimento. A janela de recuperação é transitória e é reconstruída depois de Load.
+
+Trechos restritos suportam arbitragem local de entrada em sentidos opostos. O job usa a amostra imutável de entidades e o destino revisado do atlas. Quem cede reserva um bolsão local em memória e retoma a mesma ordem quando a boca fica livre. A inspeção tem limites fixos. Destinos de formação em grupo usam células inteiras e a economia prefere áreas de interação que deixam a faixa livre.
+
 ## Ocupação ambiental — INTEGRATION-002
 
 `EnvironmentalObstacles` indexa placements procedurais por ResourceKey e rasteriza troncos e pedras com folga lógica. Água e declividade mantêm os custos de base. A grade, A* e campos de fluxo compartilham a máscara. Alterar disponibilidade ou raio atualiza o footprint e invalida campos apenas nos componentes tocados. `FindInteractionCells` enumera células livres e alcançáveis no raio de interação. [ADR-0009](decisions/ADR-0009-environmental-obstacle-occupancy.md)
+
+### Diagnóstico de navegação — NAV-001
+
+A visualização opcional de `RtsInteractionDemo` lê grade, catálogo, atlas e buffers de formação na Scene View. O Editor limita a área e o número de elementos desenhados. O custo integrado é consultado a partir dos sucessores com orçamento explícito, sem duplicar o atlas. A classificação de recursos inclui células tangentes nas duas bordas de um círculo. O mesmo teste de círculo e quadrado é usado em coordenadas positivas e negativas. [Validação NAV-001](validation/NAV-001/README.md)
+
+Na inicialização das cenas integradas, a colocação de prédios pode exigir preservação de passagens. A simulação valida o terreno e a ocupação, depois verifica se as células livres do perímetro permanecem conectadas quando o retângulo candidato é excluído da busca. Candidatos que cortam um corredor são descartados antes de publicar ocupação ou criar a entidade. A regra é aplicada aos depósitos, ao centro e à obra inicial escolhidos pela demo. O posicionamento explícito do jogador continua com as regras de construção existentes.
+
+Células parcialmente ocupadas por recursos podem expor faixas cardinais centrais quando o varrimento com o maior raio suportado passa pelo interior. A grade mantém a resolução original e a ocupação grossa para construção. A* e Dijkstra usam as mesmas transições que os componentes de conectividade. O job de movimento usa a classificação publicada na tabela nativa, alinha o centro antes de entrar e valida cada subsegmento dentro da célula. Alterar a disponibilidade ou o raio de um recurso invalida campos quando a classificação de uma faixa muda, inclusive se a ocupação grossa for igual. O save mantém a geometria de origem da ocupação e reconstrói a classificação durante a restauração.
 
 ## Fundação econômica — ECS-005
 
@@ -172,3 +184,56 @@ O catálogo de recursos é reconstruível por chunk via `ProceduralTerrainContra
 - `UnitCombatSystem` entra no passo fixo antes do movimento existente. `UnitCombat` guarda a ordem, a fase, as janelas visuais e a cadência. Reaproveita `UnitIdentity.Owner`, `UnitHealth` e os atributos de dano e alcance.
 - Aquisição usa handles ECS versionados e snapshots por alvo distinto. A perseguição usa célula lógica, atlas compartilhado da ECS-003 e classificação ambiental da INTEGRATION-002. O lote de golpes é agregado antes da aplicação de dano e remoção por `DestroyBatch`.
 - CombatDemo segue a cena da economia, com facções, ataque dirigido, barras de vida e feedback instanciado. O estado lógico independe de residência visual. Regras e limites em [ADR-0011](decisions/ADR-0011-directed-melee-combat.md).
+
+## Evitação local e multidões — ECS-007
+
+As sessões com crowd habilitado indexam o snapshot XZ no início do passo de movimento por célula global inteira. Um job Burst publica posições, velocidades, raios e IDs em um multimap nativo persistente. O job paralelo de movimento consulta células próximas e avalia até 24 entradas por célula. O custo da consulta tem limite mesmo sob concentração extrema. O índice inclui unidades paradas e usa arredondamento para baixo também em coordenadas negativas.
+
+O movimento combina a intenção existente com separação proporcional e previsão curta de aproximação. Empates de posições usam o ID lógico. Após repetidos ticks de avanço insuficiente, o steering tenta ceder lateralmente. Folga de velocidade, limites, elevação e travessia da grade continuam no passo fixo. Os raios configuráveis atuam entre unidades. O bloqueio ambiental continua sendo a travessia do centro pela grade rasterizada pela INTEGRATION-002. O sistema admite sobreposição temporária e congestionamento quando a demanda ultrapassa a largura da passagem.
+
+A formação preserva os destinos individuais e modera desvios durante o trajeto reservado. Attack reutiliza o steering na perseguição e mantém a validação de alcance, cadência e dano. Gather admite chegada numa área navegável de raio 1,25 em torno do ponto da tarefa, com segmento livre. Carga e estoque continuam transacionados no sistema econômico. O atlas conserva oito slots e expõe contadores de acertos, falhas, recusas por capacidade, substituições e tempo de reconstrução.
+
+`CrowdMovementDemo` habilita o recurso ao criar a sessão e reutiliza as fronteiras de simulação e apresentação da CombatDemo. As cenas anteriores mantêm a opção desligada. No diagnóstico da cena, os gizmos mostram raio, velocidade e intensidade da vizinhança amostrada nas primeiras 100 unidades. Vermelho indica congestionamento. [Validação ECS-007](validation/ECS-007/README.md)
+
+## Construção e depósitos físicos — ECS-008
+
+A sessão mantém entidades ECS `Building` por proprietário e coordenada lógica. O posicionamento consulta água, declividade, ocupação ambiental e estrutural, unidades, limites e acessos da grade. O projeto reserva o retângulo ao confirmar e debita madeira e pedra uma vez. Cancelamento pelo proprietário reembolsa integralmente enquanto Planned. Após o primeiro trabalho, cancelamento libera a área sem reembolso. Cada aldeão em alcance soma uma unidade de trabalho por segundo de simulação. Destruição libera a área e invalida referências de trabalho e entrega.
+
+A grade incorpora o footprint e reutiliza a invalidação seletiva de Flow Fields. A conectividade de células para aproximação e entrega é atualizada sob demanda após mudanças de ocupação. O atlas continua com oito slots. EconomyDemo e ConstructionDemo usam depósitos físicos. O depósito concluído recebe madeira e pedra do próprio proprietário. Ao perder o acesso, o trabalhador procura outra entrega ou mantém a carga até mudança na disponibilidade de depósitos. O combate ECS-006 mantém alvos de unidade. As edificações expõem vida e uma operação de dano e destruição da sessão.
+
+ConstructionDemo instancia volumes simples e mostra custo, área, progresso e vida. Os estados de construção e economia pertencem à sessão e sobrevivem ao descarregamento das meshes do terreno. As estruturas têm orientação fixa. [Validação ECS-008](validation/ECS-008/README.md)
+
+## Autonomia de unidades — ECS-009
+
+`UnitAutonomy` habilita a decisão por entidade e guarda modo, estado, âncora, retomada e retries. `UnitAutonomySystem` executa antes do combate, no passo fixo. Por padrão cada unidade reavalia a cada 12 ticks, com fase distribuída pelo índice da entidade. Gather, Build, Attack e campos de fluxo executam a decisão pelos mesmos caminhos das ordens explícitas. A apresentação lê a sessão e pode reabilitar a autonomia das unidades selecionadas.
+
+Ordens explícitas aceitas substituem a ação automática da unidade. Move, Gather, Build e Attack mantêm prioridade até ficarem sem execução ativa. Stop suspende a autonomia até uma nova ordem válida ou reativação explícita. Um acerto pode interromper Gather pelas regras de combate existentes. A unidade espera passar a interrupção antes de procurar trabalho novamente e conserva carga. Um soldado volta a guardar sua posição final ao concluir uma ordem manual. Guard persegue dentro do raio da âncora, descarta alvos inválidos e tenta voltar à célula de origem. HoldPosition só combate no alcance e com trajeto direto livre.
+
+Recursos consultam o catálogo ambiental em buckets de quatro células e mantêm a disponibilidade autoritativa no catálogo existente. Obras pendentes usam buckets equivalentes. Soldados usam índice espacial por célula e facção atualizado a cada três ticks. Uma entidade viva representa a facção em cada célula, o que limita a busca em aglomerações. Ao selecionar um alvo, o sistema revalida posição, facção e vida. A resolução da rota de combate e o atlas permanecem compartilhados. Depósitos físicos reutilizam a seleção de acesso alcançável da construção, com cache por origem e facção durante cada lote de decisões.
+
+Aldeões com carga tentam entregar antes de aceitar trabalho. Em seguida, a política opcional pode preencher duas vagas automáticas por obra. A escolha de recursos pondera distância, reserva de trabalhadores e fração disponível. Até três pontos de aproximação disponíveis são distribuídos entre os trabalhadores do recurso. O executor verifica aproximação e acesso ao depósito. Cada decisão limita as tentativas e avança na lista em caso de falha. A conclusão de uma obra devolve o aldeão à distribuição de trabalho. A decisão é local e o provisionamento de novos sítios pertence ao jogador ou à preparação inicial da cena.
+
+A percepção e as decisões usam contêineres da sessão e cópias temporárias de queries ECS. O uso de Jobs/Burst permanece no movimento de alta frequência. A avaliação gerenciada compartilha os executores existentes e é medida separadamente. Índices e âncoras usam coordenadas lógicas, independentes das meshes carregadas.
+
+## ECS-010 — Persistência local
+
+`UnitSession.CaptureSnapshot` captura estado lógico consistente após completar os jobs. `SimulationSaveFile` serializa o DTO e grava o slot local com substituição atômica. `UnitSession.RestoreSnapshot` reconstrói a sessão e seus vínculos estáveis. As malhas, os identificadores ECS, os campos de fluxo e os índices transitórios são derivados durante a reconstrução ou nos ticks seguintes.
+
+`PersistenceDemo` troca a sessão ativa depois que a reconstrução termina. O ChunkManager reaplica a definição do mundo, atualiza o filtro de recursos e recria a apresentação conforme a residência visual. No Editor, o slot fica em `Library/RTSWorld/simulation.rts`. No player, o destino é o diretório de dados persistentes da aplicação. O [ADR-0012](decisions/ADR-0012-local-simulation-persistence.md) registra o contrato do formato e os limites.
+
+
+## Apresentação medieval — VISUAL-001
+
+A VisualStyleDemo parte de uma consulta ECS somente leitura para construir amostras com posição dos pés, orientação, arquétipo, proprietário, ID lógico e atividade. A biblioteca visual resolve a malha e a pose. O backend principal usa `Graphics.RenderMeshInstanced` com um material URP Lit e agrupa matrizes por malha e sombra. O comparativo MeshRenderer mantém objetos reaproveitáveis e consome a mesma amostra. Os objetos ficam inativos quando a amostra desaparece ou o backend muda, e são destruídos ao desligar a apresentação.
+
+O frustum e o LOD por altura projetada operam após a leitura do ECS. O LOD distante reduz detalhes, usa pose neutra e desliga a sombra da unidade. A reconstrução da sessão atualiza a consulta visual, e a substituição de recursos lê disponibilidade e residência de cada chunk. Esses limites mantêm câmera e renderização fora de movimento, combate, coleta e persistência. [ADR-0013](decisions/ADR-0013-visual-presentation-backends.md)
+
+## Continuidade do cenário de referência — VISUAL-001A
+
+A VisualStyleDemo usa a saída de placements da mesma montagem de chunk que publica a malha. Árvores e rochas ficam em lotes instanciados enquanto o chunk está residente. Culling por chunk e LOD de três níveis com histerese escolhem malha, preservando a transformação de cada placement. As outras cenas mantêm o caminho combinado original. A retirada visual de um chunk não remove recursos, entidades ou ocupação do catálogo lógico.
+
+O observador da VisualStyleDemo pode preservar a última vista coberta durante uma mudança de câmera. O agendador continua carregando a janela desejada sob o mesmo limite por frame e retém temporariamente a janela exibida. Uma fundação visual lê a altura mínima e máxima do footprint no snapshot lógico, sem alterar terreno, água, colisão ou regras de construção. [Validação](validation/VISUAL-001A/README.md)
+
+## Biblioteca ambiental por bioma — VISUAL-002
+
+Durante a montagem do chunk, o perfil visual projeta os placements das chaves de recursos disponíveis e deriva uma camada decorativa apenas para leitura. O cache de matrizes é ligado à malha residente. A geometria do terreno, a hidrologia, o catálogo lógico e a serialização ECS seguem o contrato anterior. A paleta do terreno e a água por profundidade usam o mesmo shader URP de chunk. A cena de referência e a cena de benchmark compartilham a projeção visual e a simulação. [Validação](validation/VISUAL-002/README.md)

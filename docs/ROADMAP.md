@@ -10,6 +10,9 @@
 | M3 — Environmental navigation | Logical resource obstacles and interaction points (INTEGRATION-002) | Obstacle paths, regional cache and streaming tests |
 | M3 — Economy foundation | Gather, deposit and resource state (ECS-005) | Playable economy demo and conservation tests |
 | M3 — Combat and Performance | Directed ECS melee combat in the procedural world (ECS-006) | CombatDemo, fixed-step tests and measured battle scenarios |
+| VISUAL — Direção de arte e renderização | Protótipos medievais jogáveis e apresentação ECS (VISUAL-001) | VisualStyleDemo, regressões, comparação de backends e ADR |
+| VISUAL — Continuidade da cena de referência | Fundações, streaming e LOD coerentes (VISUAL-001A) | Capturas equivalentes, regressões e benchmark de cobertura |
+| VISUAL — Arte ambiental e biomas | Biblioteca procedural própria, terreno e margens (VISUAL-002) | VisualStyleDemo, benchmark Editor/Linux e capturas pareadas |
 | M4 — Networking | Two clients and authoritative command processing | Repeatable multiplayer integration test |
 | M5 — Persistence | Save/recover mutable world and dynamic entities | Restart/recovery test |
 | M6 — RTS MVP | Gathering, construction, training, combat | End-to-end playtest |

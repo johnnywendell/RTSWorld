@@ -13,7 +13,7 @@ using UnityEngine.Rendering;
 
 namespace RTSWorld.Units.Presentation
 {
-    public sealed class RtsInteractionDemo : MonoBehaviour
+    public sealed partial class RtsInteractionDemo : MonoBehaviour
     {
         [SerializeField] private RtsCameraController rig;
         [SerializeField] private RtsCameraInput cameraInput;
@@ -22,7 +22,17 @@ namespace RTSWorld.Units.Presentation
         [SerializeField, Range(2, 5000)] private int population = 100;
         [SerializeField] private bool integratedWorld;
         [SerializeField] private bool economyDemo;
+        [SerializeField] private bool constructionDemo;
+        [SerializeField] private bool autonomyDemo;
         [SerializeField] private bool combatDemo;
+        private BuildingKind? placement;
+        private int2 previewCell;
+        private bool previewVisible;
+        private PlacementIssue previewIssue;
+        private Entity selectedSite;
+        private static readonly Rect ConstructionPanel = new(510, 12, 335, 145);
+        [SerializeField] private bool crowdDemo;
+        [SerializeField] private bool crowdRecoveryDemo;
         [SerializeField, Min(.01f)] private float gatherProductivity = 4;
         [SerializeField, Range(0, 1)] private float environmentalClearance = .22f;
         [SerializeField] private Vector2Int navigationCenter = new(-152, 352);
@@ -70,9 +80,10 @@ namespace RTSWorld.Units.Presentation
         private void OnEnable()
         {
             if (rig == null || streaming == null || cameraInput == null) return;
+            InitializeVisualStyle();
             cube = UnitDemo.MakeCube();
             pickingHeight = PickingHeight;
-            var shader = Shader.Find("Universal Render Pipeline/Unlit");
+            var shader = visualMarkerMaterial != null ? visualMarkerMaterial.shader : Shader.Find("Universal Render Pipeline/Unlit");
             int kinds = combatDemo ? 9 : 3;
             matrices = new Matrix4x4[kinds][];
             counts = new int[kinds];
@@ -100,6 +111,7 @@ namespace RTSWorld.Units.Presentation
             if (economyDemo && Session != null) streaming.EnvironmentLayer?.SetResourceFilter(null);
             Session?.Dispose();
             selection.Clear();
+            selectedSite = Entity.Null;
             selectable.Clear();
             enemies.Clear();
             moving = commands = 0;
@@ -114,7 +126,7 @@ namespace RTSWorld.Units.Presentation
             int halfSize = integratedWorld ? 96 : 64;
             int2 min = center - halfSize;
             int2 max = center + halfSize;
-            Session = new UnitSession(LogicalTerrain, min, max);
+            Session = new UnitSession(LogicalTerrain, min, max, crowdEnabled: crowdDemo);
             long obstacleStarted = Stopwatch.GetTimestamp();
             var obstacles = integratedWorld && environment != null
                 ? EnvironmentalObstacles.Build(LogicalTerrain, min, max, environmentalClearance) : null;
@@ -126,14 +138,20 @@ namespace RTSWorld.Units.Presentation
             NavigationBuildMilliseconds = Since(navigationStarted);
             if (integratedWorld)
             {
-                int spawned = IntegratedSpawn.Place(Session, navigation, center, count, combatDemo);
+                int spawned = IntegratedSpawn.Place(Session, navigation, center, count, combatDemo, visualStyleDemo ? 4 : 12);
                 if (spawned != count) feedback = $"Terreno navegável para {spawned}/{count} unidades";
                 if (economyDemo && spawned > 0 && obstacles != null)
                 {
                     var depot = FindDepot(center);
-                    Session.ConfigureEconomy(depot, gatherProductivity);
+                    Session.ConfigureEconomy(depot, gatherProductivity,
+                        startingWood: autonomyDemo ? 30 : 0, startingStone: autonomyDemo ? 20 : 0);
+                    if ((constructionDemo || (!combatDemo && !crowdDemo)) && !Session.EnablePhysicalDepots(depot, 0, preservePassages: true))
+                        feedback = "Sem área para o depósito inicial";
+                    if (constructionDemo && Session.SpawnMainCenter(depot, 0, preservePassages: true) == Entity.Null)
+                        feedback = "Sem área para o centro inicial";
+                    if (autonomyDemo) PrepareAutonomyDemo(depot);
                     Session.ResourceDepleted += ResourceDepleted;
-                    streaming.ActiveEnvironment?.SetResourceFilter(ResourceVisible);
+                    SetDemoResourceFilter();
                 }
             }
             else
@@ -147,15 +165,52 @@ namespace RTSWorld.Units.Presentation
                 typeof(LogicalPose), typeof(UnitMotion), typeof(UnitHealth), typeof(UnitCombat));
         }
 
+        private void PrepareAutonomyDemo(int2 depot)
+        {
+            var manager = Session.World.EntityManager;
+            using var allUnits = manager.CreateEntityQuery(typeof(UnitIdentity));
+            using var entities = allUnits.ToEntityArray(Allocator.Temp);
+            foreach (var entity in entities)
+            {
+                var identity = manager.GetComponentData<UnitIdentity>(entity);
+                if (identity.Owner == 0)
+                    Session.EnableAutonomy(entity, ModeFor(identity), autoBuild: true);
+            }
+
+            for (int radius = 3; radius <= 12; radius++)
+                for (int z = -radius; z <= radius; z++)
+                    for (int x = -radius; x <= radius; x++)
+                    {
+                        if (math.max(math.abs(x), math.abs(z)) != radius) continue;
+                        if (Session.PlaceBuilding(BuildingKind.Depot, depot + new int2(x, z), 0, preservePassages: true) != Entity.Null)
+                            return;
+                    }
+        }
+
+        private static AutonomyMode ModeFor(UnitIdentity identity) =>
+            identity.Kind == UnitKind.Villager ? AutonomyMode.Work : AutonomyMode.Guard;
+
+        private void ResumeSelectedAutonomy()
+        {
+            var manager = Session.World.EntityManager;
+            foreach (var unit in selectable)
+            {
+                if (!selection.Contains(unit.Id) || !manager.Exists(unit.Entity)) continue;
+                Session.EnableAutonomy(unit.Entity, ModeFor(manager.GetComponentData<UnitIdentity>(unit.Entity)), true);
+            }
+        }
+
         private void Update()
         {
             if (Session == null) return;
+            if (persistenceDemo) CompletePersistenceOperation();
             if (integratedWorld && WorldConfigurationChanged()) Rebuild(population);
             long stamp = Stopwatch.GetTimestamp();
             var mouse = Mouse.current;
             var keyboard = Keyboard.current;
             if (mouse == null || !Application.isFocused)
             {
+                previewVisible = false;
                 tracking = dragging = false;
             }
             else
@@ -171,6 +226,33 @@ namespace RTSWorld.Units.Presentation
                     : keyboard != null && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed)
                         ? SelectionMode.Add : SelectionMode.Replace;
                 inputMs = Since(stamp);
+                allowed &= !constructionDemo || !ConstructionPanel.Contains(ToGui(pointer));
+                allowed &= !persistenceDemo || !PersistencePanel.Contains(ToGui(pointer));
+                previewVisible = placement.HasValue && allowed && TryConstructionCell(out previewCell);
+                if (previewVisible)
+                    previewIssue = Session.ValidateBuilding(placement.Value, previewCell, 0);
+
+                if (placement.HasValue && rightPressed)
+                {
+                    placement = null;
+                    previewVisible = false;
+                    rightPressed = false;
+                }
+                if (placement.HasValue && leftPressed)
+                {
+                    if (previewVisible && previewIssue == PlacementIssue.None)
+                    {
+                        var site = Session.PlaceBuilding(placement.Value, previewCell, 0);
+                        if (site != Entity.Null)
+                        {
+                            selectedSite = site;
+                            Issue(UnitOrder.Build(site));
+                            placement = null;
+                            previewVisible = false;
+                        }
+                    }
+                    leftPressed = false;
+                }
                 if (allowed && leftPressed)
                 {
                     tracking = true;
@@ -239,6 +321,12 @@ namespace RTSWorld.Units.Presentation
                 return UnitOrderResult.InvalidDestination;
             }
 
+            if (constructionDemo && TryPickBuilding(ray, distance, out var site))
+            {
+                selectedSite = site;
+                return Issue(UnitOrder.Build(site));
+            }
+
             UnitOrderResult result;
             if (Session.EconomyEnabled && TryPickResource(ray, logical, distance, out var resource) &&
                 navigation.Obstacles.TryGet(resource, out var picked))
@@ -300,6 +388,80 @@ namespace RTSWorld.Units.Presentation
             return found;
         }
 
+        private bool TryConstructionCell(out int2 cell)
+        {
+            cell = default;
+            if (!RtsSurfaceRay.TryHit(Surface, View.ScreenPointToRay(pointer), View.farClipPlane,
+                out _, out var logical, pickingHeight)) return false;
+            cell = new int2(Mathf.FloorToInt(logical.x), Mathf.FloorToInt(logical.y));
+            return true;
+        }
+
+        private bool TryBuildingBounds(BuildingKind kind, int2 origin, float height, out Bounds bounds)
+        {
+            bounds = default;
+            var definition = BuildingDefinition.Get(kind);
+            double2 center = origin + (double2)definition.Size * .5;
+            if (!Session.TryGetTerrainElevation(center.x, center.y, out double elevation)) return false;
+            bounds = new Bounds(WorldPosition(new double3(center.x, elevation, center.y)) + Vector3.up * height * .5f,
+                new Vector3(definition.Size.x, height, definition.Size.y));
+            return true;
+        }
+
+        private bool TryPickBuilding(Ray ray, float distance, out Entity target)
+        {
+            target = Entity.Null;
+            var manager = Session.World.EntityManager;
+            foreach (Entity entity in Session.Buildings)
+            {
+                var site = manager.GetComponentData<Building>(entity);
+                if (site.State == ConstructionState.Completed ||
+                    !TryBuildingBounds(site.Kind, site.Origin, .5f, out var bounds)) continue;
+                if (Themed && TryGetVisualBuildingSupport(site.Kind, site.Origin, out _, out double high))
+                {
+                    double2 center = site.Origin + (double2)BuildingDefinition.Get(site.Kind).Size * .5;
+                    bounds.center = WorldPosition(new double3(center.x, high, center.y)) + Vector3.up * bounds.extents.y;
+                }
+                if (bounds.IntersectRay(ray, out float depth) && depth <= distance)
+                {
+                    target = entity;
+                    distance = depth;
+                }
+            }
+            return target != Entity.Null;
+        }
+
+        private void DrawBuildings()
+        {
+            var manager = Session.World.EntityManager;
+            foreach (Entity entity in Session.Buildings)
+            {
+                var building = manager.GetComponentData<Building>(entity);
+                var definition = BuildingDefinition.Get(building.Kind);
+                float progress = (float)(building.Work / definition.Work);
+                float height = .22f + progress * (building.Kind == BuildingKind.MainCenter ? 2f : 1.2f);
+                if (!TryBuildingBounds(building.Kind, building.Origin, height, out var bounds)) continue;
+                if (StyledBuilding(building, ref bounds)) continue;
+                Add(building.State == ConstructionState.Completed ? 2 : 1, bounds.center, bounds.size);
+                if (building.State == ConstructionState.Completed)
+                {
+                    Add(0, bounds.center + Vector3.up * height * .55f,
+                        new Vector3(bounds.size.x * .8f, .24f, bounds.size.z * .8f));
+                    if (building.Kind == BuildingKind.Depot)
+                        Add(1, bounds.center + Vector3.up * (height * .5f + .35f), Vector3.one * .58f);
+                }
+                else
+                {
+                    Add(0, bounds.center + Vector3.up * (height * .5f + .12f),
+                        new Vector3(math.max(.05f, progress) * bounds.size.x, .12f, .28f));
+                }
+            }
+
+            if (previewVisible && placement.HasValue &&
+                TryBuildingBounds(placement.Value, previewCell, .13f, out var preview))
+                Add(previewIssue == PlacementIssue.None ? 2 : 1, preview.center + Vector3.up * .18f, preview.size);
+        }
+
         private int2 FindDepot(int2 center)
         {
             int2 depot = center;
@@ -320,7 +482,7 @@ namespace RTSWorld.Units.Presentation
         }
 
         private bool ResourceVisible(ResourceKey key) =>
-            Session == null || !Session.TryGetResource(key, out var amount) || amount.Remaining > 0;
+            Session == null || Session.IsResourceAvailable(key);
 
         private void ResourceDepleted(ResourceKey key) =>
             streaming.RefreshResourceChunk(LogicalTerrain.Region(key.X, key.Z));
@@ -336,7 +498,12 @@ namespace RTSWorld.Units.Presentation
         public UnitOrderResult Issue(UnitOrder order)
         {
             using var storage = new NativeArray<Entity>(selection.Count, Allocator.Temp);
-            var result = Session.ApplyOrder(order, 0, storage.GetSubArray(0, FillSelected(storage)));
+            var members = storage.GetSubArray(0, FillSelected(storage));
+            var result = Session.ApplyOrder(order, 0, members);
+#if UNITY_EDITOR
+            if (showSelectedRoute && members.Length == 1 && order.Kind == UnitOrderKind.Move)
+                CaptureMoveDiagnostic(members[0], order.Destination, result);
+#endif
             if (result == UnitOrderResult.Accepted) commands++;
             feedback = result switch
             {
@@ -344,9 +511,11 @@ namespace RTSWorld.Units.Presentation
                 {
                     UnitOrderKind.Move => "Mover",
                     UnitOrderKind.Attack => "Atacar",
+                    UnitOrderKind.Build => "Construir",
                     _ => "Parar"
                 },
                 UnitOrderResult.Empty when order.Kind == UnitOrderKind.Attack => "Selecione soldados",
+                UnitOrderResult.Empty when order.Kind == UnitOrderKind.Build => "Selecione aldeões",
                 UnitOrderResult.InvalidTarget => "Alvo indisponível",
                 UnitOrderResult.Empty => "Selecione unidades",
                 UnitOrderResult.InvalidDestination => "Destino indisponível",
@@ -416,6 +585,7 @@ namespace RTSWorld.Units.Presentation
             using var health = combatDemo ? query.ToComponentDataArray<UnitHealth>(Allocator.Temp) : default;
             using var combat = combatDemo ? query.ToComponentDataArray<UnitCombat>(Allocator.Temp) : default;
             combatTargets.Clear();
+            BeginVisualStyle();
             if (combatDemo)
                 for (int i = 0; i < combat.Length; i++)
                     if (identities[i].Owner == 0 && selection.Contains(ids[i].Value) && combat[i].Target != Entity.Null)
@@ -431,13 +601,17 @@ namespace RTSWorld.Units.Presentation
                 else if (combatDemo)
                     enemies.Add(new SelectableUnit(ids[i].Value, entities[i], center, size));
                 if (motions[i].Activity == UnitActivity.Moving) moving++;
-                Add(combatDemo && identities[i].Owner != 0 ? Enemy : kind, center, size);
+                StyledUnit(poses[i], identities[i], ids[i].Value, motions[i].Activity == UnitActivity.Moving, feet);
+                if (!Themed) Add(combatDemo && identities[i].Owner != 0 ? Enemy : kind, center, size);
                 if (combatDemo)
                     DrawCombat(feet, center, size, health[i], combat[i], combatTargets.Contains(entities[i]));
                 if (selection.Contains(ids[i].Value)) Add(2, feet + Vector3.up * .07f, new Vector3(1.04f, .12f, 1.04f));
             }
 
-            if (Session.EconomyEnabled)
+            DrawBuildings();
+            DrawStyledEnvironment();
+            prototypes?.End();
+            if (Session.EconomyEnabled && !Session.UsesPhysicalDepots)
             {
                 double2 center = (double2)Session.DepotCell + .5;
                 if (Session.TryGetTerrainElevation(center.x, center.y, out double elevation))
@@ -501,12 +675,125 @@ namespace RTSWorld.Units.Presentation
             counts[kind] = 0;
         }
 
+        public bool OrderCrowd(bool converge)
+        {
+            if (!crowdDemo || !Session.EconomyEnabled) return false;
+            Session.CompleteJobs();
+            var depot = Session.DepotCell;
+            if (!navigation.TryGetCost(depot, out int cost) || cost == 0) return false;
+            var component = NavigationSearch.BuildFlowField(navigation, depot);
+            int2 west = NearestReachable(depot - new int2(18, 0));
+            int2 east = NearestReachable(depot + new int2(18, 0));
+            using var units = query.ToEntityArray(Allocator.Temp);
+            using var identities = query.ToComponentDataArray<UnitIdentity>(Allocator.Temp);
+            using var left = new NativeList<Entity>(Allocator.Temp);
+            using var right = new NativeList<Entity>(Allocator.Temp);
+            for (int i = 0; i < units.Length; i++)
+            {
+                if (identities[i].Owner == 0) left.Add(units[i]);
+                else right.Add(units[i]);
+            }
+            bool first = left.Length > 0 && Session.SetDestination(left.AsArray(), converge ? depot : east);
+            bool second = right.Length > 0 && Session.SetDestination(right.AsArray(), converge ? depot : west);
+            return first && second;
+
+            int2 NearestReachable(int2 target)
+            {
+                int2 result = depot;
+                double best = math.lengthsq((double2)target - depot);
+                for (int i = 0; i < navigation.Size.x * navigation.Size.y; i++)
+                {
+                    int2 cell = navigation.Min + new int2(i % navigation.Size.x, i / navigation.Size.x);
+                    double distance = math.lengthsq((double2)target - cell);
+                    if (distance >= best || !component.TryGetDirection(cell, out _)) continue;
+                    best = distance;
+                    result = cell;
+                }
+                return result;
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            DrawVisualTerrainGizmos();
+#if UNITY_EDITOR
+            DrawNavigationDiagnostics();
+#endif
+            if (!crowdDemo || !diagnostics || Session == null) return;
+            Session.CompleteJobs();
+            var manager = Session.World.EntityManager;
+            using var units = query.ToEntityArray(Allocator.Temp);
+            int shown = math.min(units.Length, 100);
+            for (int i = 0; i < shown; i++)
+            {
+                var entity = units[i];
+                var pose = manager.GetComponentData<LogicalPose>(entity);
+                var motion = manager.GetComponentData<UnitMotion>(entity);
+                var attributes = manager.GetComponentData<UnitAttributes>(entity);
+                var velocity = manager.GetComponentData<MovementVelocity>(entity);
+                var start = WorldPosition(pose.Position) + Vector3.up * .08f;
+                var end = WorldPosition(pose.Position + velocity.Value * .3) + Vector3.up * .08f;
+                Gizmos.color = motion.IsCongested ? Color.red : Color.Lerp(Color.cyan, Color.yellow, motion.NearbyUnits / 8f);
+                Gizmos.DrawWireSphere(start, attributes.OccupancyRadius);
+                Gizmos.DrawLine(start, end);
+            }
+        }
+
+        private static string PlacementDescription(PlacementIssue issue)
+        {
+            if (issue == PlacementIssue.None) return "Área disponível";
+            var reasons = new List<string>();
+            if (issue.HasFlag(PlacementIssue.Bounds)) reasons.Add("fora da área");
+            if (issue.HasFlag(PlacementIssue.Water)) reasons.Add("água");
+            if (issue.HasFlag(PlacementIssue.Slope)) reasons.Add("declive");
+            if (issue.HasFlag(PlacementIssue.Obstacle)) reasons.Add("árvores ou rochas");
+            if (issue.HasFlag(PlacementIssue.Building)) reasons.Add("construção");
+            if (issue.HasFlag(PlacementIssue.Unit)) reasons.Add("unidade");
+            if (issue.HasFlag(PlacementIssue.Access)) reasons.Add("sem acesso");
+            if (issue.HasFlag(PlacementIssue.Cost)) reasons.Add("estoque insuficiente");
+            return string.Join(" · ", reasons);
+        }
+
         private void OnGUI()
         {
             if (Session == null) return;
-            GUILayout.BeginArea(Panel, GUI.skin.box);
+            if (visualObserver != null && visualObserver.LoadingFirstView)
+            {
+                GUI.Box(new Rect((Screen.width - 240) * .5f, (Screen.height - 34) * .5f, 240, 34), "Carregando terreno");
+                return;
+            }
+            if (persistenceDemo) DrawPersistenceControls();
+            if (constructionDemo)
+            {
+                GUILayout.BeginArea(ConstructionPanel, GUI.skin.box);
+                GUILayout.Label("Construir · clique para posicionar · direito para sair");
+                foreach (BuildingKind kind in System.Enum.GetValues(typeof(BuildingKind)))
+                {
+                    var definition = BuildingDefinition.Get(kind);
+                    if (GUILayout.Toggle(placement == kind, $"{definition.Name} · {definition.Wood} madeira · {definition.Stone} pedra", GUI.skin.button))
+                        placement = kind;
+                }
+                if (previewVisible) GUILayout.Label(PlacementDescription(previewIssue));
+                else if (selectedSite != Entity.Null)
+                {
+                    var building = Session.World.EntityManager.GetComponentData<Building>(selectedSite);
+                    var definition = BuildingDefinition.Get(building.Kind);
+                    GUILayout.Label($"{definition.Name} · {building.Work / definition.Work:P0} · Vida {building.Health}/{definition.Health}");
+                    if (building.State is ConstructionState.Planned or ConstructionState.UnderConstruction &&
+                        GUILayout.Button("Cancelar construção") && Session.CancelBuilding(selectedSite, 0))
+                        selectedSite = Entity.Null;
+                }
+                GUILayout.EndArea();
+            }
+            var controls = Panel;
+            if (autonomyDemo) controls.height += 24;
+            if (visualStyleDemo) controls.height += (VisualTerrainDiagnostics ? 137 : 105) + (environmentBenchmark ? 23 : 0);
+            if (crowdRecoveryDemo) controls.height += 48;
+            GUILayout.BeginArea(controls, GUI.skin.box);
             GUILayout.Label("Selecionar: clique ou arraste · Shift: adicionar · Ctrl: alternar");
-            GUILayout.Label(combatDemo ? "Direito: atacar, coletar ou mover · Espaço: parar" : economyDemo ? "Direito: coletar ou mover · Espaço: parar · WASD: pan" :
+            GUILayout.Label(autonomyDemo ? "Direito: atacar, coletar, construir ou mover · Espaço: parar" :
+                constructionDemo ? "Direito: coletar, construir ou mover · Espaço: parar · WASD: pan" :
+                combatDemo ? "Direito: atacar, coletar ou mover · Espaço: parar" : economyDemo ? "Direito: coletar ou mover · Espaço: parar · WASD: pan" :
                 "Direito: mover · Espaço: parar · WASD / meio do mouse: pan");
             GUILayout.Label("Scroll: zoom · Q/E: girar");
             GUILayout.BeginHorizontal();
@@ -515,13 +802,31 @@ namespace RTSWorld.Units.Presentation
             diagnostics = GUILayout.Toggle(diagnostics, "Diagnóstico");
             rig.Settings.EnableEdgePan = GUILayout.Toggle(rig.Settings.EnableEdgePan, "Bordas");
             GUILayout.EndHorizontal();
+            if (crowdDemo && !constructionDemo)
+            {
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Fluxos opostos")) feedback = OrderCrowd(false) ? "Fluxos em movimento" : "Rota indisponível";
+                if (GUILayout.Button("Convergir")) feedback = OrderCrowd(true) ? "Destino compartilhado" : "Rota indisponível";
+                GUILayout.EndHorizontal();
+            }
+            if (crowdRecoveryDemo)
+            {
+                Session.RecoveryEnabled = GUILayout.Toggle(Session.RecoveryEnabled, "Recuperação lateral");
+                DrawCrowdScenarios();
+            }
+            if (autonomyDemo && GUILayout.Button("Retomar autonomia das selecionadas"))
+                ResumeSelectedAutonomy();
+            DrawVisualControls();
             GUILayout.Label($"Selecionadas {selection.Count} · {feedback}");
             GUILayout.EndArea();
-            float hudHeight = integratedWorld ? 92 : 74;
-            float nextPanel = 159;
+            float hudHeight = crowdDemo ? 112 : integratedWorld ? 92 : 74;
+            float nextPanel = (autonomyDemo ? 183 : 159) + (crowdRecoveryDemo ? 48 : 0) + (visualStyleDemo ? ((VisualTerrainDiagnostics ? 137 : 105) + (environmentBenchmark ? 23 : 0)) : 0);
             if (diagnostics)
             {
-                GUI.Box(new Rect(12, nextPanel, 490, hudHeight), statistics);
+                var label = crowdDemo
+                    ? statistics + $"\nAtlas {Session.FieldHits}/{Session.FieldHits + Session.FieldMisses} acertos · {Session.FieldCapacityDenials} recusas"
+                    : statistics;
+                GUI.Box(new Rect(12, nextPanel, 490, hudHeight), label);
                 nextPanel += hudHeight + 5;
             }
             if (Session.EconomyEnabled)
@@ -532,6 +837,12 @@ namespace RTSWorld.Units.Presentation
             if (combatDemo)
             {
                 GUI.Box(new Rect(12, nextPanel, 490, 24), combatText);
+                nextPanel += 24;
+            }
+            if (autonomyDemo)
+            {
+                GUI.Box(new Rect(12, nextPanel, 490, 24),
+                    $"IA · {Session.AutonomyDecisions} decisões no tick · {Session.AutonomyAssignments} atribuições");
                 nextPanel += 24;
             }
             cameraInput.ExcludedGuiRect = diagnostics || Session.EconomyEnabled || combatDemo
@@ -564,6 +875,17 @@ namespace RTSWorld.Units.Presentation
             if (economyDemo && streaming != null) streaming.EnvironmentLayer?.SetResourceFilter(null);
             Session?.Dispose();
             Session = null;
+            if (visualStyleDemo && visualPipeline != null && QualitySettings.renderPipeline == visualPipeline)
+                QualitySettings.renderPipeline = previousPipeline;
+            if (visualStyleDemo && streaming != null && streaming.EnvironmentLayer != null)
+            {
+                streaming.EnvironmentLayer.SetInstanceTreesAndRocks(false);
+                streaming.EnvironmentLayer.SetArtProfile(false);
+            }
+            if (visualObserver != null) visualObserver.HoldUncoveredView = false;
+            environmentChunks.Clear();
+            prototypes?.Dispose();
+            prototypes = null;
             if (cube != null) Destroy(cube);
             if (materials == null) return;
             foreach (var material in materials)

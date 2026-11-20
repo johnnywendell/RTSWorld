@@ -27,11 +27,17 @@ namespace RTSWorld.Simulation
     public sealed class EnvironmentalObstacles
     {
         private readonly Dictionary<ResourceKey, EnvironmentalObstacle> resources = new();
-        private readonly int[] occupancy;
+        internal const byte AlongX = 1, AlongZ = 2, FullCell = 4;
+        internal const double LaneHalfWidth = .01;
+        private const double MaximumAgentRadius = .49;
+        private readonly int[] occupancy, horizontalObstructions, verticalObstructions;
+        private readonly Dictionary<int, byte> previousPassages = new();
         public int2 Min { get; }
         public int2 Size { get; }
         public double Clearance { get; }
+        internal IEnumerable<ResourceKey> ResourceKeys => resources.Keys;
         public int ResourceCount => resources.Count;
+        public IEnumerable<EnvironmentalObstacle> Entries => resources.Values;
 
         public EnvironmentalObstacles(int2 min, int2 max, int cellsPerChunk, double clearance,
             IEnumerable<ResourcePlacement> placements)
@@ -44,6 +50,8 @@ namespace RTSWorld.Simulation
             Size = max - min;
             Clearance = clearance;
             occupancy = new int[Size.x * Size.y];
+            horizontalObstructions = new int[occupancy.Length];
+            verticalObstructions = new int[occupancy.Length];
             foreach (var placement in placements)
             {
                 double variation = 0.8 + EnvironmentNoise.Hash(placement.Key.Seed, placement.Key.X, placement.Key.Z, 31) * 0.4;
@@ -79,12 +87,25 @@ namespace RTSWorld.Simulation
 
         internal bool IsBlocked(int index) => occupancy[index] != 0;
 
+        internal byte Passage(int index) => occupancy[index] == 0 ? FullCell :
+            (byte)((horizontalObstructions[index] == 0 ? AlongX : 0) |
+                   (verticalObstructions[index] == 0 ? AlongZ : 0));
+
+        private void CollectChanges(List<int> changed)
+        {
+            foreach (var pair in previousPassages)
+                if (Passage(pair.Key) != pair.Value)
+                    changed.Add(pair.Key);
+            previousPassages.Clear();
+        }
+
         internal bool SetAvailable(ResourceKey key, bool available, List<int> changed)
         {
             if (!resources.TryGetValue(key, out var old) || old.Available == available) return false;
             var updated = new EnvironmentalObstacle(old.Placement, old.Chunk, old.Radius, available);
             resources[key] = updated;
-            Rasterize(updated, available ? 1 : -1, changed);
+            Rasterize(updated, available ? 1 : -1, changed == null ? null : previousPassages);
+            if (changed != null) CollectChanges(changed);
             return true;
         }
 
@@ -97,8 +118,10 @@ namespace RTSWorld.Simulation
             resources[key] = updated;
             if (old.Available)
             {
-                Rasterize(old, -1, changed);
-                Rasterize(updated, 1, changed);
+                var previous = changed == null ? null : previousPassages;
+                Rasterize(old, -1, previous);
+                Rasterize(updated, 1, previous);
+                if (changed != null) CollectChanges(changed);
             }
             return true;
         }
@@ -126,34 +149,43 @@ namespace RTSWorld.Simulation
 
             result.Sort((a, b) =>
             {
-                int order = math.distancesq((double2)a + .5, center).CompareTo(math.distancesq((double2)b + .5, center));
+                int order = grid.IsFullPassage(b).CompareTo(grid.IsFullPassage(a));
+                if (order != 0) return order;
+                order = math.distancesq((double2)a + .5, center).CompareTo(math.distancesq((double2)b + .5, center));
                 return order != 0 ? order : grid.Index(a).CompareTo(grid.Index(b));
             });
         }
 
-        private void Rasterize(EnvironmentalObstacle obstacle, int delta, List<int> changed)
+        private void Rasterize(EnvironmentalObstacle obstacle, int delta, Dictionary<int, byte> previous)
         {
             if (obstacle.Radius <= 0) return;
-            double radius = obstacle.Radius + Clearance;
+            double cellRadius = obstacle.Radius + Clearance;
+            double laneRadius = obstacle.Radius + math.max(Clearance, MaximumAgentRadius);
             double2 center = obstacle.Center;
-            int2 first = math.max(Min, (int2)math.floor(center - radius));
-            int2 last = math.min(Min + Size - 1, (int2)math.floor(center + radius));
+            // Cells are closed squares for the tangency test, including on the lower side.
+            int2 first = math.max(Min, (int2)math.ceil(center - laneRadius) - 1);
+            int2 last = math.min(Min + Size - 1, (int2)math.floor(center + laneRadius));
             for (int z = first.y; z <= last.y; z++)
-                for (int x = first.x; x <= last.x; x++)
-                {
-                    var cell = new int2(x, z);
-                    double2 nearest = math.clamp(center, (double2)cell, (double2)cell + 1);
-                    if (math.distancesq(center, nearest) > radius * radius) continue;
+            for (int x = first.x; x <= last.x; x++)
+            {
+                double2 cell = new(x, z);
+                var nearest = math.clamp(center, cell, cell + 1);
+                double distance = math.distancesq(center, nearest);
+                if (distance > laneRadius * laneRadius) continue;
 
-                    int index = x - Min.x + (z - Min.y) * Size.x;
-                    bool before = occupancy[index] != 0;
-                    occupancy[index] += delta;
-                    if (changed != null && before != (occupancy[index] != 0))
-                    {
-                        // A cell that flipped twice has the same final classification.
-                        if (!changed.Remove(index)) changed.Add(index);
-                    }
-                }
+                int index = x - Min.x + (z - Min.y) * Size.x;
+                previous?.TryAdd(index, Passage(index));
+                if (distance <= cellRadius * cellRadius) occupancy[index] += delta;
+
+                var xLane = math.clamp(center, cell + new double2(0, .5 - LaneHalfWidth),
+                    cell + new double2(1, .5 + LaneHalfWidth));
+                var zLane = math.clamp(center, cell + new double2(.5 - LaneHalfWidth, 0),
+                    cell + new double2(.5 + LaneHalfWidth, 1));
+                if (math.distancesq(center, xLane) <= laneRadius * laneRadius)
+                    horizontalObstructions[index] += delta;
+                if (math.distancesq(center, zLane) <= laneRadius * laneRadius)
+                    verticalObstructions[index] += delta;
+            }
         }
     }
 }

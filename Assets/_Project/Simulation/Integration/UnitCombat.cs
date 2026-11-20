@@ -61,6 +61,7 @@ namespace RTSWorld.Simulation
                     combat.NextRoute = combatTime;
                     manager.SetComponentData(entity, combat);
                 }
+                MarkManual(manager, entity);
                 if (scheduledAttackers.Add(entity)) attackers.Add(entity);
                 accepted++;
             }
@@ -207,7 +208,19 @@ namespace RTSWorld.Simulation
             double2 origin = manager.GetComponentData<LogicalPose>(entity).Position.xz;
             double2 target = liveTargets[combat.Target].Position;
             double range = manager.GetComponentData<UnitAttributes>(entity).Range;
-            if (math.distancesq(origin, target) <= range * range && ClearAttackSegment(origin, target))
+            if (manager.HasComponent<UnitAutonomy>(entity))
+            {
+                var ai = manager.GetComponentData<UnitAutonomy>(entity);
+                if (ai.State is AutonomyState.Chase or AutonomyState.Attack &&
+                    !WithinGuardLimit(manager, combat.Target, ai, origin, range))
+                {
+                    HoldPosition(manager, entity);
+                    combat.Phase = CombatPhase.Blocked;
+                    manager.SetComponentData(entity, combat);
+                    return;
+                }
+            }
+            if (math.distancesq(origin, target) <= range * range && ClearNavigationSegment(origin, target))
             {
                 if (combat.Phase != CombatPhase.Attacking) HoldPosition(manager, entity);
                 combat.Phase = CombatPhase.Attacking;
@@ -232,7 +245,7 @@ namespace RTSWorld.Simulation
                     if (cached || !requestedField)
                     {
                         requestedField |= !cached;
-                        bool available = cached || AcquireField(destination, null, out slot);
+                        bool available = AcquireField(destination, null, out slot);
                         bool reachable = available && sharedFields[slot].TryGetDirection(current, out _);
                         if (reachable)
                         {
@@ -248,7 +261,7 @@ namespace RTSWorld.Simulation
             manager.SetComponentData(entity, combat);
         }
 
-        private bool ClearAttackSegment(double2 from, double2 to)
+        private bool ClearNavigationSegment(double2 from, double2 to)
         {
             if (navigationGrid == null) return false;
             int2 cell = (int2)math.floor(from);

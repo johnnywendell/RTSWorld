@@ -69,9 +69,10 @@ namespace RTSWorld.Simulation
                 foreach (int2 offset in Neighbors)
                 {
                     int2 neighbor = cell + offset;
-                    if (!grid.TryGetCost(neighbor, out int neighborCost) || neighborCost == 0)
+                    if (!grid.CanCross(cell, neighbor))
                         continue;
 
+                    grid.TryGetCost(neighbor, out int neighborCost);
                     int index = grid.Index(neighbor);
                     int candidate = distance[entry.index] + (reverse ? currentCost : neighborCost);
                     if (candidate >= distance[index])
@@ -170,6 +171,27 @@ namespace RTSWorld.Simulation
 
         internal void CopyTo(NativeArray<int> destination, int offset) =>
             NativeArray<int>.Copy(next, 0, destination, offset, next.Length);
+
+        /// <summary>Reads integrated path cost without retaining a second array for every field.</summary>
+        public bool TryGetIntegrationCost(int2 cell, int maxSteps, out int cost)
+        {
+            cost = 0;
+            if (!IsCurrent || !grid.TryGetCost(cell, out int entryCost) || entryCost == 0)
+                return false;
+
+            int index = grid.Index(cell);
+            for (int steps = 0; steps <= maxSteps; steps++)
+            {
+                int successor = next[index];
+                if (successor == index) return true;
+                if (successor < 0 || steps == maxSteps) break;
+                grid.TryGetCost(grid.Cell(successor), out entryCost);
+                cost += entryCost;
+                index = successor;
+            }
+            cost = 0;
+            return false;
+        }
 
         public bool TryGetDirection(int2 cell, out int2 direction)
         {

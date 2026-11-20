@@ -24,4 +24,14 @@
 | UNITS-001 | To create when scoped |
 | ECS-LOCAL-AVOIDANCE | Evitação dinâmica local para grupos e gargalos | PROPOSTA | ECS-006 | A detalhar se autorizado |
 
+| NAV-001 | Navigation Diagnostics & Clearance Calibration | DONE | ECS-003/004/007/010 e INTEGRATION-002 | `tasks/completed/NAV-001-navigation-diagnostics-clearance.md` |
+
+| NAV-002 | Crowd Deadlock Recovery & Path Quality | DONE | NAV-001 | `tasks/completed/NAV-002-crowd-deadlock-path-quality.md` |
+
+| VISUAL-001 | Art Direction & Rendering Architecture | DONE | Base técnica até NAV-002 | `tasks/completed/VISUAL-001-art-direction-rendering-architecture.md` |
+
+| VISUAL-001A | Terrain Alignment, Streaming & LOD Continuity | DONE | VISUAL-001 | `tasks/completed/VISUAL-001A-terrain-alignment-streaming-lod.md` |
+
+| VISUAL-002 | Environment Art & Biome Overhaul | DONE | VISUAL-001/001A | `tasks/completed/VISUAL-002-environment-art-biome-overhaul.md` |
+
 Backlog order is tentative. A task becomes DONE only after its acceptance criteria have evidence.

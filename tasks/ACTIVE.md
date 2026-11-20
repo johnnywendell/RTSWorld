@@ -1,7 +1,7 @@
 # Active Task
 
-**Selected task:** ECS-006 — Combat and Performance
-**File:** `tasks/completed/ECS-006-combat-performance.md`
+**Selected task:** VISUAL-002 — Environment Art & Biome Overhaul
+**File:** `tasks/completed/VISUAL-002-environment-art-biome-overhaul.md`
 **Status:** DONE
 **Writer:** nenhum
 

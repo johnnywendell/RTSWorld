@@ -3,6 +3,8 @@ using System.Linq;
 using NUnit.Framework;
 using RTSWorld.Presentation.Streaming;
 using RTSWorld.World.Chunks;
+using RTSWorld.Units.Presentation;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace RTSWorld.Presentation.Tests
@@ -36,6 +38,55 @@ namespace RTSWorld.Presentation.Tests
             manager.Step();
             for (int i = 0; i < 100 && manager.PendingCount > 0; i++) manager.Step();
             Assert.That(manager.PendingCount, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void DisplayedWindowStaysResidentUntilTheHandoff()
+        {
+            Drain();
+            var first = manager.Center;
+            manager.RetainDisplayedWindow(first, 1);
+            observer.transform.position = Vector3.right * 100;
+            manager.Step();
+            Assert.That(manager.TryGetMesh(first, out var previous), Is.True);
+            Assert.That(manager.PendingCount, Is.GreaterThan(0));
+            Drain();
+            Assert.That(manager.ActiveCount, Is.EqualTo(18));
+            Assert.That(manager.TryGetMesh(first, out var retained), Is.True);
+            Assert.That(retained, Is.SameAs(previous));
+            manager.RetainDisplayedWindow(manager.Center, 1);
+            Assert.That(manager.ActiveCount, Is.EqualTo(9));
+            Assert.That(manager.TryGetMesh(first, out _), Is.False);
+        }
+
+        [Test]
+        public void EnvironmentLodUsesDifferentApproachAndRetreatThresholds()
+        {
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(56, -1), Is.EqualTo(0));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(55, 0), Is.EqualTo(0));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(48, 0), Is.EqualTo(1));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(57, 1), Is.EqualTo(1));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(64, 1), Is.EqualTo(0));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(25, 1), Is.EqualTo(1));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(22, 1), Is.EqualTo(2));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(27, 2), Is.EqualTo(2));
+            Assert.That(RtsInteractionDemo.SelectEnvironmentLod(30, 2), Is.EqualTo(1));
+        }
+
+        [TestCase(false, 2)]
+        [TestCase(true, 6)]
+        public void FoundationSamplesTheWholeFootprint(bool interiorPeak, double expectedHigh)
+        {
+            Assert.That(RtsInteractionDemo.TrySampleFoundation(new int2(-1, -1), new int2(2, 2),
+                Height, out double low, out double high));
+            Assert.That(low, Is.EqualTo(2));
+            Assert.That(high, Is.EqualTo(expectedHigh));
+
+            bool Height(double x, double z, out double elevation)
+            {
+                elevation = interiorPeak && x == 0 && z == 0 ? 6 : 2;
+                return true;
+            }
         }
 
         [Test]

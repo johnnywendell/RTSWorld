@@ -1,0 +1,5 @@
+units,obstacle_catalog_ms,grid_ms,astar_ms,path_cells,atlas_build_total_ms,fields,tick_mean_ms,managed_bytes_120_ticks,invalidation_ms,fields_invalidated,order_accepted,path_found,resource_changed
+100,35.24420,17.19140,11.86550,258,32.02650,2,0.02251,0,0.21690,2,True,True,True
+500,34.01310,16.94430,11.25360,258,40.04000,2,0.04344,0,0.31650,2,True,True,True
+1000,33.49180,16.79500,11.37660,258,41.23790,2,0.06510,0,0.43360,2,True,True,True
+5000,33.41480,16.61790,14.23760,258,31.02780,2,0.20607,0,1.32820,2,True,True,True

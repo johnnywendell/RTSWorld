@@ -19,6 +19,20 @@ namespace RTSWorld.Presentation.Environment
         }
         private EnvironmentGenerator generator;
         private System.Func<ResourceKey, bool> includeResource;
+        public bool InstanceTreesAndRocks { get; private set; }
+        public bool ArtProfile { get; private set; }
+        public void SetArtProfile(bool enabled)
+        {
+            if (ArtProfile == enabled) return;
+            ArtProfile = enabled;
+            Revision++;
+        }
+        public void SetInstanceTreesAndRocks(bool enabled)
+        {
+            if (InstanceTreesAndRocks == enabled) return;
+            InstanceTreesAndRocks = enabled;
+            Revision++;
+        }
         public void SetResourceFilter(System.Func<ResourceKey, bool> filter)
         {
             if (includeResource == filter) return;
@@ -44,9 +58,11 @@ namespace RTSWorld.Presentation.Environment
             _ = new EnvironmentDefinition(seaLevel, environmentVersion);
             if (environmentMaterial == null) throw new System.InvalidOperationException("Assign an environment material.");
         }
-        public Mesh Build(TerrainChunkData source, float horizontal, float vertical) => Build(source, horizontal, vertical, out _);
+        public Mesh Build(TerrainChunkData source, float horizontal, float vertical) =>
+            Build(source, horizontal, vertical, out _, out _, out _);
 
-        internal Mesh Build(TerrainChunkData source, float horizontal, float vertical, out int resourceCount)
+        internal Mesh Build(TerrainChunkData source, float horizontal, float vertical, out int resourceCount,
+            out ResourcePlacement[] instances, out EnvironmentArtPlacement[] art)
         {
             var definition = source.Definition;
             if (generator == null || cachedWorld.Seed != definition.Seed || cachedWorld.CellsPerChunk != definition.CellsPerChunk ||
@@ -57,9 +73,17 @@ namespace RTSWorld.Presentation.Environment
             }
             var layer = generator.Generate(source);
             resourceCount = 0;
+            var detached = InstanceTreesAndRocks && geometryView == EnvironmentGeometryView.Combined
+                ? new System.Collections.Generic.List<ResourcePlacement>() : null;
             foreach (var resource in layer.Resources)
-                if (includeResource == null || includeResource(resource.Key)) resourceCount++;
-            return EnvironmentMeshBuilder.Build(layer, horizontal, vertical, geometryView, includeResource);
+            {
+                if (includeResource != null && !includeResource(resource.Key)) continue;
+                if (detached != null && (ArtProfile || resource.Kind != NaturalResource.Gold)) detached.Add(resource);
+                else resourceCount++;
+            }
+            instances = detached?.ToArray();
+            art = ArtProfile && detached != null ? EnvironmentArtDistribution.Build(layer, detached) : null;
+            return EnvironmentMeshBuilder.Build(layer, horizontal, vertical, geometryView, includeResource, detached != null, art != null);
         }
     }
 }

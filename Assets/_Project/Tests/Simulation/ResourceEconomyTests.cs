@@ -12,7 +12,9 @@ namespace RTSWorld.Tests
         [TestCase(NaturalResource.Stone, 10)]
         [TestCase(NaturalResource.Tree, 50)]
         [TestCase(NaturalResource.Stone, 100)]
-        public void WorkersConserveResourceAndDeliverToDepot(NaturalResource kind, int population)
+        [TestCase(NaturalResource.Tree, 10, true)]
+        [TestCase(NaturalResource.Stone, 50, true)]
+        public void WorkersConserveResourceAndDeliverToDepot(NaturalResource kind, int population, bool crowd = false)
         {
             var terrain = new ProceduralTerrainContract(new WorldDefinition(7));
             var min = new int2(-24); var max = new int2(24);
@@ -20,7 +22,7 @@ namespace RTSWorld.Tests
             var resource = new ResourcePlacement(key, kind, .5f, .5f, 0);
             var obstacles = new EnvironmentalObstacles(min, max, 32, .22, new[] { resource });
             var grid = new NavigationGrid(terrain, min, max, 100, obstacles: obstacles);
-            using var session = new UnitSession(terrain, min, max);
+            using var session = new UnitSession(terrain, min, max, crowdEnabled: crowd);
             session.SetNavigationGrid(grid);
             session.ConfigureEconomy(new int2(-5, 0), productivity: 10, wood: 21, stone: 23);
             using var workers = session.SpawnBatch(UnitDefinition.Villager, 0, population, new double3(-16.5, 0, -5.5), default, .8);

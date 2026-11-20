@@ -4,6 +4,7 @@ using System.Diagnostics;
 using RTSWorld.Presentation.Terrain;
 using RTSWorld.World.Chunks;
 using RTSWorld.World.Generation;
+using RTSWorld.World.Environment;
 using UnityEngine;
 using RTSWorld.Presentation.Environment;
 using Object = UnityEngine.Object;
@@ -30,6 +31,8 @@ namespace RTSWorld.Presentation.Streaming
             public GameObject Object;
             public Mesh Mesh;
             public int ResourceCount;
+            public ResourcePlacement[] Instances;
+            public EnvironmentArtPlacement[] Art;
         }
 
         private readonly Dictionary<ChunkCoordinate, View> active = new Dictionary<ChunkCoordinate, View>();
@@ -37,6 +40,9 @@ namespace RTSWorld.Presentation.Streaming
         private readonly HashSet<ChunkCoordinate> desired = new HashSet<ChunkCoordinate>();
         private readonly List<ChunkCoordinate> ordered = new List<ChunkCoordinate>();
         private readonly List<ChunkCoordinate> removal = new List<ChunkCoordinate>();
+        private readonly HashSet<ChunkCoordinate> refresh = new HashSet<ChunkCoordinate>();
+        private ChunkCoordinate retainedCenter;
+        private int retainedRadius = -1;
         private readonly TerrainGenerator generator = new TerrainGenerator();
         private WorldDefinition definition;
         private float appliedHorizontal, appliedVertical;
@@ -55,9 +61,16 @@ namespace RTSWorld.Presentation.Streaming
         public double LastMeshBuildMilliseconds { get; private set; }
         public void SetEnvironment(EnvironmentPresentation layer) => environment = layer;
 
+        public void ApplyWorldDefinition(WorldDefinition world)
+        {
+            seed = world.Seed;
+            cellsPerChunk = world.CellsPerChunk;
+        }
+
         public int Seed { get => seed; set => seed = value; }
         public int LoadRadius { get => loadRadius; set { ChunkSelection.ValidateRadius(value); loadRadius = value; } }
         public int ActiveCount => active.Count;
+        public int ResidencyVersion { get; private set; }
         public int PendingCount => pending.Count;
         public ChunkCoordinate Center { get; private set; }
         public long TotalGenerated { get; private set; }
@@ -66,6 +79,8 @@ namespace RTSWorld.Presentation.Streaming
         public double LastStepMilliseconds { get; private set; }
         public double PeakStepMilliseconds { get; private set; }
         public IEnumerable<ChunkCoordinate> ActiveCoordinates => active.Keys;
+        public bool IsSelectionReady(ChunkCoordinate center, int radius) =>
+            selectedRadius == radius && Center.Equals(center) && pending.Count == 0;
 
         public bool TryGetMesh(ChunkCoordinate coordinate, out Mesh mesh)
         {
@@ -73,6 +88,22 @@ namespace RTSWorld.Presentation.Streaming
             mesh = found ? view.Mesh : null;
             return found;
         }
+
+        public bool TryGetResourceInstances(ChunkCoordinate coordinate, out Mesh mesh, out ReadOnlySpan<ResourcePlacement> instances)
+        {
+            if (active.TryGetValue(coordinate, out var view) && view.Instances != null)
+            {
+                mesh = view.Mesh;
+                instances = view.Instances;
+                return true;
+            }
+            mesh = null;
+            instances = default;
+            return false;
+        }
+
+        public ReadOnlySpan<EnvironmentArtPlacement> GetEnvironmentArt(ChunkCoordinate coordinate) =>
+            active.TryGetValue(coordinate, out var view) ? view.Art : default;
 
         public void Configure(Transform target, Material material, int worldSeed = 12345, int cells = 32,
             float horizontal = 2, float vertical = 1.2f, int radius = 1, int maxPerFrame = 1, float milliseconds = 4)
@@ -182,8 +213,26 @@ namespace RTSWorld.Presentation.Streaming
             ChunkSelection.Fill(center, loadRadius, ordered);
             desired.Clear();
             foreach (var coordinate in ordered) desired.Add(coordinate);
+            ReleaseOutsideSelection();
+            pending.Clear(); // Discard obsolete requests on teleport/radius changes, not a growing history.
+            refresh.IntersectWith(active.Keys);
+            foreach (var coordinate in ordered)
+                if (!active.ContainsKey(coordinate) || refresh.Contains(coordinate)) pending.Enqueue(coordinate);
+        }
+
+        public void RetainDisplayedWindow(ChunkCoordinate center, int radius)
+        {
+            if (retainedCenter.Equals(center) && retainedRadius == radius) return;
+            retainedCenter = center;
+            retainedRadius = radius;
+            ReleaseOutsideSelection();
+        }
+
+        private void ReleaseOutsideSelection()
+        {
             removal.Clear();
-            foreach (var pair in active) if (!desired.Contains(pair.Key)) removal.Add(pair.Key);
+            foreach (var pair in active)
+                if (!desired.Contains(pair.Key) && !InRetainedWindow(pair.Key)) removal.Add(pair.Key);
             foreach (var coordinate in removal)
             {
                 ActiveResourceCount -= active[coordinate].ResourceCount;
@@ -192,9 +241,11 @@ namespace RTSWorld.Presentation.Streaming
                 TotalUnloaded++;
             }
             removal.Clear();
-            pending.Clear(); // Discard obsolete requests on teleport/radius changes, not a growing history.
-            foreach (var coordinate in ordered) if (!active.ContainsKey(coordinate)) pending.Enqueue(coordinate);
         }
+
+        private bool InRetainedWindow(ChunkCoordinate coordinate) =>
+            Math.Abs((long)coordinate.X - retainedCenter.X) <= retainedRadius &&
+            Math.Abs((long)coordinate.Z - retainedCenter.Z) <= retainedRadius;
 
         private void Create(ChunkCoordinate coordinate)
         {
@@ -204,7 +255,9 @@ namespace RTSWorld.Presentation.Streaming
             LastTerrainGenerationMilliseconds = Elapsed(stamp);
             stamp = Stopwatch.GetTimestamp();
             int resources = 0;
-            var mesh = appliedEnvironment != null ? appliedEnvironment.Build(data, horizontalScale, verticalScale, out resources) :
+            ResourcePlacement[] instances = null;
+            EnvironmentArtPlacement[] art = null;
+            var mesh = appliedEnvironment != null ? appliedEnvironment.Build(data, horizontalScale, verticalScale, out resources, out instances, out art) :
                 TerrainMeshFactory.Create(TerrainGeometry.Build(data, horizontalScale, verticalScale));
             LastMeshBuildMilliseconds = Elapsed(stamp);
             mesh.name = $"Stream chunk {coordinate}";
@@ -219,7 +272,13 @@ namespace RTSWorld.Presentation.Streaming
                     (float)(origin.Z * (double)horizontalScale));
                 chunk.AddComponent<MeshFilter>().sharedMesh = mesh;
                 chunk.AddComponent<MeshRenderer>().sharedMaterial = appliedEnvironment != null ? appliedEnvironment.Material : terrainMaterial;
-                active.Add(coordinate, new View { Object = chunk, Mesh = mesh, ResourceCount = resources });
+                if (active.TryGetValue(coordinate, out var previous))
+                {
+                    ActiveResourceCount -= previous.ResourceCount;
+                    ReleaseView(previous);
+                }
+                active[coordinate] = new View { Object = chunk, Mesh = mesh, ResourceCount = resources, Instances = instances, Art = art };
+                refresh.Remove(coordinate);
                 ActiveResourceCount += resources;
             }
             catch
@@ -233,6 +292,11 @@ namespace RTSWorld.Presentation.Streaming
         public void RefreshResourceChunk(ChunkCoordinate coordinate)
         {
             if (!active.TryGetValue(coordinate, out var view)) return;
+            if (view.Instances != null)
+            {
+                if (refresh.Add(coordinate) && desired.Contains(coordinate)) pending.Enqueue(coordinate);
+                return;
+            }
             ActiveResourceCount -= view.ResourceCount;
             ReleaseView(view);
             active.Remove(coordinate);
@@ -242,10 +306,12 @@ namespace RTSWorld.Presentation.Streaming
 
         public void Clear()
         {
+            ResidencyVersion++;
             foreach (var view in active.Values) { ReleaseView(view); TotalUnloaded++; }
             ActiveResourceCount = 0;
-            active.Clear(); pending.Clear(); desired.Clear(); ordered.Clear(); removal.Clear();
+            active.Clear(); pending.Clear(); desired.Clear(); ordered.Clear(); removal.Clear(); refresh.Clear();
             definition = null; appliedMaterial = null; selectedRadius = -1;
+            retainedRadius = -1;
             appliedEnvironment = null;
             LastGeneratedCount = 0;
         }
